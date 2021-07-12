@@ -36,6 +36,17 @@ const userSchema = Schema({
 
 const User = mongoose.model('User', userSchema, 'users');
 
+const eventSchema = Schema({
+  name: String,
+  location: String,
+  date: Date,
+  description: String,
+  organizer: String,
+  group_id: Number,
+});
+
+const Event = mongoose.model('Event', eventSchema, 'events');
+
 module.exports = {
 
 }
