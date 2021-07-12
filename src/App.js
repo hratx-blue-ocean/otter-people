@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChakraProvider, Box, Text, VStack, Grid, theme, } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import Recs from './recs/Recs.js'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <Text>
               Hello world
             </Text>
+            <Recs />
           </VStack>
         </Grid>
       </Box>
