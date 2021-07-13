@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDisclosure } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { VStack } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { useDisclosure } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { FormLabel, FormControl } from '@chakra-ui/react';
 import {
   Modal,
@@ -12,11 +12,11 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 function JoinGroupModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [groupCode, setGroupCode] = useState();
+  const [groupCode, setGroupCode] = useState('');
 
   const handleGroupCodeChange = (e) => {
     let groupCode = e.target.value;
@@ -26,6 +26,11 @@ function JoinGroupModal() {
   const handleFormSubmission = (e) => {
     onClose()
     // HANDLE FORM SUBMISSION
+    // check to see if group code matches
+    // send put Request to add to group
+    // somehow re-render page with content
+    setGroupCode('');
+
   }
 
 

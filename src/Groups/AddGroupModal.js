@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDisclosure } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { Textarea } from "@chakra-ui/react";
-import { VStack } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { useDisclosure } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
+import { Textarea } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { FormLabel, FormControl } from '@chakra-ui/react';
 import {
   Modal,
@@ -13,13 +13,13 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-function AddGroupModal() {
+function AddGroupModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [groupName, setGroupName] = useState();
-  const [groupDescription, setGroupDescription] = useState();
-  const [groupPhoto, setGroupPhoto] = useState();
+  const [groupName, setGroupName] = useState('');
+  const [groupDescription, setGroupDescription] = useState('');
+  const [groupPhoto, setGroupPhoto] = useState('');
 
   const handleGroupNameChange = (e) => {
     let groupNameValue = e.target.value;
@@ -35,11 +35,35 @@ function AddGroupModal() {
     let groupPhotoUpload = e.target.file;
     setGroupPhoto(groupPhotoUpload);
   };
+    /*
+  group = {
+    id: id,
+    name: name,
+    description: description,
+    picture: picture,
+    members: [id...],
+    events: [events...]
+  }
+  */
 
   const handleFormSubmission = (e) => {
     console.log("cats")
     onClose()
     // HANDLE FORM SUBMISSION
+    const newGroup = {
+      name: groupName,
+      description: groupDescription,
+      picture: groupPhoto,
+      members: [],
+      events: [],
+    };
+
+    console.log('newGroup', newGroup);
+    props.createGroup(newGroup);
+    // clear form inputs
+    setGroupName('');
+    setGroupDescription('');
+    setGroupPhoto('');
   }
 
 

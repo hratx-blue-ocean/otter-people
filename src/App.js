@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Box, Text, VStack, Grid, theme, } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import axios from 'axios';
 import GroupList from './Groups/GroupList';
 
 function App() {
+
+  // const [groups, setGroups] = useState([]);
+  const [currentGroup, setCurrentGroup] = useState();
+  const userId = 1234;
+
+
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
@@ -13,7 +20,7 @@ function App() {
             <Text>
               Hello world
             </Text>
-            <GroupList />
+            <GroupList userId={userId} setCurrentGroup={setCurrentGroup} />
           </VStack>
         </Grid>
       </Box>
