@@ -6,7 +6,6 @@ import GroupList from './Groups/GroupList';
 
 function App() {
 
-  // const [groups, setGroups] = useState([]);
   const [currentGroup, setCurrentGroup] = useState();
   const userId = 1234;
 

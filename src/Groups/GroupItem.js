@@ -1,28 +1,34 @@
 import React from 'react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { List, ListItem, ListIcon } from '@chakra-ui/react';
+import { SunIcon } from '@chakra-ui/icons'
+
 
 const GroupItem = (props) => {
   let groupBullet;
 
   const handleGroupClick = (e) => {
-    props.setCurrentGroup(props.groups[e.target.id]);  // NEED TO FORMAT PROPERLY based on db query!
+    props.setCurrentGroup(props.displayedGroups[e.target.id]);  // NEED TO FORMAT PROPERLY based on db query!
   };
 
-  console.log('testingggg', props.setCurrentGroup);
-  if (props.groups === undefined || props.groups.length === 0) {
+  if (props.displayedGroups === undefined || props.displayedGroups.length === 0) {
     groupBullet = 'You\'re not in a group.'
   } else {
-    groupBullet = props.groups.map((group, index) => {
+    groupBullet = props.displayedGroups.map((group, index) => {
       return (
-        <li key={index} id={index} onClick={handleGroupClick}>{group.name}</li>
+        <ListItem textAlign='left' key={index} id={index} onClick={handleGroupClick}>
+          <ListIcon as={SunIcon} />
+          {group.name}
+        </ListItem>
       );
     })
   }
 
   return (
-    <React.Fragment>
-      {groupBullet}
-    </React.Fragment>
+    <>
+      <List spacing={3}>
+        {groupBullet}
+      </List>
+    </>
   )
 };
 
