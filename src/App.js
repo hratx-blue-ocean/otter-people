@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChakraProvider, Box, Text, VStack, Grid, theme, } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Members from './components/members/Members.js';
+import Members from './members/Members.js';
 
 function App() {
   return (
