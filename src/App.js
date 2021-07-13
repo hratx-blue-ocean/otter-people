@@ -3,6 +3,7 @@ import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem } from '@chakr
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
+import Members from './members/Members.js';
 
 const theme = extendTheme({
   colors: {
@@ -51,7 +52,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
-        <AppBar/>
+        <AppBar />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)">
           <GridItem colSpan={2}>
             <VStack spacing={8}>
@@ -65,6 +66,7 @@ function App() {
           </GridItem>
           <GridItem colSpan={3}>
             <VStack spacing={8}>
+              <Members />
               <Recs />
             </VStack>
           </GridItem>
