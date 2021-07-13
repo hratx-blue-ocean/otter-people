@@ -64,10 +64,10 @@ export default function Recs(props) {
 
   return (
     <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Heading size="lg">Around Town</Heading>
-      <Text fontSize="sm" >Click to Add As Your Next Event!</Text>
+      <Heading p="1" size="lg">Around Town</Heading>
+      <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
-        <Select onChange={onChange} placeholder="Category" size="sm" width="50%">
+        <Select p="1" onChange={onChange} placeholder="Category" size="sm" width="50%">
           <option value="SIGHTS">Sights</option>
           <option value="NIGHTLIFE">Nightlife</option>
           <option value="RESTAURANT">Restaurants</option>

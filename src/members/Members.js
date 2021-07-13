@@ -55,44 +55,43 @@ export default function Members(props) {
 
   return (
     <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Flex p="4">
+      {/* <Flex p="4">
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
-        <Spacer />
-        <Box p="2">
-          <Heading size="lg">Group Members</Heading>
-        </Box>
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        <Spacer /> */}
+      <Box p="1">
+        <Heading size="lg">Group Members</Heading>
+      </Box>
+      {/* <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
-        <Box p="3" maxWidth="150px">
-          <Text fontSize="xs"> Invite Friends with Group Code: {code}</Text>
-          {/* <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} /> */}
+        <Spacer />
+        <Spacer /> */}
+      <Box >
+        <Text p="1" fontSize="sm"> Invite Friends with Group Code: {code}</Text>
+        {/* <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} /> */}
 
-        </Box>
-        <Spacer />
-      </Flex>
+      </Box>
+      {/* <Spacer />
+      </Flex> */}
       <SimpleGrid columns={2}>
         {members.slice(0, itemsShown).map((each, i) =>
           eachMember(each, i)
         )}
       </SimpleGrid>
-      <br />
       {
         itemsShown < members.length && members.length > 6 ?
           <IconButton onClick={onSeeMore} aria-label="See More" icon={<TriangleDownIcon />} />
           :
           <IconButton onClick={onCollapse} aria-label="Collapse" icon={<TriangleUpIcon />} />
       }
-      <br /><br />
+      <br />
     </Box >
   )
 
