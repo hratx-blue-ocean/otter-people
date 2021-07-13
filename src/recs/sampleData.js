@@ -1,9 +1,338 @@
 //GET
 //https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=41.397158&longitude=2.160873&radius=5&page%5Blimit%5D=10&page%5Boffset%5D=0&categories=SIGHTS,NIGHTLIFE,RESTAURANT,SHOPPING
 
+export const apiTransformed = [{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "B25508A8A2",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/B25508A8A2",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.76992,
+    "longitude": -122.466354
+  },
+  "name": "California Academy of Sciences",
+  "category": "SIGHTS",
+  "rank": 5,
+  "tags": [
+    "museum",
+    "sightseeing",
+    "tourguide",
+    "restaurant",
+    "sights",
+    "attraction",
+    "aquarium",
+    "garden",
+    "fairground",
+    "commercialplace",
+    "professionalservices",
+    "activities"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "34C787EEC9",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/34C787EEC9",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.80241,
+    "longitude": -122.44783
+  },
+  "name": "Palace of Fine Arts",
+  "category": "SIGHTS",
+  "rank": 10,
+  "tags": [
+    "sights",
+    "sightseeing",
+    "landmark",
+    "historicplace",
+    "museum",
+    "restaurant",
+    "artgallerie",
+    "theater",
+    "lake",
+    "activities",
+    "latte",
+    "attraction",
+    "nature",
+    "events",
+    "commercialplace",
+    "musicvenue"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "07763D2087",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/07763D2087",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.854034,
+    "longitude": -122.47881
+  },
+  "name": "Scoma's Sausalito",
+  "category": "RESTAURANT",
+  "rank": 10,
+  "tags": [
+    "restaurant",
+    "seafood",
+    "sightseeing",
+    "commercialplace",
+    "patio",
+    "garden",
+    "events",
+    "shopping"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "F0252F20C9",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/F0252F20C9",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.853535,
+    "longitude": -122.478516
+  },
+  "name": "The Trident",
+  "category": "RESTAURANT",
+  "rank": 10,
+  "tags": [
+    "restaurant",
+    "seafood",
+    "burger",
+    "fastfood",
+    "breakfast",
+    "shopping",
+    "transport",
+    "patio",
+    "garden",
+    "activities",
+    "events",
+    "sightseeing",
+    "commercialplace",
+    "banquethalls"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "E650BF4C46",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/E650BF4C46",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.85515,
+    "longitude": -122.47885
+  },
+  "name": "Barrel House Tavern",
+  "category": "RESTAURANT",
+  "rank": 10,
+  "tags": [
+    "restaurant",
+    "sightseeing",
+    "bar",
+    "pub",
+    "commercialplace",
+    "events",
+    "club",
+    "shopping",
+    "transport",
+    "patio",
+    "garden"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "52DFBA24A8",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/52DFBA24A8",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.76942,
+    "longitude": -122.48621
+  },
+  "name": "Golden Gate Park",
+  "category": "SIGHTS",
+  "rank": 15,
+  "tags": [
+    "sightseeing",
+    "park",
+    "tourguide",
+    "landmark",
+    "sights",
+    "restaurant",
+    "activities",
+    "attraction",
+    "education",
+    "professionalservices",
+    "commercialplace",
+    "sports",
+    "parking",
+    "picnic",
+    "nature",
+    "trail",
+    "beauty&spas",
+    "garden"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "43123EE4F2",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/43123EE4F2",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.855755,
+    "longitude": -122.47936
+  },
+  "name": "Lappert's Ice Cream",
+  "category": "RESTAURANT",
+  "rank": 15,
+  "tags": [
+    "restaurant",
+    "juicebar",
+    "shopping",
+    "icecream",
+    "sightseeing",
+    "commercialplace",
+    "transport"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "20E74FFAB5",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/20E74FFAB5",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.854607,
+    "longitude": -122.47904
+  },
+  "name": "Angelino Restaurant",
+  "category": "RESTAURANT",
+  "rank": 15,
+  "tags": [
+    "restaurant",
+    "seafood",
+    "fastfood",
+    "pizza",
+    "shopping",
+    "events",
+    "sightseeing",
+    "commercialplace"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "22D1D82D79",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/22D1D82D79",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.771572,
+    "longitude": -122.4684
+  },
+  "name": "de Young Museum",
+  "category": "RESTAURANT",
+  "rank": 30,
+  "tags": [
+    "restaurant",
+    "burger",
+    "fastfood",
+    "museum",
+    "sightseeing",
+    "tourguide",
+    "sights",
+    "attraction",
+    "shopping",
+    "commercialplace",
+    "activities",
+    "events",
+    "library"
+  ]
+},
+{
+  "type": "location",
+  "subType": "POINT_OF_INTEREST",
+  "id": "059D5B812B",
+  "self": {
+    "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/059D5B812B",
+    "methods": [
+      "GET"
+    ]
+  },
+  "geoCode": {
+    "latitude": 37.78504,
+    "longitude": -122.49941
+  },
+  "name": "Legion of Honor",
+  "category": "SIGHTS",
+  "rank": 30,
+  "tags": [
+    "museum",
+    "sightseeing",
+    "sights",
+    "tourguide",
+    "landmark",
+    "historicplace",
+    "historic",
+    "restaurant",
+    "events",
+    "commercialplace",
+    "banquethalls",
+    "professionalservices",
+    "fastfood",
+    "transport",
+    "bus",
+    "busstation",
+    "attraction",
+    "activities",
+    "shopping",
+    "library"
+  ]
+}
+]
+
 //San Francisco
 //bounds:Latitude North: 37.810980, Longitude West: -122.483716, Latitude South: 37.732007, Longitude East: -122.370076
-export const apiSF = {
+const apiSF = {
   "data": [
     {
       "type": "location",

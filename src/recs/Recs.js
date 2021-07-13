@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Box } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
@@ -7,26 +7,53 @@ import { Image } from "@chakra-ui/react"
 import { SimpleGrid } from "@chakra-ui/react"
 import { Select } from "@chakra-ui/react"
 import { Center } from "@chakra-ui/react"
-import { TriangleDownIcon } from '@chakra-ui/icons'
+import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
+import { IconButton } from "@chakra-ui/react"
 
-import apiResult from './sampleData.js'
+//change this to props later
+import { apiTransformed } from './sampleData.js'
 
 export default function Recs(props) {
 
   //useState hooks
+  const [category, setCategory] = useState("Sights");
+  const [itemsShown, setItemsShown] = useState(4);
+  const [isMore, setIsMore] = useState(true);
+  const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
 
   //useEffect hooks
+  useEffect(() => {
+    setData(apiTransformed.slice(0, itemsShown))
+  }, [itemsShown])
+
+  const onChange = (e) => {
+    setCategory(e.target.value)
+  };
+
+  const onClick = () => {
+    //open Create Event modal
+    //autofill name and location (reverse geocode)
+  };
+
+  const onSeeMore = () => {
+    setItemsShown(itemsShown + 4)
+
+  };
+
+  const onCollapse = () => {
+    setItemsShown(4)
+  };
 
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Heading size="lg">Around Town</Heading>
       <Text fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
-        <Select placeholder="Category" size="sm" width="50%">
-          <option value="option1">Sights</option>
-          <option value="option2">Nightlife</option>
-          <option value="option3">Restaurants</option>
-          <option value="option3">Shopping</option>
+        <Select onChange={onChange} placeholder="Category" size="sm" width="50%">
+          <option value="Sights">Sights</option>
+          <option value="Nightlife">Nightlife</option>
+          <option value="Restaurants">Restaurants</option>
+          <option value="Shopping">Shopping</option>
         </Select>
       </Center>
 
@@ -76,7 +103,14 @@ export default function Recs(props) {
         </Box>
       </SimpleGrid>
       <Center>
-        <TriangleDownIcon />
+
+        {
+          itemsShown < apiTransformed.length && apiTransformed.length > 4 ?
+            <IconButton onClick={onSeeMore} aria-label="See More" icon={<TriangleDownIcon />} />
+            :
+            <IconButton onClick={onCollapse} aria-label="Collapse" icon={<TriangleUpIcon />} />
+        }
+
         <br /><br />
       </Center>
     </Box>
