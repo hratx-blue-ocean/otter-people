@@ -1,7 +1,8 @@
 import React from 'react';
-import { ChakraProvider, Box, Text, VStack, Grid, extendTheme, GridItem } from '@chakra-ui/react';
+import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem } from '@chakra-ui/react';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
+import Recs from './recs/Recs.js'
 
 const theme = extendTheme({
   colors: {
@@ -64,7 +65,7 @@ function App() {
           </GridItem>
           <GridItem colSpan={3}>
             <VStack spacing={8}>
-
+              <Recs />
             </VStack>
           </GridItem>
         </Grid>
