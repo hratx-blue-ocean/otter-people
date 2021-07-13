@@ -16,18 +16,18 @@ import { apiTransformed } from './sampleData.js'
 export default function Recs(props) {
 
   //useState hooks
-  const [category, setCategory] = useState("Sights");
+  const [category, setCategory] = useState("All");
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
-  const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
+  // const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
 
   //useEffect hooks
-  useEffect(() => {
-    setData(apiTransformed.slice(0, itemsShown))
-  }, [itemsShown])
+  // useEffect(() => {
+  //   setData(apiTransformed.slice(0, itemsShown))
+  // }, [itemsShown])
 
   const onChange = (e) => {
-    setCategory(e.target.value)
+    setCategory(e.target.value || "All")
   };
 
   const onClick = () => {
@@ -45,63 +45,62 @@ export default function Recs(props) {
   };
 
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Heading size="lg">Around Town</Heading>
       <Text fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
         <Select onChange={onChange} placeholder="Category" size="sm" width="50%">
-          <option value="Sights">Sights</option>
-          <option value="Nightlife">Nightlife</option>
-          <option value="Restaurants">Restaurants</option>
-          <option value="Shopping">Shopping</option>
+          <option value="SIGHTS">Sights</option>
+          <option value="NIGHTLIFE">Nightlife</option>
+          <option value="RESTAURANT">Restaurants</option>
+          <option value="SHOPPING">Shopping</option>
         </Select>
       </Center>
 
-      <SimpleGrid columns={2} >
-        <Box p="2" >
-          <Image src="https://www.calacademy.org/sites/default/files/styles/manual_crop_standard_960x540/public/uploads/images/cas22-155-layers-small.jpg?itok=_r3WtJWF&c=f14936ae55e8d4293886b19bcfa364bd"
-            alt="California Academy of Sciences" />
-          <Box
-            mt="1"
-            lineHeight="tight"
-          >
-            <Text isTruncated fontSize="xs">California Academy of Sciences</Text>
-          </Box>
-        </Box>
-        <Box p="2">
-          <Image src="https://www.calacademy.org/sites/default/files/styles/manual_crop_standard_960x540/public/uploads/images/cas22-155-layers-small.jpg?itok=_r3WtJWF&c=f14936ae55e8d4293886b19bcfa364bd"
-            alt="California Academy of Sciences" />
-          <Box
-            mt="1"
-            lineHeight="tight"
-          >
-            <Text isTruncated fontSize="xs">California Academy of Sciences</Text>
-          </Box>
-        </Box>
-      </SimpleGrid>
+      {category === "All" ?
+        <SimpleGrid columns={2} >
+          {apiTransformed.slice(0, itemsShown).map((each, i) =>
+            <Box key={i} p="2" >
+              {/*  */}
+              {/* Need to hardcode height="" pixels based on final layout */}
+              {/*  */}
+              <Image objectFit="cover" maxWidth="100%" maxHeight="100%" src={each.imageURL}
+                alt={each.name} />
+              <Box
+                mt="1"
+                lineHeight="tight"
+              >
+                <Text isTruncated fontSize="xs">{each.name}</Text>
+              </Box>
+            </Box>
+          )}
+        </SimpleGrid>
+        :
+        <SimpleGrid columns={2} >
+          {/*  */}
+          {/* Consider making separate data arrays for each category? */}
+          {/* Problem is that this is truncating results */}
+          {/*  */}
+          {apiTransformed.slice(0, itemsShown).map((each, i) => {
+            if (category === each.category) {
+              return (
+                < Box key={i} p="2" >
+                  <Image maxWidth="175px" maxHeight="116px" src={each.imageURL}
+                    alt={each.name} />
+                  <Box
+                    mt="1"
+                    lineHeight="tight"
+                  >
+                    <Text isTruncated fontSize="xs">{each.name}</Text>
+                  </Box>
+                </Box>
 
-      <SimpleGrid columns={2} >
-        <Box p="2" >
-          <Image src="https://www.calacademy.org/sites/default/files/styles/manual_crop_standard_960x540/public/uploads/images/cas22-155-layers-small.jpg?itok=_r3WtJWF&c=f14936ae55e8d4293886b19bcfa364bd"
-            alt="California Academy of Sciences" />
-          <Box
-            mt="1"
-            lineHeight="tight"
-          >
-            <Text isTruncated fontSize="xs">California Academy of Sciences</Text>
-          </Box>
-        </Box>
-        <Box p="2">
-          <Image src="https://www.calacademy.org/sites/default/files/styles/manual_crop_standard_960x540/public/uploads/images/cas22-155-layers-small.jpg?itok=_r3WtJWF&c=f14936ae55e8d4293886b19bcfa364bd"
-            alt="California Academy of Sciences" />
-          <Box
-            mt="1"
-            lineHeight="tight"
-          >
-            <Text isTruncated fontSize="xs">California Academy of Sciences</Text>
-          </Box>
-        </Box>
-      </SimpleGrid>
+              )
+            }
+          }
+          )}
+        </SimpleGrid>
+      }
       <Center>
 
         {
@@ -113,6 +112,6 @@ export default function Recs(props) {
 
         <br /><br />
       </Center>
-    </Box>
+    </Box >
   )
 }

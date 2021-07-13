@@ -16,6 +16,10 @@ export const apiTransformed = [{
     "longitude": -122.466354
   },
   "name": "California Academy of Sciences",
+  //added
+  "imageURL": "https://www.calacademy.org/sites/default/files/styles/manual_crop_standard_960x540/public/uploads/images/cas22-155-layers-small.jpg?itok=_r3WtJWF&c=f14936ae55e8d4293886b19bcfa364bd",
+  //added
+  "address": "55 Music Concourse Dr, San Francisco, CA 94118",
   "category": "SIGHTS",
   "rank": 5,
   "tags": [
@@ -48,6 +52,8 @@ export const apiTransformed = [{
     "longitude": -122.44783
   },
   "name": "Palace of Fine Arts",
+  "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
+  "address": "3601 Lyon St, San Francisco, CA 94123",
   "category": "SIGHTS",
   "rank": 10,
   "tags": [
@@ -84,6 +90,8 @@ export const apiTransformed = [{
     "longitude": -122.47881
   },
   "name": "Scoma's Sausalito",
+  "imageURL": "https://www.sftravel.com/sites/sftravel.prod.acquia-sites.com/files/parters/images/P0000632_1_20150324150014.JPG",
+  "address": "588 Bridgeway, Sausalito, CA 94965",
   "category": "RESTAURANT",
   "rank": 10,
   "tags": [
@@ -112,6 +120,8 @@ export const apiTransformed = [{
     "longitude": -122.478516
   },
   "name": "The Trident",
+  "imageURL": "https://www.gayot.com/images/reviews/trident.jpg",
+  "address": "558 Bridgeway, Sausalito, CA 94965",
   "category": "RESTAURANT",
   "rank": 10,
   "tags": [
