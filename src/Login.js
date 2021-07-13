@@ -9,6 +9,7 @@ function Login(props) {
 
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
+  let isInvalid = username === '' || password === '';
 
   let login = (event) => {
     //submit post request to db passing in username and password
@@ -16,11 +17,12 @@ function Login(props) {
     //if username invalid: prompt to create account 
     //if username valid and password invalid: prompt 'incorrect password'
     event.preventDefault();
-    axios.post(`${url}/login`, { username: username, password: password })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(err => console.error(err))
+    console.log('submitted')
+    // axios.post(`${url}/login`, { username: username, password: password })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => console.error(err))
   };
 
   return (
@@ -28,17 +30,25 @@ function Login(props) {
       <ColorModeSwitcher justifySelf="flex-end" />
       <div className="login-wrapper">
         <Text>Please Log In</Text>
-        <form onSubmit={login}>
-          <label>
-            <Text>Username</Text>
-            <input type="text" onChange={(e) => setUsername(e.target.value)} />
-          </label>
-          <label>
-            <Text>Password</Text>
-            <input type="password" onChange={(e) => setPassword(e.target.value)} />
-          </label>
+        <form method="POST" onSubmit={login}>
+          <Text>Username</Text>
+          <input
+            required
+            type="text"
+            placeholder="Email address"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+          <Text>Password</Text>
+          <input
+            required
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            autoComplete="off"
+          />
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={isInvalid}>Submit</button>
           </div>
         </form>
       </div>
