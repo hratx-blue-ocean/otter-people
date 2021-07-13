@@ -44,6 +44,24 @@ export default function Recs(props) {
     setItemsShown(4)
   };
 
+  const eachRecommendation = (dataObj, index) => {
+    return (
+      < Box key={index} p="2" >
+        {/*  */}
+        {/* Need to hardcode height="" pixels based on final layout */}
+        {/*  */}
+        <Image objectFit="cover" maxWidth="100%" maxHeight="100%" src={dataObj.imageURL}
+          alt={dataObj.name} />
+        <Box
+          mt="1"
+          lineHeight="tight"
+        >
+          <Text isTruncated fontSize="xs">{dataObj.name}</Text>
+        </Box>
+      </Box>
+    )
+  }
+
   return (
     <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Heading size="lg">Around Town</Heading>
@@ -60,19 +78,7 @@ export default function Recs(props) {
       {category === "All" ?
         <SimpleGrid columns={2} >
           {apiTransformed.slice(0, itemsShown).map((each, i) =>
-            <Box key={i} p="2" >
-              {/*  */}
-              {/* Need to hardcode height="" pixels based on final layout */}
-              {/*  */}
-              <Image objectFit="cover" maxWidth="100%" maxHeight="100%" src={each.imageURL}
-                alt={each.name} />
-              <Box
-                mt="1"
-                lineHeight="tight"
-              >
-                <Text isTruncated fontSize="xs">{each.name}</Text>
-              </Box>
-            </Box>
+            eachRecommendation(each, i)
           )}
         </SimpleGrid>
         :
@@ -84,17 +90,7 @@ export default function Recs(props) {
           {apiTransformed.slice(0, itemsShown).map((each, i) => {
             if (category === each.category) {
               return (
-                < Box key={i} p="2" >
-                  <Image maxWidth="175px" maxHeight="116px" src={each.imageURL}
-                    alt={each.name} />
-                  <Box
-                    mt="1"
-                    lineHeight="tight"
-                  >
-                    <Text isTruncated fontSize="xs">{each.name}</Text>
-                  </Box>
-                </Box>
-
+                eachRecommendation(each, i)
               )
             }
           }
