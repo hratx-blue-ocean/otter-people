@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useColorModeValue } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/react";
 import { VStack } from "@chakra-ui/react";
@@ -42,29 +42,35 @@ function AddGroupModal() {
     // HANDLE FORM SUBMISSION
   }
 
+  const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");
+  const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
+  const text = useColorModeValue("text.light", "text.dark");
+  const layer = useColorModeValue("layer.light", "layer.dark");
+
 
   return (
     <>
       <Button onClick={onOpen}>Create New Group</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader >Create New Group</ModalHeader>
+        <ModalContent bg={mainBlue}>
+          <ModalHeader color={'text.dark'}>Create New Group</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing="20px">
 
               <FormControl isRequired>
-                <FormLabel>Group Name</FormLabel>
+                <FormLabel color={'text.dark'}>Group Name</FormLabel>
                 <Input
                   value={groupName}
                   onChange={handleGroupNameChange}
                   placeholder="Group Name"
+                  bg={layer}
                 />
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Group Description</FormLabel>
+                <FormLabel color={'text.dark'}>Group Description</FormLabel>
                 <Textarea
                   value={groupDescription}
                   onChange={handleGroupDescriptionChange}
@@ -72,6 +78,7 @@ function AddGroupModal() {
                   size="md"
                   height="100px"
                   resize="None"
+                  bg={layer}
                 />
               </FormControl>
               {/* <FormControl>
@@ -82,7 +89,7 @@ function AddGroupModal() {
           </ModalBody>
 
           <ModalFooter alignItems="center" >
-            <Button colorScheme="blue" ml="auto" mr="auto" onClick={handleFormSubmission}>
+            <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission}>
               Create Group
             </Button>
           </ModalFooter>
