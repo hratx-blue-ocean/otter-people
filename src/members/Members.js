@@ -33,17 +33,17 @@ export default function Members(props) {
 
     return (
       < Box key={index} p="2" >
-        <Flex p="4">
+        <Flex p="0">
           <Spacer />
           {/* Future Feature */}
           {/* Can add avatar image URL to src attribute */}
-          <Avatar size="lg" name={fullName} src="" />
+          <Avatar size="md" name={fullName} src="" />
           <Box
-            p="4"
+            p="2"
             mt="1"
             lineHeight="tight"
           >
-            <Text fontSize="s">{dataObj.firstName} {dataObj.lastName.slice(0, 1)}.</Text>
+            <Text fontSize="md">{dataObj.firstName} {dataObj.lastName.slice(0, 1)}.</Text>
           </Box>
           <Spacer />
           <Spacer />
@@ -63,7 +63,7 @@ export default function Members(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <Box p="1">
+        <Box p="2">
           <Heading size="lg">Group Members</Heading>
         </Box>
         <Spacer />
@@ -73,8 +73,8 @@ export default function Members(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <Box maxWidth="150px">
-          <Text fontSize="sm"> Invite Friends with Group Code: {code}</Text>
+        <Box p="3" maxWidth="150px">
+          <Text fontSize="xs"> Invite Friends with Group Code: {code}</Text>
           {/* <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} /> */}
 
         </Box>
