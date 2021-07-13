@@ -9,13 +9,15 @@ const members = [{ firstName: 'Jack', lastName: 'Pronske' }, { firstName: 'Kim',
 { firstName: 'Joe', lastName: 'Haller' }, { firstName: 'Cody', lastName: 'Haines' },
 { firstName: 'Christian', lastName: 'Peterson' }]
 
+//need to pass as props
+const code = '0214';
+
 export default function Members(props) {
 
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
 
   const onInvite = () => {
-    //
   };
 
   const onSeeMore = () => {
@@ -71,8 +73,11 @@ export default function Members(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <Text fontSize="sm" p="2"> Invite A Friend</Text>
-        <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} />
+        <Box maxWidth="150px">
+          <Text fontSize="sm"> Invite Friends with Group Code: {code}</Text>
+          {/* <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} /> */}
+
+        </Box>
         <Spacer />
       </Flex>
       <SimpleGrid columns={2}>
