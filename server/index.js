@@ -4,10 +4,6 @@ const cors = require('cors');
 const db = require('../database');
 const port = 3001;
 
-console.log('test');
-
-console.log(db.createGroup)
-
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, './public')));
@@ -18,12 +14,40 @@ app.use(express.json());
 app.get('/groups', (req, res) => {
   console.log('reqparmas', req.query.userId);
 
-   let userEmail = req.query.userId;
-    db.fetchGroups(userEmail, (err, result) => {
+  let userEmail = req.query.userId;
+  db.fetchGroups(userEmail, (err, result) => {
     if (err) {
       res.status(400).send(err)
     } else {
       res.status(200).send(result);
+    }
+  })
+});
+
+app.get('/groups/code', (req, res) => {
+  // let groupCode = req.query.groupCode;
+  let userId = 456;
+  let secretCode = '1626211580955';
+  let groupCode = '1626211580955';
+
+
+  db.findGroupCode(groupCode, (err, result) => {
+    if (err) {
+      res.status(400).send('Code incorrect', err);
+    } else {
+      if (result === true) {
+        // DO PUT REQUEST! - add to groups
+        db.addUserToGroup(userId, groupCode, (err, result) => {
+          if (err) {
+            res.status(400).send('cannot add to group', err);
+          } else {
+            res.status(200).send(result);
+          }
+        })
+
+
+      }
+
     }
   })
 });

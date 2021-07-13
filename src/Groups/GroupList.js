@@ -20,10 +20,9 @@ const GroupList = (props) => {
       params: {
         userId: props.userId,
       }
-    }
+    };
     axios.get(url, config)
       .then((result) => {
-        console.log('results', result.data);
         setGroups(result.data)
       })
       .catch((err) => {
@@ -33,7 +32,25 @@ const GroupList = (props) => {
 
   // joinGroups - HTTP PUT Request? HOW TO HANDLE LOGIN ???
   // PUT Request to group & user
-  const joinGroup = (userId, group) => {
+  const joinGroup = (userId, groupCode) => {
+    const url = 'http://localhost:3001/groups/code';
+    const config = {
+      params: {
+        groupCode: groupCode,
+      }
+    };
+    axios.get(url, config)
+    .then((result) => {
+      console.log(result.data);
+      // update current Group
+      //refetch groups
+    })
+    .catch((err) => {
+      console.error('Error: ', err);
+
+    });
+
+
 
   };
 

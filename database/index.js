@@ -42,14 +42,14 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  group_id: {type: Number, index: true}
+  group_id: { type: Number, index: true }
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
 
 // model to get groups from database based on userEmail
 const fetchGroups = (userEmail, callback) => {
-  Group.find({members: { $in: userEmail }}, (err, results) => {
+  Group.find({ members: { $in: userEmail } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -65,20 +65,39 @@ const createGroup = (groupData, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      callback(null, results)
+      callback(null, results);
     }
   });
 }
 
 //model to add user to a group
-const addUserToGroup = (callback) => {
-
+const addUserToGroup = (userId, groupCode, callback) => {
+  Group.updateOne({ code: groupCode }, { $addToSet: { members: userId } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
 };
 
 
 // model to get group code from the database
+const findGroupCode = (groupCode, callback) => {
+  Group.exists({ code: groupCode }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 
 module.exports = {
   fetchGroups,
-  createGroup
+  createGroup,
+  findGroupCode,
+  addUserToGroup
 }
+

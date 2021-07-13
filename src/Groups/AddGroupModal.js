@@ -50,6 +50,7 @@ group = {
     const newGroup = {
       name: groupName,
       description: groupDescription,
+      code: Date.now(),
       photo: groupPhoto,
       members: [props.userId],
     };
@@ -60,8 +61,6 @@ group = {
     setGroupDescription('');
     setGroupPhoto('');
   }
-
-  console.log('us', props.userId)
 
   return (
     <>
