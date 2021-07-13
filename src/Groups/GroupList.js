@@ -12,11 +12,16 @@ const GroupList = (props) => {
   // [{ name: 'Drumline' }, { name: 'DnD' }, { name: 'Foodies' }, { name: 'Green Thumb' }]
   const [displayedGroups, setDisplayedGroups] = useState([]); // default to show three groups
   const [toggleTriangle, setToggleTriangle] = useState(false);
-  //props.userEmail
+  //props.userId
 
   const getGroups = (userEmail) => {
     const url = `http://localhost:3001/groups`;
-    axios.get(url)
+    const config = {
+      params: {
+        userId: props.userId,
+      }
+    }
+    axios.get(url, config)
       .then((result) => {
         console.log('results', result.data);
         setGroups(result.data)
@@ -32,13 +37,13 @@ const GroupList = (props) => {
 
   };
 
-  const createGroup = (userEmail, group) => {
+  const createGroup = (userId, group) => {
     const url = `http://localhost:3001/groups`;
     axios.post(url, group)
     .then((result) => {
       console.log('results', result)
       // call getGroups to get updated listed of groups
-      getGroups(props.userEmail);
+      getGroups(props.userId);
     })
     .catch((err) => {
       console.error('Error: ', err);
@@ -65,7 +70,7 @@ const GroupList = (props) => {
 
   return (
     <>
-      <AddGroupModal createGroup={createGroup} userEmail={props.userEmail}/>
+      <AddGroupModal createGroup={createGroup} userEmail={props.userEmail} userId={props.userId}/>
       <JoinGroupModal joinGroup={joinGroup} />
       <GroupItem groups={groups} displayedGroups={displayedGroups} setCurrentGroup={props.setCurrentGroup} />
       {!toggleTriangle ?

@@ -70,6 +70,14 @@ const createGroup = (groupData, callback) => {
   });
 }
 
+//model to add user to a group
+const addUserToGroup = (callback) => {
+
+};
+
+
+// model to get group code from the database
+
 module.exports = {
   fetchGroups,
   createGroup

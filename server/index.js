@@ -16,9 +16,10 @@ app.use(express.json());
 // group routes
 // NEED TO HOOK UP USEREMAIL
 app.get('/groups', (req, res) => {
-  console.log('body', req.body);
-  let userEmail = 'email1'
-  db.fetchGroups(userEmail, (err, result) => {
+  console.log('reqparmas', req.query.userId);
+
+   let userEmail = req.query.userId;
+    db.fetchGroups(userEmail, (err, result) => {
     if (err) {
       res.status(400).send(err)
     } else {
@@ -37,6 +38,7 @@ app.post('/groups', (req, res) => {
     }
   })
 });
+
 
 app.post('/login', (req, res) => {
   db.findOne({ "email": req.body.username }).lean()

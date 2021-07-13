@@ -51,17 +51,17 @@ group = {
       name: groupName,
       description: groupDescription,
       photo: groupPhoto,
-      members: [props.userEmail],
+      members: [props.userId],
     };
     console.log(newGroup);
-    props.createGroup(props.useEmail, newGroup);
+    props.createGroup(props.userId, newGroup);
     // clear form inputs
     setGroupName('');
     setGroupDescription('');
     setGroupPhoto('');
   }
 
-  console.log('us', props.userEmail)
+  console.log('us', props.userId)
 
   return (
     <>
