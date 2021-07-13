@@ -35,37 +35,33 @@ function AddGroupModal(props) {
     let groupPhotoUpload = e.target.file;
     setGroupPhoto(groupPhotoUpload);
   };
-    /*
-  group = {
-    id: id,
-    name: name,
-    description: description,
-    picture: picture,
-    members: [id...],
-    events: [events...]
-  }
-  */
+  /*
+group = {
+  id: id,
+  name: name,
+  description: description,
+  picture: picture,
+  members: [id...],
+}
+*/
 
   const handleFormSubmission = (e) => {
-    console.log("cats")
     onClose()
-    // HANDLE FORM SUBMISSION
     const newGroup = {
       name: groupName,
       description: groupDescription,
-      picture: groupPhoto,
-      members: [],
-      events: [],
+      photo: groupPhoto,
+      members: [props.userEmail],
     };
-
-    console.log('newGroup', newGroup);
-    props.createGroup(newGroup);
+    console.log(newGroup);
+    props.createGroup(props.useEmail, newGroup);
     // clear form inputs
     setGroupName('');
     setGroupDescription('');
     setGroupPhoto('');
   }
 
+  console.log('us', props.userEmail)
 
   return (
     <>

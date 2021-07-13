@@ -42,7 +42,7 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  group_id: Number,
+  group_id: {type: Number, index: true}
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
@@ -56,22 +56,21 @@ const fetchGroups = (userEmail, callback) => {
       console.log(results);
       callback(null, results)
     }
-  })
+  });
 }
 
-const createGroup = (groupData) => {
+const createGroup = (groupData, callback) => {
   const groupToAdd = new Group(groupData);
   Group.create(groupToAdd, (err, results) => {
     if (err) {
-      console.error(err);
+      callback(err, null);
     } else {
-      console.log('group created')
+      callback(null, results)
     }
-  })
+  });
 }
 
 module.exports = {
   fetchGroups,
   createGroup
-
 }

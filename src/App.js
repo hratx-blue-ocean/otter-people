@@ -7,7 +7,9 @@ import GroupList from './Groups/GroupList';
 function App() {
 
   const [currentGroup, setCurrentGroup] = useState();
-  const userId = 1234;
+  const [userId, setCurrentUserId] = useState('123');
+  const [userEmail, setUserEmail] = useState('email1');
+
 
 
   return (
@@ -19,7 +21,7 @@ function App() {
             <Text>
               Hello world
             </Text>
-            <GroupList userId={userId} setCurrentGroup={setCurrentGroup} />
+            <GroupList userEmail={userEmail} userId={userId} setCurrentGroup={setCurrentGroup} />
           </VStack>
         </Grid>
       </Box>

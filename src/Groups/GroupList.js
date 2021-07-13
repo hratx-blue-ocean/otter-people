@@ -8,18 +8,18 @@ import AddGroupModal from './AddGroupModal';
 import JoinGroupModal from './JoinGroupModal';
 
 const GroupList = (props) => {
-  const [groups, setGroups] = useState([{ name: 'Drumline' }, { name: 'DnD' }, { name: 'Foodies' }, { name: 'Green Thumb' }]);
+  const [groups, setGroups] = useState([]);
+  // [{ name: 'Drumline' }, { name: 'DnD' }, { name: 'Foodies' }, { name: 'Green Thumb' }]
   const [displayedGroups, setDisplayedGroups] = useState([]); // default to show three groups
   const [toggleTriangle, setToggleTriangle] = useState(false);
-  //props.userId
+  //props.userEmail
 
-
-  // getGroups HTTP Request
-  const getGroups = (userId) => {
+  const getGroups = (userEmail) => {
     const url = `http://localhost:3001/groups`;
     axios.get(url)
       .then((result) => {
-        console.log('results', result);
+        console.log('results', result.data);
+        setGroups(result.data)
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -32,12 +32,17 @@ const GroupList = (props) => {
 
   };
 
-  // createGroup HTTP POST REQUEST
-  const createGroup = (group) => {
-
-    // call getGroups to get updated listed of groups
-    getGroups(props.userId);
-
+  const createGroup = (userEmail, group) => {
+    const url = `http://localhost:3001/groups`;
+    axios.post(url, group)
+    .then((result) => {
+      console.log('results', result)
+      // call getGroups to get updated listed of groups
+      getGroups(props.userEmail);
+    })
+    .catch((err) => {
+      console.error('Error: ', err);
+    })
   };
 
   const showMoreGroups = (e) => {
@@ -54,11 +59,13 @@ const GroupList = (props) => {
     setDisplayedGroups(groups.slice(0, 3))
   }, [groups])
 
+  useEffect(() => {
+    getGroups(props.userId);
+  }, [])
 
   return (
     <>
-      <h1>Our Group Component will be below. It will live on the left side bar!</h1>
-      <AddGroupModal createGroup={createGroup} />
+      <AddGroupModal createGroup={createGroup} userEmail={props.userEmail}/>
       <JoinGroupModal joinGroup={joinGroup} />
       <GroupItem groups={groups} displayedGroups={displayedGroups} setCurrentGroup={props.setCurrentGroup} />
       {!toggleTriangle ?
