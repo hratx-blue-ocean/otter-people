@@ -67,11 +67,7 @@ export default function Recs(props) {
   }
 
   return (
-<<<<<<< HEAD
-    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
-=======
-    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
->>>>>>> 901d2556c1b1e58b77ac1302ca5f944e96071b22
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
       <Heading p="1" size="lg">Around Town</Heading>
       <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
