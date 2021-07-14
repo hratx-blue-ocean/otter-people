@@ -1,9 +1,12 @@
 import React from 'react';
-import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue } from '@chakra-ui/react';
+import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
 import Members from './members/Members.js';
+import SelectedGroup from './groupAndEvents/SelectedGroup.js';
+import Events from './groupAndEvents/Events.js';
+import Login from './Login/Login.js';
 
 const theme = extendTheme({
   colors: {
@@ -48,13 +51,15 @@ const theme = extendTheme({
 
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: true});
 
-  const bg = useColorModeValue("red.500", "green.200");
+  const bg = useColorModeValue("bg.dark", "bg.dark");
 
   return (
     <ChakraProvider theme={theme}>
-      <AppBar />
+      <AppBar onClose={onOpen}/>
       <Box  textAlign="center" fontSize="xl">
+        <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
         <Grid  minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>
@@ -63,7 +68,8 @@ function App() {
           </GridItem>
           <GridItem colSpan={7} >
             <VStack spacing={8}>
-            {/* events */}
+              <SelectedGroup />
+              <Events />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >
