@@ -1,5 +1,5 @@
-<h2>Alumni MeetUp</h2>
-<i><h4>Stay Touching<h4></i>
+<h2>Otter People</h2>
+<i><h4>Stay in touch with each otter<h4></i>
 
 A place for alumni to network by creating private groups and events.
 Invite friends and get activity recommendations.
