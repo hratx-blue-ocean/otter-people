@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import AddEventModal from './AddEventModal';
 import { Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
@@ -27,9 +27,7 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <Button onClick={addEvent} mt="10" mr="6" colorScheme="teal" size="lg">
-          + Event
-        </Button>
+        <AddEventModal mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
     </Box>
   )

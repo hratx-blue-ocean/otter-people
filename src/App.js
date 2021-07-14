@@ -67,7 +67,7 @@ function App() {
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)">
           <GridItem colSpan={2}>
             <VStack spacing={8}>
-              <GroupList />
+              <GroupList  userEmail={userEmail} userId={userId} setCurrentGroup={setCurrentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={7}>
