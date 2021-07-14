@@ -41,7 +41,6 @@ const GroupList = (props) => {
     axios.get(url, config)
       .then((result) => {
         props.setCurrentGroup(result.data);
-
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -78,9 +77,11 @@ const GroupList = (props) => {
     const url = `http://localhost:3001/groups`;
     axios.post(url, group)
     .then((result) => {
-      props.setCurrentGroup(JSON.parse(result.config.data))
+      let newGroup = JSON.parse(result.config.data);
+      // props.setCurrentGroup(JSON.parse(result.config.data))
       // call getGroups to get updated listed of groups
       getGroups(props.userId);
+      getOneGroup(newGroup.code)
     })
     .catch((err) => {
       console.error('Error: ', err);
