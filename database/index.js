@@ -31,7 +31,7 @@ const userSchema = Schema({
   city: String,
   state: String,
   calculated_geolocation: [Object],
-  groups: [Number],
+  groups: [String],
 })
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -50,6 +50,18 @@ const Event = mongoose.model('Event', eventSchema, 'events');
 // model to get groups from database based on userEmail
 const fetchGroups = (userEmail, callback) => {
   Group.find({ members: { $in: userEmail } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(results);
+      callback(null, results)
+    }
+  });
+}
+
+// model to a single groups from database based on groupCode
+const fetchGroup = (groupCode, callback) => {
+  Group.find({ code: { $in: groupCode } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -81,6 +93,16 @@ const addUserToGroup = (userId, groupCode, callback) => {
   });
 };
 
+//model to add group Name to a user
+const addGroupNameToUser = (userId, groupName, callback) => {
+  User.updateOne({ userId: userId }, { $addToSet: { groups: groupName } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
 
 // model to get group code from the database
 const findGroupCode = (groupCode, callback) => {
@@ -98,6 +120,8 @@ module.exports = {
   fetchGroups,
   createGroup,
   findGroupCode,
-  addUserToGroup
+  addUserToGroup,
+  addGroupNameToUser,
+  fetchGroup
 }
 

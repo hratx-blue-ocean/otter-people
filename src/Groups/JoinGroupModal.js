@@ -14,7 +14,8 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-function JoinGroupModal() {
+function JoinGroupModal(props) {
+  console.log('uId in joinModal', props.userId);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [groupCode, setGroupCode] = useState('');
 
@@ -25,6 +26,8 @@ function JoinGroupModal() {
 
   const handleFormSubmission = (e) => {
     onClose()
+    console.log(typeof groupCode)
+    props.joinGroup(props.userId, groupCode)
     // HANDLE FORM SUBMISSION
     // check to see if group code matches
     // send put Request to add to group

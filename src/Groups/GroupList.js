@@ -30,6 +30,24 @@ const GroupList = (props) => {
       });
   };
 
+  // get group base on groupCode
+  const getOneGroup = (groupCode) => {
+    const url = `http://localhost:3001/groups/getOne`;
+    const config = {
+      params: {
+        groupCode: groupCode,
+      }
+    };
+    axios.get(url, config)
+      .then((result) => {
+        props.setCurrentGroup(result.data);
+
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  };
+
   // joinGroups - HTTP PUT Request? HOW TO HANDLE LOGIN ???
   // PUT Request to group & user
   const joinGroup = (userId, groupCode) => {
@@ -37,12 +55,14 @@ const GroupList = (props) => {
     const config = {
       params: {
         groupCode: groupCode,
+        userId: userId,
       }
     };
     axios.get(url, config)
     .then((result) => {
-      console.log(result.data);
+      console.log('hello');
       // update current Group
+      getOneGroup(groupCode);
       //refetch groups
     })
     .catch((err) => {
@@ -58,7 +78,7 @@ const GroupList = (props) => {
     const url = `http://localhost:3001/groups`;
     axios.post(url, group)
     .then((result) => {
-      console.log('results', result)
+      props.setCurrentGroup(JSON.parse(result.config.data))
       // call getGroups to get updated listed of groups
       getGroups(props.userId);
     })
@@ -88,7 +108,7 @@ const GroupList = (props) => {
   return (
     <>
       <AddGroupModal createGroup={createGroup} userEmail={props.userEmail} userId={props.userId}/>
-      <JoinGroupModal joinGroup={joinGroup} />
+      <JoinGroupModal joinGroup={joinGroup} userId={props.userId} />
       <GroupItem groups={groups} displayedGroups={displayedGroups} setCurrentGroup={props.setCurrentGroup} />
       {!toggleTriangle ?
         <IconButton

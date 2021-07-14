@@ -7,7 +7,7 @@ import GroupList from './Groups/GroupList';
 function App() {
 
   const [currentGroup, setCurrentGroup] = useState();
-  const [userId, setCurrentUserId] = useState('123');
+  const [userId, setCurrentUserId] = useState('50112');
   const [userEmail, setUserEmail] = useState('email1');
 
 

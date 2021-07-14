@@ -24,30 +24,35 @@ app.get('/groups', (req, res) => {
   })
 });
 
-app.get('/groups/code', (req, res) => {
-  // let groupCode = req.query.groupCode;
-  let userId = 456;
-  let secretCode = '1626211580955';
-  let groupCode = '1626211580955';
+app.get('/groups/getOne', (req, res) => {
+  let groupCode = req.query.groupCode;
+  db.fetchGroup(groupCode, (err, result) => {
+    if (err) {
+      res.status(400).send(err)
+    } else {
+      res.status(200).send(result);
+    }
+  })
+});
 
+app.get('/groups/code', (req, res) => {
+  let groupCode = req.query.groupCode;
+  let userId = req.query.userId;
 
   db.findGroupCode(groupCode, (err, result) => {
     if (err) {
       res.status(400).send('Code incorrect', err);
     } else {
       if (result === true) {
-        // DO PUT REQUEST! - add to groups
+        // DO PUT REQUEST! - add to groups - DO we need to add group to user?
         db.addUserToGroup(userId, groupCode, (err, result) => {
           if (err) {
             res.status(400).send('cannot add to group', err);
           } else {
-            res.status(200).send(result);
+            res.status(200).send('added to group');
           }
         })
-
-
       }
-
     }
   })
 });
