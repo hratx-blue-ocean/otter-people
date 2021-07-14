@@ -63,7 +63,7 @@ function AddEventModal(props) {
     <>
       <Button onClick={onOpen} mt="10" mr="6" colorScheme="teal" size="lg"> + Event</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} >
+      <Modal isOpen={isOpen} onClose={onClose} isCentered={true} >
         <ModalOverlay />
         <ModalContent bg={mainBlue}>
           <ModalHeader color={'text.dark'}>Create New Event</ModalHeader>
@@ -103,7 +103,7 @@ function AddEventModal(props) {
                 <Textarea
                   value={eventDescription}
                   onChange={handleEventDescriptionChange}
-                  placeholder="Group Description"
+                  placeholder="Event Description"
                   size="md"
                   height="100px"
                   resize="None"
