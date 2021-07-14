@@ -19,6 +19,7 @@ function AppBar (props) {
         minH="7vh"
         templateColumns="repeat(12, 1fr)"
         gap={0}
+        textAlign="center" fontSize="xl"
       >
         <GridItem colSpan={3} bg={mainBlue}>
           <Text fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Alumni MeetUp</Text>

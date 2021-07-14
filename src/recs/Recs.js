@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Box } from "@chakra-ui/react"
+import { Box, useColorModeValue } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Image } from "@chakra-ui/react"
@@ -20,6 +20,10 @@ export default function Recs(props) {
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
   // const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
+
+  const layer = useColorModeValue('layer.light', 'layer.dark');
+  const slect = useColorModeValue('select.light', 'select.dark');
+  const txt = useColorModeValue('text.light', 'text.dark');
 
   //useEffect hooks
   // useEffect(() => {
@@ -46,7 +50,7 @@ export default function Recs(props) {
 
   const eachRecommendation = (dataObj, index) => {
     return (
-      < Box key={index} p="2" >
+      < Box key={index} p="2" bg={layer} color={txt}>
         {/*  */}
         {/* Need to hardcode height="" pixels based on final layout */}
         {/*  */}
@@ -63,11 +67,15 @@ export default function Recs(props) {
   }
 
   return (
+<<<<<<< HEAD
     <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
+=======
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
+>>>>>>> 901d2556c1b1e58b77ac1302ca5f944e96071b22
       <Heading p="1" size="lg">Around Town</Heading>
       <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
-        <Select p="1" onChange={onChange} placeholder="Category" size="sm" width="50%">
+        <Select bg={slect} p="1" onChange={onChange} placeholder="Category" size="sm" width="50%">
           <option value="SIGHTS">Sights</option>
           <option value="NIGHTLIFE">Nightlife</option>
           <option value="RESTAURANT">Restaurants</option>

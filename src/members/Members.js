@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Box, Center, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
+import { Box, Center, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar, useColorModeValue } from "@chakra-ui/react"
 import { TriangleUpIcon, TriangleDownIcon, EmailIcon } from '@chakra-ui/icons'
 
 //need to pass as props
@@ -13,6 +13,9 @@ const members = [{ firstName: 'Jack', lastName: 'Pronske' }, { firstName: 'Kim',
 const code = '0214';
 
 export default function Members(props) {
+
+  const layer = useColorModeValue('layer.light', 'layer.dark');
+  const txt = useColorModeValue('text.light', 'text.dark');
 
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
@@ -33,7 +36,7 @@ export default function Members(props) {
 
     return (
       < Box key={index} p="2" >
-        <Flex p="0">
+        <Flex p="0" bg={layer} color={txt}>
           <Spacer />
           {/* Future Feature */}
           {/* Can add avatar image URL to src attribute */}
@@ -42,6 +45,7 @@ export default function Members(props) {
             p="2"
             mt="1"
             lineHeight="tight"
+            bg={layer}
           >
             <Text fontSize="md">{dataObj.firstName} {dataObj.lastName.slice(0, 1)}.</Text>
           </Box>
@@ -54,7 +58,7 @@ export default function Members(props) {
   }
 
   return (
-    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>

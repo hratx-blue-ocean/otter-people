@@ -8,7 +8,6 @@ const GroupList = (props) => {
 
   return (
     <React.Fragment>
-    <h1>Testing! Groupssss</h1>
     <AddGroupModal />
     <JoinGroupModal />
     <GroupItem />

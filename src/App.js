@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem } from '@chakra-ui/react';
+import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue } from '@chakra-ui/react';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
@@ -49,22 +49,24 @@ const theme = extendTheme({
 
 function App() {
 
+  const bg = useColorModeValue("red.500", "green.200");
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <AppBar />
-        <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)">
-          <GridItem colSpan={2}>
+      <AppBar />
+      <Box  textAlign="center" fontSize="xl">
+        <Grid  minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
+          <GridItem colSpan={2} >
             <VStack spacing={8}>
               <GroupList />
             </VStack>
           </GridItem>
-          <GridItem colSpan={7}>
+          <GridItem colSpan={7} >
             <VStack spacing={8}>
-
+            {/* events */}
             </VStack>
           </GridItem>
-          <GridItem colSpan={3}>
+          <GridItem colSpan={3} >
             <VStack spacing={8}>
               <Members />
               <Recs />
