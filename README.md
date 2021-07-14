@@ -7,7 +7,7 @@ Invite like-minded others and get activity recommendations tailored to your loca
 
 Never lose touch with your friends and each otter again!
 
-<img src="https://user-images.githubusercontent.com/75913066/125656077-f39b7bd0-d36b-4b2f-8111-4bd65b8b52ed.png" width="250"> <img src="https://user-images.githubusercontent.com/75913066/125657145-b753627c-35d7-443e-be1c-26e3236cd4d8.png" width="250"> <br>
+<img src="https://user-images.githubusercontent.com/75913066/125656077-f39b7bd0-d36b-4b2f-8111-4bd65b8b52ed.png" width="250"> <br>
 
 ## Usage
 
