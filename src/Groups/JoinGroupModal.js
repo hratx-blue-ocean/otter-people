@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useColorModeValue } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { VStack } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
@@ -28,31 +28,36 @@ function JoinGroupModal() {
     // HANDLE FORM SUBMISSION
   }
 
+  const gBtn = useColorModeValue('gBtn.light', 'gBtn.dark');
+  const mainBlue = useColorModeValue('mainBlue.light', 'mainBlue.dark');
+  const layer = useColorModeValue('layer.ligth', 'layer.dark');
+  const txt = useColorModeValue('text.light', 'text.dark');
 
   return (
     <>
-      <Button onClick={onOpen}>Join Existing Group</Button>
+      <Button bg={mainBlue} color={'text.dark'} onClick={onOpen}>Join Existing Group</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader >Join Existing Group</ModalHeader>
+        <ModalContent bg={mainBlue}>
+          <ModalHeader color={'text.dark'}>Join Existing Group</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing="20px">
               <FormControl isRequired>
-                <FormLabel>Group Invitation Code</FormLabel>
+                <FormLabel color={'text.dark'}>Group Invitation Code</FormLabel>
                 <Input
                   value={groupCode}
                   onChange={handleGroupCodeChange}
                   placeholder="Invitation Code"
+                  bg={layer}
                 />
               </FormControl>
             </VStack>
           </ModalBody>
 
           <ModalFooter alignItems="center" >
-            <Button colorScheme="blue" ml="auto" mr="auto" onClick={handleFormSubmission}>
+            <Button bg={gBtn} color={txt} ml="auto" mr="auto" onClick={handleFormSubmission}>
               Join Group
             </Button>
           </ModalFooter>

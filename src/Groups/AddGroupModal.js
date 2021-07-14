@@ -50,7 +50,7 @@ function AddGroupModal() {
 
   return (
     <>
-      <Button onClick={onOpen}>Create New Group</Button>
+      <Button bg={gBtn} color={text}  onClick={onOpen}>Create New Group</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
