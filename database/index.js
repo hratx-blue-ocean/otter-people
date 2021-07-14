@@ -60,16 +60,13 @@ let signIn = (username, password, callback) => { //callback will be (req, res) c
       console.log(err);
       callback(err, null); //{failedUsername: true}
     } else {
-      console.log("null user: ", user);
-      console.log(password);
       if (!user) {
-        callback(null, { failedUsername: true })
+        callback(null, { failedLogin: true })
       } else if (user.pin === Number(password)) {
         callback(null, user);
       } else {
         //if username is correct but passwords don't match...
-        console.log('incorrect password')
-        callback(null, { failedPassword: true })
+        callback(null, { failedLogin: true })
       }
     }
   });

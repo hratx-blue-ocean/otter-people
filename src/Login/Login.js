@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
-import { Text, } from '@chakra-ui/react';
+import { Heading, Text, Input, VStack, FormControl, FormLabel, Button, useColorModeValue, Grid, GridItem, HStack, Box } from '@chakra-ui/react';
 import axios from 'axios';
 import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
+import SignUp from './SignUp';
 
 const url = 'http://127.0.0.1:3001';
 
 function Login(props) {
-
-  let [username, setUsername] = useState('');
+  //hooks
+  let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
-  let isInvalid = username === '' || password === '';
+  let isInvalid = email === '' || password === '';
 
   let login = (event) => {
     //submit post request to db passing in username and password
@@ -25,83 +23,87 @@ function Login(props) {
     //if username invalid: prompt to create account
     //if username valid and password invalid: prompt 'incorrect password'
     event.preventDefault();
-    axios.post(`${url}/login`, { username: username, password: password })
+    axios.post(`${url}/login`, { email: email, password: password })
       .then((response) => {
         if (response.data.error) {
           console.log(response.data.error);
         } else {
           //successful login, update state variable with user data
           console.log('successful login')
+          props.onClose();
+          setEmail('');
         }
         console.log(response.data);
+        setPassword('');
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err)
+        setPassword('');
+      });
   };
 
+  //colors
+  const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");
+  const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
+  const text = useColorModeValue("text.light", "text.dark");
+  const layer = useColorModeValue("layer.light", "layer.dark");
+  const bg = useColorModeValue("bg.light", "bg.dark");
   return (
-    // <Modal isOpen={isOpen} onClose={onClose} >
-    //     <ModalOverlay />
-    //     <ModalContent bg={mainBlue}>
-    //       <ModalHeader color={'text.dark'}>Create New Group</ModalHeader>
-    //       <ModalCloseButton />
-    //       <ModalBody>
-    //         <VStack spacing="20px">
-    //           <FormControl isRequired>
-    //             <FormLabel color={'text.dark'}>Group Name</FormLabel>
-    //             <Input
-    //               value={groupName}
-    //               onChange={handleGroupNameChange}
-    //               placeholder="Group Name"
-    //               bg={layer}
-    //             />
-    //           </FormControl>
-    //           <FormControl isRequired>
-    //             <FormLabel color={'text.dark'}>Group Description</FormLabel>
-    //             <Input
-    //               value={groupName}
-    //               onChange={handleGroupNameChange}
-    //               placeholder="Group Name"
-    //               bg={layer}
-    //             />
-    //           </FormControl>
-    //           {/* <FormControl>
-    //           <FormLabel>Upload Group Photo</FormLabel>
-    //           <Input type="file" />
-    //           </FormControl> */}
-    //         </VStack>
-    //       </ModalBody>
-
-    //       <ModalFooter alignItems="center" >
-    //         <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission}>
-    //           Create Group
-    //         </Button>
-    //       </ModalFooter>
-    //     </ModalContent>
-    //   </Modal>
-      <div className="login-wrapper">
-        <Text>Please Log In</Text>
-        <form method="POST" onSubmit={login}>
-          <Text>Username</Text>
-          <input
-            required
-            type="text"
-            placeholder="Email address"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-          />
-          <Text>Password</Text>
-          <input
-            required
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            autoComplete="off"
-          />
-          <div>
-            <button type="submit" disabled={isInvalid}>Submit</button>
-          </div>
-        </form>
-      </div>
+    <Modal isOpen={props.isOpen} onClose={()=>{}} closeOnEsc={false} closeOnOverlayClick={false} size='full' autoFocus={false}  isCentered={true} blockScrollOnMount={true}>
+        <ModalOverlay />
+        <ModalContent bg={bg}>
+          <ModalBody>
+            <Grid
+              minH="100vh"
+              templateColumns="repeat(3, 1fr)"
+              gap={0}
+              align='center'
+              justify='center'
+              bg={bg}
+            >
+              <GridItem colSpan={1} bg={bg} >
+                <VStack spacing='10'>
+                  <Heading>Angela here is your space</Heading>
+                  <Text>dont forget the otters</Text>
+                </VStack>
+              </GridItem>
+              <GridItem colSpan={1} bg={bg} >
+                <Box bg={mainBlue} justifySelf='center' alignSelf='center' mt='50%' p='10' borderRadius='lg'>
+                  <VStack spacing="10" >
+                    <FormControl isRequired>
+                      <FormLabel color={'text.dark'}>Email Address</FormLabel>
+                      <Input
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="example@example.com"
+                        bg={layer}
+                      />
+                    </FormControl>
+                    <FormControl isRequired>
+                      <FormLabel color={'text.dark'}>Password</FormLabel>
+                      <Input
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder=''
+                        bg={layer}
+                        type='password'
+                      />
+                    </FormControl>
+                    <HStack spacing='10'>
+                      <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={login} isDisabled={isInvalid}>
+                        Login
+                      </Button>
+                      {/* <Text>Don't have an account yet? Sign up below!</Text> */}
+                      <SignUp onClose={props.onClose}/>
+                    </HStack>
+                  </VStack>
+                </Box>
+              </GridItem>
+              <GridItem colSpan={1} bg={bg}/>
+            </Grid>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
   );
 };
 

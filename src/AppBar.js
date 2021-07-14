@@ -8,7 +8,7 @@ function AppBar (props) {
 
   const logOut = () => {
     // logout function from props
-    console.log('Hello');
+    props.onClose();
   };
 
   return (

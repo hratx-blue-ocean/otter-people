@@ -6,6 +6,7 @@ import Recs from './recs/Recs.js'
 import Members from './members/Members.js';
 import SelectedGroup from './groupAndEvents/SelectedGroup.js';
 import Events from './groupAndEvents/Events.js';
+import Login from './Login/Login.js';
 
 const theme = extendTheme({
   colors: {
@@ -51,15 +52,14 @@ const theme = extendTheme({
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: true});
-  console.log(isOpen);
 
-  const bg = useColorModeValue("red.500", "green.200");
+  const bg = useColorModeValue("bg.dark", "bg.dark");
 
   return (
     <ChakraProvider theme={theme}>
-      <AppBar />
+      <AppBar onClose={onOpen}/>
       <Box  textAlign="center" fontSize="xl">
-        {/* <Login/> */}
+        <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
         <Grid  minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>

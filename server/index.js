@@ -10,16 +10,14 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(express.json());
 
 app.post('/login', (req, res) => {
-  console.log('user data: ', req.body.username, ' ', req.body.password)
+  console.log('user data: ', req.body.email, ' ', req.body.password)
   console.log('reached the endpoint');
-  db.signIn(req.body.username, req.body.password, (err, data) => {
+  db.signIn(req.body.email, req.body.password, (err, data) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      if (data.failedUsername) {
-        res.status(200).send({ error: 'incorrect username' });
-      } else if (data.failedPassword) {
-        res.status(200).send({ error: 'incorrect password' });
+      if (data.failedLogin) {
+        res.status(200).send({ error: 'incorrect email' });
       } else {
         res.status(200).send(data);
       }
