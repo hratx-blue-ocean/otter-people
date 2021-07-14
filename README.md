@@ -17,6 +17,7 @@ Get recommendations of what to do based on the geolocation of group members.
 
 ### Technologies
 
+|---|--|
 |Languages|Javascript|
 |Frameworks|React|
 |Hosting|AWS|
