@@ -1,14 +1,12 @@
 # Otter People 
-*Stay in touch with each otter*
+*Stay in touch with each otter.*
+
+<img src="https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png" width=100> <img src="https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png" width=100> 
 
 A place for alumni and friends to create private groups and events. <br>
 Invite like-minded others and get activity recommendations tailored to your locations.<br>
 
 Never lose touch with your friends and each otter again!
-
-![otterLogo](https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png) ![otterLogo](https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png) ![otterLogo](https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png)
-
-
 
 ## Usage
 
