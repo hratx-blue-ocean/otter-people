@@ -62,10 +62,6 @@ export default function Members(props) {
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>
-      <Box >
-        <Text p="1" fontSize="sm"> Invite Friends with Group Code: {code}</Text>
-        {/* <IconButton onClick={onInvite} aria-label="Invite" p="2" size="sm" icon={<EmailIcon boxSize={6} />} /> */}
-      </Box>
       <SimpleGrid columns={2}>
         {members.slice(0, itemsShown).map((each, i) =>
           eachMember(each, i)
