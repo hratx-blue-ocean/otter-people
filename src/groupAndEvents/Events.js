@@ -26,7 +26,7 @@ const userId = "c";
 export default function Events(props) {
 
   //
-  //add SHOW MORE
+  //add SHOW MORE if we want
   //
   //
 
