@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ChakraProvider, Box, Text, VStack, Grid, theme, } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { ChakraProvider, Text, theme, } from '@chakra-ui/react';
 import axios from 'axios';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
@@ -17,12 +17,17 @@ function Login(props) {
     //if username invalid: prompt to create account 
     //if username valid and password invalid: prompt 'incorrect password'
     event.preventDefault();
-    console.log('submitted')
-    // axios.post(`${url}/login`, { username: username, password: password })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch(err => console.error(err))
+    axios.post(`${url}/login`, { username: username, password: password })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          //successful login, update state variable with user data
+          console.log('successful login')
+        }
+        console.log(response.data);
+      })
+      .catch(err => console.error(err))
   };
 
   return (
@@ -55,15 +60,6 @@ function Login(props) {
     </ChakraProvider>
   );
 };
-// function Login(props) {
-//   return (
-//     <ChakraProvider theme={theme}>
-//       <Text>
-//         Login screen
-//       </Text>
-//     </ChakraProvider>
-//   );
-// };
 
 export default Login;
 

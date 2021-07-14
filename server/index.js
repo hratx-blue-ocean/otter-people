@@ -1,23 +1,46 @@
 const express = require('express');
 const path = require('path');
 const db = require('../database');
+const cors = require('cors');
 const port = 3001;
 
 const app = express();
-
+app.use(cors());
 app.use(express.static(path.join(__dirname, './public')));
 app.use(express.json());
 
 app.post('/login', (req, res) => {
-  db.findOne({ "email": req.body.username }).lean()
-    .then((response) => {
-      console.log(response);
-      //if response.pin === password ...
-      res.status(200).send('You did it!!!')
-    })
-    .catch((err) => {
+  console.log('user data: ', req.body.username, ' ', req.body.password)
+  console.log('reached the endpoint');
+  db.signIn(req.body.username, req.body.password, (err, data) => {
+    if (err) {
       res.status(400).send(err);
-    })
+    } else {
+      if (data.failedUsername) {
+        res.status(200).send({ error: 'incorrect username' });
+      } else if (data.failedPassword) {
+        res.status(200).send({ error: 'incorrect password' });
+      } else {
+        res.status(200).send(data);
+      }
+    }
+
+  });
+});
+
+app.post('/sign', (req, res) => {
+  console.log('signup reached');
+  db.signUp(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
 })
 
 app.listen(port, (err) => {
