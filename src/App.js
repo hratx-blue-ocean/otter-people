@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue } from '@chakra-ui/react';
+import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
@@ -50,6 +50,8 @@ const theme = extendTheme({
 
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: true});
+  console.log(isOpen);
 
   const bg = useColorModeValue("red.500", "green.200");
 
@@ -57,6 +59,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <AppBar />
       <Box  textAlign="center" fontSize="xl">
+        {/* <Login/> */}
         <Grid  minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>
