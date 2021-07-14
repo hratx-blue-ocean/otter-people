@@ -4,6 +4,8 @@ import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
 import Members from './members/Members.js';
+import SelectedGroup from './groupAndEvents/SelectedGroup.js';
+import Events from './groupAndEvents/Events.js';
 
 const theme = extendTheme({
   colors: {
@@ -63,7 +65,8 @@ function App() {
           </GridItem>
           <GridItem colSpan={7} >
             <VStack spacing={8}>
-            {/* events */}
+              <SelectedGroup />
+              <Events />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >
