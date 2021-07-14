@@ -19,7 +19,7 @@ Invite friends with the provided group code.
 
 Get recommendations of what to do based on the geolocation of group members.
 
-### Technologies
+## Technologies
 
 <table>
 <tr>
