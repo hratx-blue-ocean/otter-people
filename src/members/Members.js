@@ -54,7 +54,7 @@ export default function Members(props) {
   }
 
   return (
-    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>
