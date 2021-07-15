@@ -1,10 +1,9 @@
 # Otter People 
 *Stay in touch with each otter.*
 
-<img src="https://user-images.githubusercontent.com/33425993/125716613-c3076a2c-70d6-414b-a0b9-949ccfa4e897.png" width=100>  <img src="https://user-images.githubusercontent.com/33425993/125716613-c3076a2c-70d6-414b-a0b9-949ccfa4e897.png" width=100>
+<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>  <img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
 
-<img src="https://user-images.githubusercontent.com/33425993/125716574-5fb24b93-158a-49dc-83e8-0e3a9eb35c19.png" width=100>  <img src="https://user-images.githubusercontent.com/33425993/125716574-5fb24b93-158a-49dc-83e8-0e3a9eb35c19.png" width=100>
-
+<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>  <img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
 
 
 A place for alumni and friends to create private groups and events. <br>
