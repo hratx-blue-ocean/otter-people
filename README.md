@@ -2,7 +2,11 @@
 *Stay in touch with each otter.*
 
 <img src="https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png" width=100> <img src="https://user-images.githubusercontent.com/75913066/125695178-39c27000-709e-4334-8d31-bc25f5767207.png" width=100>
+
 <img src="https://user-images.githubusercontent.com/33425993/125712429-bb3803b1-5374-42b4-8e9a-5c352a9315af.png" width=100>  <img src="https://user-images.githubusercontent.com/33425993/125712429-bb3803b1-5374-42b4-8e9a-5c352a9315af.png" width=100>
+
+<img src="https://user-images.githubusercontent.com/33425993/125713461-201fe3fd-0720-4d4b-9fa6-d3e4527eef6f.png" width=100>  <img src="https://user-images.githubusercontent.com/33425993/125713461-201fe3fd-0720-4d4b-9fa6-d3e4527eef6f.png" width=100>
+
 
 
 A place for alumni and friends to create private groups and events. <br>
