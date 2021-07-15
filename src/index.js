@@ -6,7 +6,8 @@ import App from './App';
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />
-    <App/>
+    {/* <Login /> */}
+    <App />
   </StrictMode>,
   document.getElementById('root')
 );

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDisclosure, useColorModeValue } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
-import { VStack } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { FormLabel, FormControl } from '@chakra-ui/react';
 import {
   Modal,
@@ -12,11 +12,12 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-function JoinGroupModal() {
+function JoinGroupModal(props) {
+  console.log('uId in joinModal', props.userId);
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [groupCode, setGroupCode] = useState();
+  const [groupCode, setGroupCode] = useState('');
 
   const handleGroupCodeChange = (e) => {
     let groupCode = e.target.value;
@@ -25,7 +26,14 @@ function JoinGroupModal() {
 
   const handleFormSubmission = (e) => {
     onClose()
+    console.log(typeof groupCode)
+    props.joinGroup(props.userId, groupCode)
     // HANDLE FORM SUBMISSION
+    // check to see if group code matches
+    // send put Request to add to group
+    // somehow re-render page with content
+    setGroupCode('');
+
   }
 
   const gBtn = useColorModeValue('gBtn.light', 'gBtn.dark');

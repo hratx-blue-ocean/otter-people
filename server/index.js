@@ -1,13 +1,73 @@
 const express = require('express');
 const path = require('path');
-const db = require('../database');
 const cors = require('cors');
+const db = require('../database');
 const port = 3001;
 
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, './public')));
 app.use(express.json());
+
+// group routes
+// NEED TO HOOK UP USEREMAIL
+app.get('/groups', (req, res) => {
+  console.log('reqparmas', req.query.userId);
+
+  let userEmail = req.query.userId;
+  db.fetchGroups(userEmail, (err, result) => {
+    if (err) {
+      res.status(400).send(err)
+    } else {
+      res.status(200).send(result);
+    }
+  })
+});
+
+app.get('/groups/getOne', (req, res) => {
+  let groupCode = req.query.groupCode;
+  db.fetchGroup(groupCode, (err, result) => {
+    if (err) {
+      res.status(400).send(err)
+    } else {
+      res.status(200).send(result);
+    }
+  })
+});
+
+app.get('/groups/code', (req, res) => {
+  let groupCode = req.query.groupCode;
+  let userId = req.query.userId;
+
+  db.findGroupCode(groupCode, (err, result) => {
+    if (err) {
+      res.status(400).send('Code incorrect', err);
+    } else {
+      if (result === true) {
+        // DO PUT REQUEST! - add to groups - DO we need to add group to user?
+        db.addUserToGroup(userId, groupCode, (err, result) => {
+          if (err) {
+            res.status(400).send('cannot add to group', err);
+          } else {
+            res.status(200).send('added to group');
+          }
+        })
+      }
+    }
+  })
+});
+
+app.post('/groups', (req, res) => {
+  db.createGroup(req.body, (err, results) => {
+    if (err) {
+      res.status(400).send(err)
+    } else {
+      console.log(results);
+      res.status(201).send();
+    }
+  })
+});
+
 
 app.post('/login', (req, res) => {
   console.log('user data: ', req.body.email, ' ', req.body.password)

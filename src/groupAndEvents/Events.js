@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
@@ -107,10 +107,9 @@ export default function Events(props) {
               <GridItem colSpan={3}>
                 <Button onClick={selectAttending} mt="4" colorScheme="teal" size="md">
                   {each.attending.includes(userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
-                </Button><br />
-                <Button onClick={getDetails} mt="4" colorScheme="teal" size="md">
-                  Details
                 </Button>
+                <br />
+                <EventDetailCard event={each}/>
 
               </GridItem>
             </Grid >
