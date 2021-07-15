@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons'
+import { StarIcon } from '@chakra-ui/icons';
+import axios from 'axios';
 
 //need to pass as props
 let groupEvents = [{
@@ -22,6 +23,7 @@ let groupEvents = [{
 
 //need to pass as a prop
 const userId = "c";
+// props.currentGroup
 
 export default function Events(props) {
 
@@ -29,6 +31,22 @@ export default function Events(props) {
   //add SHOW MORE if we want
   //
   //
+
+  const getEvents = (groupId) => {
+    const url = 'http://localhost:3001/events';
+    const config = {
+      params: {
+        groupId: groupId,
+      }
+    };
+    axios.get(url, config)
+      .then((results) => {
+        console.log(results.data);
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  };
 
   const addAttending = () => {
     //api call to add user to array of attendees in event
@@ -39,6 +57,7 @@ export default function Events(props) {
   const selectAttending = () => {
     addAttending();
   }
+
 
   const getDetails = () => {
     //
@@ -109,7 +128,7 @@ export default function Events(props) {
                   {each.attending.includes(userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
                 </Button>
                 <br />
-                <EventDetailCard event={each}/>
+                <EventDetailCard event={each} />
 
               </GridItem>
             </Grid >

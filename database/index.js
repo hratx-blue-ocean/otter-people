@@ -195,8 +195,8 @@ db.users.insert({
 });
 */
 // model to get groups from database based on userEmail
-const fetchGroups = (userEmail, callback) => {
-  Group.find({ members: { $in: userEmail } }, (err, results) => {
+const fetchGroups = (userId, callback) => {
+  Group.find({ members: { $in: userId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -271,6 +271,16 @@ const findGroupCode = (groupCode, callback) => {
   });
 };
 
+const fetchEvents = (groupId, callback) => {
+  Event.find({ groupId: groupId }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('event query results');
+      callback(null, results)
+    }
+  });
+}
 
 module.exports = {
   fetchGroups,
@@ -281,6 +291,7 @@ module.exports = {
   fetchGroup,
   signIn,
   signUp,
-  createEvent
+  createEvent,
+  fetchEvents
 }
 

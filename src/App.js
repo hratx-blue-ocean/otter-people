@@ -76,7 +76,7 @@ function App() {
           <GridItem colSpan={7} >
             <VStack spacing={8}>
               <SelectedGroup />
-              <Events />
+              <Events currentGroup={currentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >

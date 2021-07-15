@@ -14,7 +14,7 @@ const GroupList = (props) => {
   const [toggleTriangle, setToggleTriangle] = useState(false);
 
   const getGroups = (userEmail) => {
-    const url = `http://localhost:3001/groups`;
+    const url = 'http://localhost:3001/groups';
     const config = {
       params: {
         userId: props.userId,
@@ -31,7 +31,7 @@ const GroupList = (props) => {
 
   // get group base on groupCode
   const getOneGroup = (groupCode) => {
-    const url = `http://localhost:3001/groups/getOne`;
+    const url = 'http://localhost:3001/groups/getOne';
     const config = {
       params: {
         groupCode: groupCode,
