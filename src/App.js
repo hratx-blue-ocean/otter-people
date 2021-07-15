@@ -63,10 +63,7 @@ const theme = extendTheme({
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const [userData, setUserData] = useState({});
-
-
   const [currentGroup, setCurrentGroup] = useState();
-
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
@@ -83,8 +80,8 @@ function App() {
           </GridItem>
           <GridItem colSpan={7} >
             <VStack spacing={8} >
-              <SelectedGroup />
-              <Events currentGroup={currentGroup} />
+              <SelectedGroup group={currentGroup} />
+              <Events groupId={currentGroup ? currentGroup.groupId : 0} userId={userData.userId} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >
