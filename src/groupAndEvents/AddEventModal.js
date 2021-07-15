@@ -14,12 +14,15 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import DatePicker from 'react-datepicker';
+// import PropTypes from 'prop-types';
+import "react-datepicker/dist/react-datepicker.css";
 
 function AddEventModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventName, setEventName] = useState('');
   const [eventLocation, setEventLocation] = useState('');
-  const [eventDate, setEventDate] = useState('');
+  const [eventDate, setEventDate] = useState(new Date());
   const [eventDescription, setEventDescription] = useState('');
 
   const handleEventNameChange = (e) => {
@@ -30,11 +33,6 @@ function AddEventModal(props) {
   const handleEventLocationChange = (e) => {
     let eventLocationValue = e.target.value;
     setEventLocation(eventLocationValue);
-  };
-
-  const handleEventDateChange = (e) => {
-    let eventDateValue = e.target.value;
-    setEventDate(eventDateValue);
   };
 
   const handleEventDescriptionChange = (e) => {
@@ -91,13 +89,15 @@ function AddEventModal(props) {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
-                <Input
-                  value={eventDate}
-                  onChange={handleEventDateChange}
-                  placeholder="Need to research date picker"
-                  bg={layer}
-                />
+                <DatePicker
+                selected={eventDate}
+                onChange={(date) => setEventDate(date)}
+                showTimeSelect
+                isClearable
+                dateFormat="Pp"
+              />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Description</FormLabel>
                 <Textarea
