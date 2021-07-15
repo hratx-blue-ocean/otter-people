@@ -28,7 +28,7 @@ const sampleUserId = "c";
 export default function Events(props) {
   const userId = "c";
 
-  const [events, setEvents] = useState();
+  const [events, setEvents] = useState([]);
   //
   //add SHOW MORE if we want
   //
@@ -79,12 +79,13 @@ export default function Events(props) {
   }, [props.groupId])
 
   useEffect(() => {
-    if (props.currentGroup !== undefined){
-      getEvents(props.currentGroup.groupId)}
-  }, [props.currentGroup])
+    if (props?.groupId !== undefined){
+      console.log('hello from events')
+      getEvents(props.groupId)}
+  }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
-    let groupEvents = sampleEvents.reverse();
+    let groupEvents = events.reverse();
 
     return (
       groupEvents.map((each, i) => {

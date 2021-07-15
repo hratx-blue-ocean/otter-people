@@ -13,7 +13,7 @@ const GroupList = (props) => {
   const [displayedGroups, setDisplayedGroups] = useState([]); // default to show three groups
   const [toggleTriangle, setToggleTriangle] = useState(false);
 
-  const getGroups = (userEmail) => {
+  const getGroups = (userId) => {
     const url = 'http://localhost:3001/groups';
     const config = {
       params: {
