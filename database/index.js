@@ -18,7 +18,18 @@ const counterSchema = Schema({
 })
 
 const Counter = mongoose.model('Counter', counterSchema, 'counters');
+Counter.findOne({ _id: "userId" }, (err, counter) => {
+  if (err) {
+    console.log("Error finding counter: ", err);
+  } else {
+    if (counter === null) {
+      Counter.create({ _id: "userId", sequence_value: 0 });
+    } else {
+      //do nothing
+    }
+  }
 
+});
 
 const getNextSequenceValue = (sequenceName) => {
   return Counter.findOneAndUpdate({ _id: sequenceName }, { $inc: { sequence_value: 1 } });
@@ -94,25 +105,28 @@ let signUp = (userData, callback) => {
     } else {
       //No existing user with this email, so create new user
       if (user === null) {
-        getNextSequenceValue("userId").then((response) => {
-          User.create({
-            email: userData.email,
-            userId: response.sequence_value,
-            pin: userData.password,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            city: userData.city,
-            state: userData.stateName,
-            groups: []
-          }, (err, user) => {
-            if (err) {
-              callback(err, null);
-            } else {
-              callback(null, user);
-            }
+        getNextSequenceValue("userId")
+          .then((response) => {
+            User.create({
+              email: userData.email,
+              userId: response.sequence_value,
+              pin: userData.password,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              city: userData.city,
+              state: userData.stateName,
+              groups: []
+            }, (err, user) => {
+              if (err) {
+                callback(err, null);
+              } else {
+                callback(null, user);
+              }
+            });
+          })
+          .catch((err) => {
+            console.log(err);
           });
-        })
-
       } else {
         callback(null, { error: 'User Already Exists' })
       }
