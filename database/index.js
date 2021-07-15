@@ -58,6 +58,22 @@ Counter.findOne({ _id: "groupId" }, (err, counter) => {
 
 });
 
+// db.users.create({
+//   email: "test@test.com",
+//   userId: 1,
+//   avatar: "",
+//   pin: 1234,
+//   firstName: "testFirstName",
+//   lastName: "testLastName",
+//   city: "Houston",
+//   state: "TX",
+//   calculated_geolocation: [{}],
+//   groups: [1],
+// })
+
+
+
+
 const userSchema = Schema({
   email: { type: String, unique: true, index: true },
   userId: Number,
