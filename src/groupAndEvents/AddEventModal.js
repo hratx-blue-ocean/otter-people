@@ -17,6 +17,8 @@ import {
 import DatePicker from 'react-datepicker';
 // import PropTypes from 'prop-types';
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
+const url = 'http://127.0.0.1:3001';
 
 function AddEventModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -40,15 +42,36 @@ function AddEventModal(props) {
     setEventDescription(eventDescriptionValue);
   };
 
-  const handleFormSubmission = (e) => {
-    onClose()
-    // handle submission
-
+  const clearForm = () => {
     // clear form inputs
     setEventName('');
     setEventLocation('');
     setEventDate('');
     setEventDescription('');
+  }
+  
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    onClose();
+    let formSubmission = {
+      name: eventName,
+      location: eventLocation,
+      date: eventDate,
+      description: eventDescription,
+      organizer: props.organizer,
+      groupId: props.groupId,
+    };
+    axios.post(`${url}/event`, formSubmission)
+      .then((response) => {
+        onClose();
+        console.log('successfully added event: ', response);
+        props.onClose();
+        clearForm();
+      })
+      .catch((err) => {
+        console.log('Failed to add Event: ', err);
+        clearForm();
+      })
   }
 
   const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");

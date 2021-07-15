@@ -84,6 +84,36 @@ const eventSchema = Schema({
 
 const Event = mongoose.model('Event', eventSchema, 'events');
 
+//Add event to db for specific group
+const createEvent = (event, callback) => {
+  //check if event already exists first, then create event if doesn't exist
+  Event.findOne({ name: event.name, groupId: event.groupId}, (err, data) => {
+    if (err) {
+      console.log(err);``
+      callback(err, null);
+    } else {
+      //No existing event name within this group, so create new event for group
+      if (data === null) {
+        Event.create({
+          name: event.name,
+          location: event.location,
+          date: event.date,
+          description: event.description,
+          organizer: event.organizer,
+          groupId: event.groupId,
+        }, (err, user) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, user);
+          }
+        });
+      } else {
+        callback(null, { error: 'Event Already Exists' })
+      }
+    }
+  })
+}
 
 /* signIn method overview:
 Find a user given an email
@@ -92,7 +122,7 @@ If given email matches a user in database
 if either username (email) don't exist in db, or password doesn't match
   error or false
 */
-let signIn = (username, password, callback) => { //callback will be (req, res) coming in from server
+const signIn = (username, password, callback) => { //callback will be (req, res) coming in from server
   User.findOne({ email: username }, (err, user) => {
     if (err) {
       console.log(err);
@@ -110,7 +140,7 @@ let signIn = (username, password, callback) => { //callback will be (req, res) c
   });
 };
 
-let signUp = (userData, callback) => {
+const signUp = (userData, callback) => {
   User.findOne({ email: userData.email }, (err, user) => {
     if (err) {
       console.log(err);
@@ -250,6 +280,7 @@ module.exports = {
   addGroupNameToUser,
   fetchGroup,
   signIn,
-  signUp
+  signUp,
+  createEvent
 }
 

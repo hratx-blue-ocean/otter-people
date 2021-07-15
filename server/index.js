@@ -110,6 +110,21 @@ app.post('/sign', (req, res) => {
   })
 })
 
+app.post('/event', (req, res) => {
+  console.log('server index: /event reached');
+  db.createEvent(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
 app.listen(port, (err) => {
   if (err) console.log(err);
   console.log(`Listening to port ${port}`);
