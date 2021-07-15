@@ -44,7 +44,7 @@ const userSchema = Schema({
   city: String,
   state: String,
   calculated_geolocation: [Object],
-  groups: [Number],
+  groups: [String],
 })
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -55,7 +55,7 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  group_id: Number,
+  group_id: { type: Number, index: true }
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
@@ -121,7 +121,6 @@ let signUp = (userData, callback) => {
 }
 
 //export methods that rely on the classes created (e.g. Group, User, Event)
-module.exports = { signIn, signUp }
 
 /* injecting fake user into db
 use alumniMeetUp
@@ -138,3 +137,83 @@ db.users.insert({
   groups: [1,3,3,7],
 });
 */
+// model to get groups from database based on userEmail
+const fetchGroups = (userEmail, callback) => {
+  Group.find({ members: { $in: userEmail } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(results);
+      callback(null, results)
+    }
+  });
+}
+
+// model to a single groups from database based on groupCode
+const fetchGroup = (groupCode, callback) => {
+  Group.find({ code: { $in: groupCode } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(results);
+      callback(null, results)
+    }
+  });
+}
+
+const createGroup = (groupData, callback) => {
+  const groupToAdd = new Group(groupData);
+  Group.create(groupToAdd, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+//model to add user to a group
+const addUserToGroup = (userId, groupCode, callback) => {
+  Group.updateOne({ code: groupCode }, { $addToSet: { members: userId } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+//model to add group Name to a user
+const addGroupNameToUser = (userId, groupName, callback) => {
+  User.updateOne({ userId: userId }, { $addToSet: { groups: groupName } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+// model to get group code from the database
+const findGroupCode = (groupCode, callback) => {
+  Group.exists({ code: groupCode }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+
+module.exports = {
+  fetchGroups,
+  createGroup,
+  findGroupCode,
+  addUserToGroup,
+  addGroupNameToUser,
+  fetchGroup,
+  signIn,
+  signUp
+}
+

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { ChakraProvider, Box, Text, VStack, Grid, extendTheme, GridItem, useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import axios from 'axios';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
@@ -55,6 +57,13 @@ function App() {
   const [userData, setUserData] = useState({})
   const bg = useColorModeValue("bg.dark", "bg.dark");
 
+  const [currentGroup, setCurrentGroup] = useState();
+  const [userId, setCurrentUserId] = useState('50112');
+  const [userEmail, setUserEmail] = useState('email1');
+
+
+
+
   return (
     <ChakraProvider theme={theme}>
       <AppBar onClose={onOpen} />
@@ -63,7 +72,7 @@ function App() {
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>
-              <GroupList />
+              <GroupList  userEmail={userEmail} userId={userId} setCurrentGroup={setCurrentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={7} >
