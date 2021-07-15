@@ -17,7 +17,7 @@ app.post('/login', (req, res) => {
       res.status(400).send(err);
     } else {
       if (data.failedLogin) {
-        res.status(200).send({ error: 'incorrect email' });
+        res.status(200).send({ error: 'incorrect email or password' });
       } else {
         res.status(200).send(data);
       }
