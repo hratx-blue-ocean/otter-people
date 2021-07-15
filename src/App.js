@@ -58,8 +58,6 @@ function App() {
   const bg = useColorModeValue("bg.dark", "bg.dark");
 
   const [currentGroup, setCurrentGroup] = useState();
-  const [userId, setCurrentUserId] = useState('50112');
-  const [userEmail, setUserEmail] = useState('email1');
 
 
 
@@ -72,7 +70,7 @@ function App() {
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>
-              <GroupList  userEmail={userEmail} userId={userId} setCurrentGroup={setCurrentGroup} />
+              <GroupList userEmail={userData.email} userId={userData.userId} setCurrentGroup={setCurrentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={7} >
