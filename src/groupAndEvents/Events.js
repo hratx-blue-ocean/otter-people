@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons'
+import { StarIcon } from '@chakra-ui/icons';
+
 
 //need to pass as props
 let sampleEvents = [{
@@ -25,13 +26,31 @@ let sampleEvents = [{
 const sampleUserId = "c";
 
 export default function Events(props) {
+  const userId = "c";
 
+  const [events, setEvents] = useState([]);
   //
   //add SHOW MORE if we want
   //
   //
 
-  const [events, setEvents] = useState([]);
+  const getEvents = (groupId) => {
+    const url = 'http://localhost:3001/events';
+    const config = {
+      params: {
+        groupId: groupId,
+      }
+    };
+    axios.get(url, config)
+      .then((results) => {
+        setEvents(results.data);
+        console.log(results.data);
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  };
+
 
   const findEvents = () => {
     //axios
@@ -49,12 +68,24 @@ export default function Events(props) {
     addAttending();
   }
 
+
+  const getDetails = () => {
+    //
+    //need to create drawer
+    //
+  }
   useEffect(() => {
     findEvents();
   }, [props.groupId])
 
+  useEffect(() => {
+    if (props?.groupId !== undefined){
+      console.log('hello from events')
+      getEvents(props.groupId)}
+  }, [props.groupId])
+
   function Feature({ title, desc, ...rest }) {
-    let groupEvents = sampleEvents.reverse();
+    let groupEvents = events.reverse();
 
     return (
       groupEvents.map((each, i) => {
@@ -126,6 +157,7 @@ export default function Events(props) {
       })
     )
   }
+
 
   return (
     <Box  >

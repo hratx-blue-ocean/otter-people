@@ -69,7 +69,6 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <AppBar onClose={onOpen} />
-      {console.log(colorMode)}
       <Box textAlign="center" fontSize="xl" >
         <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >

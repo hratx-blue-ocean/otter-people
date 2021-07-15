@@ -61,6 +61,7 @@ let SignUp = (props) => {
         console.log('successful Sign-Up: ', response);
         props.setUser(response.data);
         onClose();
+        console.log('successful Sign-Up: ', response);
         props.onClose();
         clearForm();
       })
