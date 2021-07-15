@@ -5,7 +5,7 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 function AppBar(props) {
 
   const mainBlue = useColorModeValue('mainBlue.light', 'mainBlue.dark');
-  const image = useColorModeValue("https://i.imgur.com/bQzhE4k.png", "https://i.imgur.com/Nc36aGv.png")
+  const image = useColorModeValue("https://i.imgur.com/xB1svO4.png", "https://i.imgur.com/QiA0JT9.png")
 
   const logOut = () => {
     // logout function from props
@@ -24,7 +24,7 @@ function AppBar(props) {
       >
         <GridItem colSpan={1} bg={mainBlue}>
           <Center >
-            <Image mt="1" src={image} maxWidth="16" />
+            <Image mt="1" src={image} maxWidth="12" />
           </Center>
         </GridItem>
         <GridItem colSpan={2} bg={mainBlue}>
