@@ -2,7 +2,7 @@ import React from 'react';
 import { useColorModeValue, Grid, GridItem, Link, Text } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
-function AppBar (props) {
+function AppBar(props) {
 
   const mainBlue = useColorModeValue('mainBlue.light', 'mainBlue.dark');
 
@@ -22,12 +22,12 @@ function AppBar (props) {
         textAlign="center" fontSize="xl"
       >
         <GridItem colSpan={3} bg={mainBlue}>
-          <Text fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Alumni MeetUp</Text>
+          <Text fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Otter People</Text>
         </GridItem>
-        <GridItem colSpan={6} bg={mainBlue}/>
+        <GridItem colSpan={6} bg={mainBlue} />
         <GridItem colSpan={3} bg={mainBlue} >
           <Link onClick={logOut} d='inline' color={'text.dark'} mr={5}>Log Out</Link>
-          <ColorModeSwitcher bg={mainBlue} justifySelf="flex-end" m='1vh'/>
+          <ColorModeSwitcher bg={mainBlue} justifySelf="flex-end" m='1vh' />
         </GridItem>
       </Grid>
     </>
