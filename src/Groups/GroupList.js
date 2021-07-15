@@ -12,7 +12,6 @@ const GroupList = (props) => {
   // [{ name: 'Drumline' }, { name: 'DnD' }, { name: 'Foodies' }, { name: 'Green Thumb' }]
   const [displayedGroups, setDisplayedGroups] = useState([]); // default to show three groups
   const [toggleTriangle, setToggleTriangle] = useState(false);
-  //props.userId
 
   const getGroups = (userEmail) => {
     const url = `http://localhost:3001/groups`;
@@ -59,7 +58,6 @@ const GroupList = (props) => {
     };
     axios.get(url, config)
     .then((result) => {
-      console.log('hello');
       // update current Group
       getOneGroup(groupCode);
       //refetch groups
@@ -104,7 +102,7 @@ const GroupList = (props) => {
 
   useEffect(() => {
     getGroups(props.userId);
-  }, [])
+  }, [props.userId]);
 
   return (
     <>
