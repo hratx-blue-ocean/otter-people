@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
 //need to pass as props
-let groupEvents = [{
+let sampleEvents = [{
   date: "Fri July 23 2021 16:30:00 GMT-0500 (Central Daylight Time)", name: "Hack Reactor Graduation", location: "Zoom",
   description: "Bring your friends and family to our virtual graduation! Cap and gown not required.",
   attending: ["a", "b"]
@@ -21,7 +22,7 @@ let groupEvents = [{
 }]
 
 //need to pass as a prop
-const userId = "c";
+const sampleUserId = "c";
 
 export default function Events(props) {
 
@@ -30,24 +31,30 @@ export default function Events(props) {
   //
   //
 
+  const [events, setEvents] = useState([]);
+
+  const findEvents = () => {
+    //axios
+    //setEvents(result)
+  }
+
+
   const addAttending = () => {
     //api call to add user to array of attendees in event
     //should update number attending
-    //and change RSVP button to "Attending"
   }
 
+  //troubleshoot
   const selectAttending = () => {
     addAttending();
   }
 
-  const getDetails = () => {
-    //
-    //need to create drawer
-    //
-  }
+  useEffect(() => {
+    findEvents();
+  }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
-    groupEvents = groupEvents.reverse();
+    let groupEvents = sampleEvents.reverse();
 
     return (
       groupEvents.map((each, i) => {
@@ -106,10 +113,10 @@ export default function Events(props) {
 
               <GridItem colSpan={3}>
                 <Button onClick={selectAttending} mt="4" colorScheme="teal" size="md">
-                  {each.attending.includes(userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
+                  {each.attending.includes(props.userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
                 </Button>
                 <br />
-                <EventDetailCard event={each}/>
+                <EventDetailCard event={each} />
 
               </GridItem>
             </Grid >
