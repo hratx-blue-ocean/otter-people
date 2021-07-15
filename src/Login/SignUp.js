@@ -58,8 +58,8 @@ let SignUp = (props) => {
     };
     axios.post(`${url}/sign`, formSubmission)
       .then((response) => {
-        console.log('successful Sign-Up: ', response);
         onClose();
+        console.log('successful Sign-Up: ', response);
         props.onClose();
         clearForm();
       })
