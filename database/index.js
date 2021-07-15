@@ -80,7 +80,7 @@ const eventSchema = Schema({
   description: String,
   organizer: String,
   groupId: { type: Number, index: true },
-  attending: [String]
+  attending: [Number]
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
