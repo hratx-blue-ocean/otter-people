@@ -3,7 +3,7 @@ import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons';
-import axios from 'axios';
+
 
 //need to pass as props
 let sampleEvents = [{
@@ -87,7 +87,7 @@ export default function Events(props) {
     let groupEvents = sampleEvents.reverse();
 
     return (
-      event.map((each, i) => {
+      groupEvents.map((each, i) => {
         return (
           <Center>
             <Grid
