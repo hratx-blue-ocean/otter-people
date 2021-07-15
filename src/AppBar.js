@@ -1,10 +1,11 @@
 import React from 'react';
-import { useColorModeValue, Grid, GridItem, Link, Text } from '@chakra-ui/react';
+import { useColorModeValue, Center, Box, Image, Grid, GridItem, Link, Text } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 function AppBar(props) {
 
   const mainBlue = useColorModeValue('mainBlue.light', 'mainBlue.dark');
+  const image = useColorModeValue("https://i.imgur.com/bQzhE4k.png", "https://i.imgur.com/Nc36aGv.png")
 
   const logOut = () => {
     // logout function from props
@@ -21,8 +22,14 @@ function AppBar(props) {
         gap={0}
         textAlign="center" fontSize="xl"
       >
-        <GridItem colSpan={3} bg={mainBlue}>
-          <Text fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Otter People</Text>
+        <GridItem colSpan={1} bg={mainBlue}>
+          <Center >
+            <Image mt="1" src={image} maxWidth="16" />
+          </Center>
+        </GridItem>
+        <GridItem colSpan={2} bg={mainBlue}>
+
+          <Text align="left" fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Otter People</Text>
         </GridItem>
         <GridItem colSpan={6} bg={mainBlue} />
         <GridItem colSpan={3} bg={mainBlue} >
