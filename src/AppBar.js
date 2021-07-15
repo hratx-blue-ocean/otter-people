@@ -24,7 +24,7 @@ function AppBar(props) {
       >
         <GridItem colSpan={1} bg={mainBlue}>
           <Center >
-            <Image mt="1" src={image} maxWidth="12" />
+            <Image mt="1.5" src={image} maxWidth="12" />
           </Center>
         </GridItem>
         <GridItem colSpan={2} bg={mainBlue}>
