@@ -21,12 +21,13 @@ let groupEvents = [{
   attending: ["a", "b"]
 }]
 
-//need to pass as a prop
-const userId = "c";
-// props.currentGroup
 
 export default function Events(props) {
+  const userId = "c";
 
+  const [events, setEvents] = useState();
+
+console.log('events', props.currentGroup)
   //
   //add SHOW MORE if we want
   //
@@ -41,6 +42,7 @@ export default function Events(props) {
     };
     axios.get(url, config)
       .then((results) => {
+        setEvents(results.data);
         console.log(results.data);
       })
       .catch((err) => {
@@ -65,11 +67,16 @@ export default function Events(props) {
     //
   }
 
+  useEffect(() => {
+    if (props.currentGroup !== undefined){
+      getEvents(props.currentGroup.groupId)}
+  }, [props.currentGroup])
+
   function Feature({ title, desc, ...rest }) {
-    groupEvents = groupEvents.reverse();
+    // groupEvents = groupEvents.reverse();
 
     return (
-      groupEvents.map((each, i) => {
+      events.map((each, i) => {
         return (
           <Center>
             <Grid
@@ -138,6 +145,7 @@ export default function Events(props) {
       })
     )
   }
+
 
   return (
     <Box  >

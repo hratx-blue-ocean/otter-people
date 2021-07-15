@@ -58,6 +58,8 @@ let SignUp = (props) => {
     };
     axios.post(`${url}/sign`, formSubmission)
       .then((response) => {
+        console.log('successful Sign-Up: ', response);
+        props.setUser(response.data);
         onClose();
         console.log('successful Sign-Up: ', response);
         props.onClose();
@@ -78,7 +80,7 @@ let SignUp = (props) => {
 
   return (
     <>
-      <Button bg={sUpBtn} color={text}  onClick={onOpen}>Sign Up</Button>
+      <Button bg={sUpBtn} color={text} onClick={onOpen}>Sign Up</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalHeader color={'text.dark'}>Sign Up!</ModalHeader>

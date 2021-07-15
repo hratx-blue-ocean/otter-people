@@ -1,10 +1,11 @@
 import React from 'react';
-import { List, ListItem, ListIcon } from '@chakra-ui/react';
-import { SunIcon } from '@chakra-ui/icons'
+import { List, ListItem, ListIcon, useColorModeValue } from '@chakra-ui/react';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 
 const GroupItem = (props) => {
   let groupBullet;
+  const SwitchIcon = useColorModeValue(FaSun, FaMoon);
 
   const handleGroupClick = (e) => {
     props.setCurrentGroup(props.displayedGroups[e.target.id]);  // NEED TO FORMAT PROPERLY based on db query!
@@ -16,7 +17,7 @@ const GroupItem = (props) => {
     groupBullet = props.displayedGroups.map((group, index) => {
       return (
         <ListItem textAlign='left' key={index} id={index} onClick={handleGroupClick}>
-          <ListIcon as={SunIcon} />
+          <ListIcon as={SwitchIcon} />
           {group.name}
         </ListItem>
       );

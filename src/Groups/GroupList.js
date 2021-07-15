@@ -23,6 +23,7 @@ const GroupList = (props) => {
     axios.get(url, config)
       .then((result) => {
         setGroups(result.data)
+        props.setCurrentGroup(result.data[0])
       })
       .catch((err) => {
         console.error('Error: ', err);

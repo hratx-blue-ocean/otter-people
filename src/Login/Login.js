@@ -70,7 +70,7 @@ function Login(props) {
             // align='center'
 
             justify='center'
-            mt="50%"
+            mt="25%"
             bg={bg}
           >
 
@@ -127,7 +127,7 @@ function Login(props) {
                       Login
                     </Button>
                     {/* <Text>Don't have an account yet? Sign up below!</Text> */}
-                    <SignUp onClose={props.onClose} />
+                    <SignUp onClose={props.onClose} setUser={props.setUser} />
                   </HStack>
                 </VStack>
               </Box>

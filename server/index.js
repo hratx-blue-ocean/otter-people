@@ -62,7 +62,7 @@ app.get('/groups/code', (req, res) => {
             res.status(500).send('cannot add to group');
           } else {
             console.log("This is the result: ", result);
-            db.addGroupNameToUser(userId, result.n, (err, data) => {
+            db.addGroupNameToUser(userId, result.groupId, (err, data) => {
               if (err) {
                 res.status(500).send('cannot add group to user', err);
               } else {

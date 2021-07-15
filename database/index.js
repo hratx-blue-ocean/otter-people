@@ -68,7 +68,7 @@ const userSchema = Schema({
   city: String,
   state: String,
   calculated_geolocation: [Object],
-  groups: [Number],
+  groups: [String],
 })
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -89,7 +89,7 @@ const createEvent = (event, callback) => {
   //check if event already exists first, then create event if doesn't exist
   Event.findOne({ name: event.name, groupId: event.groupId}, (err, data) => {
     if (err) {
-      console.log(err);``
+      console.log(err);
       callback(err, null);
     } else {
       //No existing event name within this group, so create new event for group
@@ -251,7 +251,7 @@ const addUserToGroup = (userId, groupCode, callback) => {
 
 //model to add group Name to a user
 const addGroupNameToUser = (userId, groupId, callback) => {
-  User.updateOne({ userId: userId }, { $addToSet: { groups: groupId } }, (err, results) => {
+  User.findOneAndUpdate({ userId: userId }, { $addToSet: { groups: groupId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
