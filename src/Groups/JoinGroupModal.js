@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 
 function JoinGroupModal(props) {
-  console.log('uId in joinModal', props.userId);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [groupCode, setGroupCode] = useState('');
 
