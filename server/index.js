@@ -43,15 +43,24 @@ app.get('/groups/code', (req, res) => {
     if (err) {
       res.status(400).send('Code incorrect', err);
     } else {
-      if (result === true) {
+      if (result !== null) {
         // DO PUT REQUEST! - add to groups - DO we need to add group to user?
         db.addUserToGroup(userId, groupCode, (err, result) => {
           if (err) {
-            res.status(400).send('cannot add to group', err);
+            res.status(500).send('cannot add to group');
           } else {
-            res.status(200).send('added to group');
+            console.log("This is the result: ", result);
+            db.addGroupNameToUser(userId, result.n, (err, data) => {
+              if (err) {
+                res.status(500).send('cannot add group to user', err);
+              } else {
+                res.status(200).send('Successfully added user to group and vice versa');
+              }
+            });
           }
-        })
+        });
+      } else {
+        res.status(400).send('Code incorrect', err);
       }
     }
   })
@@ -77,7 +86,7 @@ app.post('/login', (req, res) => {
       res.status(400).send(err);
     } else {
       if (data.failedLogin) {
-        res.status(200).send({ error: 'incorrect email' });
+        res.status(200).send({ error: 'incorrect email or password' });
       } else {
         res.status(200).send(data);
       }

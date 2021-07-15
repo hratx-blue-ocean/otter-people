@@ -12,8 +12,32 @@ db.once('open', function () {
   console.log('Mongo connected!')
 });
 
+const counterSchema = Schema({
+  _id: String,
+  sequence_value: Number,
+})
+
+const Counter = mongoose.model('Counter', counterSchema, 'counters');
+Counter.findOne({ _id: "userId" }, (err, counter) => {
+  if (err) {
+    console.log("Error finding counter: ", err);
+  } else {
+    if (counter === null) {
+      Counter.create({ _id: "userId", sequence_value: 0 });
+    } else {
+      //do nothing
+    }
+  }
+
+});
+
+const getNextSequenceValue = (sequenceName) => {
+  return Counter.findOneAndUpdate({ _id: sequenceName }, { $inc: { sequence_value: 1 } });
+}
+
 const groupSchema = Schema({
   name: { type: String, unique: true, index: true },
+  groupId: Number,
   description: String,
   code: String,
   photo: String,
@@ -21,9 +45,22 @@ const groupSchema = Schema({
 });
 
 const Group = mongoose.model('Group', groupSchema, 'groups');
+Counter.findOne({ _id: "groupId" }, (err, counter) => {
+  if (err) {
+    console.log("Error finding counter: ", err);
+  } else {
+    if (counter === null) {
+      Counter.create({ _id: "groupId", sequence_value: 0 });
+    } else {
+      //do nothing
+    }
+  }
+
+});
 
 const userSchema = Schema({
   email: { type: String, unique: true, index: true },
+  userId: Number,
   avatar: String,
   pin: Number,
   firstName: String,
@@ -31,7 +68,7 @@ const userSchema = Schema({
   city: String,
   state: String,
   calculated_geolocation: [Object],
-  groups: [String],
+  groups: [Number],
 })
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -42,10 +79,11 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  group_id: { type: Number, index: true }
+  groupId: { type: Number, index: true }
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
+
 
 /* signIn method overview:
 Find a user given an email
@@ -80,21 +118,28 @@ let signUp = (userData, callback) => {
     } else {
       //No existing user with this email, so create new user
       if (user === null) {
-        User.create({
-          email: userData.email,
-          pin: userData.password,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          city: userData.city,
-          state: userData.stateName,
-          groups: []
-        }, (err, user) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            callback(null, user);
-          }
-        });
+        getNextSequenceValue("userId")
+          .then((response) => {
+            User.create({
+              email: userData.email,
+              userId: response.sequence_value,
+              pin: userData.password,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              city: userData.city,
+              state: userData.stateName,
+              groups: []
+            }, (err, user) => {
+              if (err) {
+                callback(err, null);
+              } else {
+                callback(null, user);
+              }
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         callback(null, { error: 'User Already Exists' })
       }
@@ -144,14 +189,23 @@ const fetchGroup = (groupCode, callback) => {
 }
 
 const createGroup = (groupData, callback) => {
-  const groupToAdd = new Group(groupData);
-  Group.create(groupToAdd, (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
+  getNextSequenceValue("groupId")
+    //response is the group number
+    .then((response) => {
+      groupData.groupId = response.sequence_value;
+      const groupToAdd = new Group(groupData);
+      Group.create(groupToAdd, (err, results) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, results);
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
 }
 
 //model to add user to a group
@@ -166,8 +220,8 @@ const addUserToGroup = (userId, groupCode, callback) => {
 };
 
 //model to add group Name to a user
-const addGroupNameToUser = (userId, groupName, callback) => {
-  User.updateOne({ userId: userId }, { $addToSet: { groups: groupName } }, (err, results) => {
+const addGroupNameToUser = (userId, groupId, callback) => {
+  User.updateOne({ userId: userId }, { $addToSet: { groups: groupId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -178,7 +232,7 @@ const addGroupNameToUser = (userId, groupName, callback) => {
 
 // model to get group code from the database
 const findGroupCode = (groupCode, callback) => {
-  Group.exists({ code: groupCode }, (err, results) => {
+  Group.findOne({ code: groupCode }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
