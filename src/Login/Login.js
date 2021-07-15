@@ -32,9 +32,10 @@ function Login(props) {
           console.log(response.data.error);
         } else {
           //successful login, update state variable with user data
-          console.log('successful login')
+          console.log('successful login');
           props.onClose();
           setEmail('');
+          props.setUser(response.data);
         }
         console.log(response.data);
         setPassword('');
@@ -102,6 +103,7 @@ function Login(props) {
                     <FormLabel color={'text.dark'} mb="2" mt="0">Email Address</FormLabel>
                     <Input
                       mb="6"
+
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       placeholder="example@example.com"
@@ -112,6 +114,7 @@ function Login(props) {
                     <FormLabel color={'text.dark'} mb="2">Password</FormLabel>
                     <Input
                       mb="9"
+
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       placeholder=''
@@ -134,6 +137,7 @@ function Login(props) {
         </ModalBody>
       </ModalContent>
     </Modal >
+
   );
 };
 

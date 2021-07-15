@@ -1,5 +1,7 @@
-import React from 'react';
-import { ChakraProvider, Box, VStack, Grid, extendTheme, GridItem, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { ChakraProvider, Box, Text, VStack, Grid, extendTheme, GridItem, useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import axios from 'axios';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
 import Recs from './recs/Recs.js'
@@ -51,19 +53,24 @@ const theme = extendTheme({
 
 
 function App() {
-  const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen: true});
-
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const [userData, setUserData] = useState({})
   const bg = useColorModeValue("bg.dark", "bg.dark");
+
+  const [currentGroup, setCurrentGroup] = useState();
+
+
+
 
   return (
     <ChakraProvider theme={theme}>
-      <AppBar onClose={onOpen}/>
-      <Box  textAlign="center" fontSize="xl">
-        <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
-        <Grid  minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
+      <AppBar onClose={onOpen} />
+      <Box textAlign="center" fontSize="xl">
+        <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
+        <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
             <VStack spacing={8}>
-              <GroupList />
+              <GroupList userEmail={userData.email} userId={userData.userId} setCurrentGroup={setCurrentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={7} >
