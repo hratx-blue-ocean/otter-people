@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import AddEventModal from './AddEventModal';
 import { Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
 //need to pass as props
-const selectedGroup = { name: "Winterguard 2010", description: "The best ones." }
+const selectedGroup = { name: "Winterguard 2010", description: "The best ones.", code: '1234567891234'}
 
 export default function SelectedGroup(props) {
 
@@ -21,15 +21,14 @@ export default function SelectedGroup(props) {
         <Box>
           <Heading mt="8">{selectedGroup.name}</Heading>
           <Text align="left" fontSize="md">{selectedGroup.description}</Text>
+          <Text align="left" fontSize="sm">Invitation Code: {selectedGroup.code}</Text>
         </Box>
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
-        <Button onClick={addEvent} mt="10" mr="6" colorScheme="teal" size="lg">
-          + Event
-        </Button>
+        <AddEventModal mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
     </Box>
   )
