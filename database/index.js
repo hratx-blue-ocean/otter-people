@@ -12,6 +12,18 @@ db.once('open', function () {
   console.log('Mongo connected!')
 });
 
+const counterSchema = Schema({
+  _id: String,
+  sequence_value: Number,
+})
+
+const Counter = mongoose.model('Counter', counterSchema, 'counters');
+
+
+const getNextSequenceValue = (sequenceName) => {
+  return Counter.findOneAndUpdate({ _id: sequenceName }, { $inc: { sequence_value: 1 } });
+}
+
 const groupSchema = Schema({
   name: { type: String, unique: true, index: true },
   description: String,
@@ -24,6 +36,7 @@ const Group = mongoose.model('Group', groupSchema, 'groups');
 
 const userSchema = Schema({
   email: { type: String, unique: true, index: true },
+  userId: Number,
   avatar: String,
   pin: Number,
   firstName: String,
@@ -46,6 +59,7 @@ const eventSchema = Schema({
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
+
 
 /* signIn method overview:
 Find a user given an email
@@ -80,21 +94,25 @@ let signUp = (userData, callback) => {
     } else {
       //No existing user with this email, so create new user
       if (user === null) {
-        User.create({
-          email: userData.email,
-          pin: userData.password,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          city: userData.city,
-          state: userData.stateName,
-          groups: []
-        }, (err, user) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            callback(null, user);
-          }
-        });
+        getNextSequenceValue("userId").then((response) => {
+          User.create({
+            email: userData.email,
+            userId: response.sequence_value,
+            pin: userData.password,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            city: userData.city,
+            state: userData.stateName,
+            groups: []
+          }, (err, user) => {
+            if (err) {
+              callback(err, null);
+            } else {
+              callback(null, user);
+            }
+          });
+        })
+
       } else {
         callback(null, { error: 'User Already Exists' })
       }

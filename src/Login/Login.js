@@ -29,9 +29,10 @@ function Login(props) {
           console.log(response.data.error);
         } else {
           //successful login, update state variable with user data
-          console.log('successful login')
+          console.log('successful login');
           props.onClose();
           setEmail('');
+          props.setUser(response.data);
         }
         console.log(response.data);
         setPassword('');
@@ -49,61 +50,61 @@ function Login(props) {
   const layer = useColorModeValue("layer.light", "layer.dark");
   const bg = useColorModeValue("bg.light", "bg.dark");
   return (
-    <Modal isOpen={props.isOpen} onClose={()=>{}} closeOnEsc={false} closeOnOverlayClick={false} size='full' autoFocus={false}  isCentered={true} blockScrollOnMount={true}>
-        <ModalOverlay />
-        <ModalContent bg={bg}>
-          <ModalBody>
-            <Grid
-              minH="100vh"
-              templateColumns="repeat(3, 1fr)"
-              gap={0}
-              align='center'
-              justify='center'
-              bg={bg}
-            >
-              <GridItem colSpan={1} bg={bg} >
-                <VStack spacing='10'>
-                  <Heading>Angela here is your space</Heading>
-                  <Text>dont forget the otters</Text>
+    <Modal isOpen={props.isOpen} onClose={() => { }} closeOnEsc={false} closeOnOverlayClick={false} size='full' autoFocus={false} isCentered={true} blockScrollOnMount={true}>
+      <ModalOverlay />
+      <ModalContent bg={bg}>
+        <ModalBody>
+          <Grid
+            minH="100vh"
+            templateColumns="repeat(3, 1fr)"
+            gap={0}
+            align='center'
+            justify='center'
+            bg={bg}
+          >
+            <GridItem colSpan={1} bg={bg} >
+              <VStack spacing='10'>
+                <Heading>Angela here is your space</Heading>
+                <Text>dont forget the otters</Text>
+              </VStack>
+            </GridItem>
+            <GridItem colSpan={1} bg={bg} >
+              <Box bg={mainBlue} justifySelf='center' alignSelf='center' mt='50%' p='10' borderRadius='lg'>
+                <VStack spacing="10" >
+                  <FormControl isRequired>
+                    <FormLabel color={'text.dark'}>Email Address</FormLabel>
+                    <Input
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="example@example.com"
+                      bg={layer}
+                    />
+                  </FormControl>
+                  <FormControl isRequired>
+                    <FormLabel color={'text.dark'}>Password</FormLabel>
+                    <Input
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      placeholder=''
+                      bg={layer}
+                      type='password'
+                    />
+                  </FormControl>
+                  <HStack spacing='10'>
+                    <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={login} isDisabled={isInvalid}>
+                      Login
+                    </Button>
+                    {/* <Text>Don't have an account yet? Sign up below!</Text> */}
+                    <SignUp onClose={props.onClose} />
+                  </HStack>
                 </VStack>
-              </GridItem>
-              <GridItem colSpan={1} bg={bg} >
-                <Box bg={mainBlue} justifySelf='center' alignSelf='center' mt='50%' p='10' borderRadius='lg'>
-                  <VStack spacing="10" >
-                    <FormControl isRequired>
-                      <FormLabel color={'text.dark'}>Email Address</FormLabel>
-                      <Input
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder="example@example.com"
-                        bg={layer}
-                      />
-                    </FormControl>
-                    <FormControl isRequired>
-                      <FormLabel color={'text.dark'}>Password</FormLabel>
-                      <Input
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        placeholder=''
-                        bg={layer}
-                        type='password'
-                      />
-                    </FormControl>
-                    <HStack spacing='10'>
-                      <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={login} isDisabled={isInvalid}>
-                        Login
-                      </Button>
-                      {/* <Text>Don't have an account yet? Sign up below!</Text> */}
-                      <SignUp onClose={props.onClose}/>
-                    </HStack>
-                  </VStack>
-                </Box>
-              </GridItem>
-              <GridItem colSpan={1} bg={bg}/>
-            </Grid>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+              </Box>
+            </GridItem>
+            <GridItem colSpan={1} bg={bg} />
+          </Grid>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 
