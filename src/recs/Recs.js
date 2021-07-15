@@ -24,7 +24,6 @@ export default function Recs(props) {
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const slect = useColorModeValue('select.light', 'select.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
-  const bg = useColorModeValue('bg.light', 'bg.dark');
 
   //useEffect hooks
   // useEffect(() => {
