@@ -79,7 +79,8 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  groupId: { type: Number, index: true }
+  groupId: { type: Number, index: true },
+  attending: [String]
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');

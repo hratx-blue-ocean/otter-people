@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
@@ -21,7 +22,7 @@ let groupEvents = [{
 }]
 
 //need to pass as a prop
-const userId = "c";
+// const userId = "c";
 
 export default function Events(props) {
 
@@ -29,6 +30,14 @@ export default function Events(props) {
   //add SHOW MORE if we want
   //
   //
+
+  const [events, setEvents] = useState([]);
+
+  const findEvents = () => {
+    //axios
+    //setEvents(result)
+  }
+
 
   const addAttending = () => {
     //api call to add user to array of attendees in event
@@ -40,11 +49,9 @@ export default function Events(props) {
     addAttending();
   }
 
-  const getDetails = () => {
-    //
-    //need to create drawer
-    //
-  }
+  useEffect(() => {
+    findEvents();
+  }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
     groupEvents = groupEvents.reverse();
@@ -106,10 +113,10 @@ export default function Events(props) {
 
               <GridItem colSpan={3}>
                 <Button onClick={selectAttending} mt="4" colorScheme="teal" size="md">
-                  {each.attending.includes(userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
+                  {each.attending.includes(props.userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
                 </Button>
                 <br />
-                <EventDetailCard event={each}/>
+                <EventDetailCard event={each} />
 
               </GridItem>
             </Grid >
