@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, Box, Text, VStack, Grid, extendTheme, GridItem, useDisclosure, useColorModeValue } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { ChakraProvider, Box, Text, VStack, Grid, extendTheme, GridItem, useDisclosure, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import axios from 'axios';
 import GroupList from './Groups/GroupList';
 import AppBar from './AppBar.js';
@@ -11,6 +10,15 @@ import Events from './groupAndEvents/Events.js';
 import Login from './Login/Login.js';
 
 const theme = extendTheme({
+  styles: {
+    global: (props) => ({
+      "html, body": {
+        bg: props.colorMode === "light" ? "#f3f4f1" : "#2b2b2a",
+      }
+    })
+  },
+  initialColorMode: "dark",
+  useSystemColorMode: false,
   colors: {
     bg: {
       light: "#f3f4f1",
@@ -54,33 +62,33 @@ const theme = extendTheme({
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-  const [userData, setUserData] = useState({})
-  const bg = useColorModeValue("bg.dark", "bg.dark");
+  const [userData, setUserData] = useState({});
+
 
   const [currentGroup, setCurrentGroup] = useState();
 
-
-
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <ChakraProvider theme={theme}>
       <AppBar onClose={onOpen} />
-      <Box textAlign="center" fontSize="xl">
+      {console.log(colorMode)}
+      <Box textAlign="center" fontSize="xl" >
         <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
           <GridItem colSpan={2} >
-            <VStack spacing={8}>
+            <VStack spacing={8} >
               <GroupList userEmail={userData.email} userId={userData.userId} setCurrentGroup={setCurrentGroup} />
             </VStack>
           </GridItem>
           <GridItem colSpan={7} >
-            <VStack spacing={8}>
+            <VStack spacing={8} >
               <SelectedGroup />
               <Events />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >
-            <VStack spacing={8}>
+            <VStack spacing={8} >
               <Members />
               <Recs />
             </VStack>

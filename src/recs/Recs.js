@@ -24,6 +24,7 @@ export default function Recs(props) {
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const slect = useColorModeValue('select.light', 'select.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
+  const bg = useColorModeValue('bg.light', 'bg.dark');
 
   //useEffect hooks
   // useEffect(() => {
@@ -67,11 +68,11 @@ export default function Recs(props) {
   }
 
   return (
-    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="md" borderColor={layer} overflow="hidden">
       <Heading p="1" size="lg">Around Town</Heading>
       <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
-        <Select bg={slect} p="1" onChange={onChange} placeholder="Category" size="sm" width="50%">
+        <Select bg={slect} p="1" onChange={onChange} placeholder="Category" size="sm" width="50%" borderColor={slect} borderRadius='md'>
           <option value="SIGHTS">Sights</option>
           <option value="NIGHTLIFE">Nightlife</option>
           <option value="RESTAURANT">Restaurants</option>

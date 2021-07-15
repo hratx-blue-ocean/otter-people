@@ -9,8 +9,6 @@ const members = [{ firstName: 'Jack', lastName: 'Pronske' }, { firstName: 'Kim',
 { firstName: 'Joe', lastName: 'Haller' }, { firstName: 'Cody', lastName: 'Haines' },
 { firstName: 'Christian', lastName: 'Peterson' }]
 
-//need to pass as props
-const code = '0214';
 
 export default function Members(props) {
 
@@ -58,7 +56,7 @@ export default function Members(props) {
   }
 
   return (
-    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="sm" overflow="hidden">
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderColor={layer} borderRadius="md" overflow="hidden">
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>

@@ -70,7 +70,7 @@ function Login(props) {
             // align='center'
 
             justify='center'
-            mt="50%"
+            mt="25%"
             bg={bg}
           >
 
