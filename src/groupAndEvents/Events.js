@@ -73,10 +73,10 @@ console.log('events', props.currentGroup)
   }, [props.currentGroup])
 
   function Feature({ title, desc, ...rest }) {
-    // groupEvents = groupEvents.reverse();
+    groupEvents = groupEvents.reverse();
 
     return (
-      events.map((each, i) => {
+      event.map((each, i) => {
         return (
           <Center>
             <Grid
