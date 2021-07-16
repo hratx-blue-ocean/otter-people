@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddEventModal from './AddEventModal';
-import { Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
+import { useColorModeValue, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
 //need to pass as props
@@ -19,9 +19,13 @@ export default function SelectedGroup(props) {
 
   const organizer = props.organizer.firstName + props.organizer.lastName;
 
-  return (
+  // Colors
+  const layer = useColorModeValue('layer.light', 'layer.dark');
+  const border = useColorModeValue('select.light', 'layer.dark')
+  const txt = useColorModeValue('text.light', 'text.dark');
 
-    <Box maxW="90%" width="90%" height="140px" borderBottomWidth="1px" borderRadius="sm" >
+  return (
+    <Box maxW="90%" width="90%" height="140px" borderWidth="1px" borderRadius="md" bg={layer} borderColor={border} color={txt}>
       <Flex >
         <Spacer />
         <StarIcon mt="10" w={12} h={12} />
@@ -36,8 +40,8 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
+        <AddEventModal events={props.events} setEvents={props.setEvents} groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
-    </Box>
+    </Box >
   )
 }

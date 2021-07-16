@@ -24,11 +24,11 @@ let sampleEvents = [{
 }]
 
 //need to pass as a prop
-const sampleUserId = "c";
+const sampleUserId = "0";
 
 export default function Events(props) {
 
-  const [events, setEvents] = useState([]);
+  const [groupEvents, setGroupEvents] = useState([]);
   const organizer = props.organizer.firstName + props.organizer.lastName;
 
   const getEvents = (groupId) => {
@@ -40,7 +40,8 @@ export default function Events(props) {
     };
     axios.get(url, config)
       .then((results) => {
-        setEvents(results.data);
+        // setEvents(results.data); //props.setEvents(results.data)
+        props.setEvents(results.data); //props.setEvents(results.data)
         console.log(results.data);
       })
       .catch((err) => {
@@ -53,14 +54,26 @@ export default function Events(props) {
       console.log('hello from events')
       getEvents(props.groupId)
     }
-  }, [props.groupId])
+  }, [props.groupId]);
+
+  useEffect(() => {
+    let newEvents = props?.events !== undefined ? props.events.sort(function (a, b) {
+      return new Date(a.date) - new Date(b.date);
+    }) : [];
+    if (newEvents.length !== 0) {
+      newEvents.forEach(event => {
+        event.date = new Date(event.date);
+        event.date = event.date.toLocaleString();
+      });
+    }
+    setGroupEvents(newEvents);
+  }, [props.events]);
 
   function Feature({ title, desc, ...rest }) {
-    let groupEvents = events.reverse();
     return (
       groupEvents.map((each, i) => {
         return (
-          <EventCard userId={props.organizer.userId} organizer={organizer} each={each} />
+          <EventCard key={i} userId={props.organizer.userId} organizer={organizer} each={each} />
         )
       })
     )

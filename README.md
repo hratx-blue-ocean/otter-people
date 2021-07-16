@@ -1,17 +1,26 @@
+![OtterPeople](https://user-images.githubusercontent.com/79018160/126011396-d5465aee-869e-44ae-9989-76cc26c933c2.png)
+
 # Otter People 
 *Stay in touch with each otter.*
-
-<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>  <img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
-
-<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>  <img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
-
 
 A place for alumni and friends to create private groups and events. <br>
 Invite like-minded others and get activity recommendations tailored to your locations.<br>
 
 Never lose touch with your friends and each otter again!
 
-## Usage
+
+## Overview
+
+
+
+## UI & Usage
+### Dark Logo
+<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>
+
+### Light Logo
+<img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
+
+
 
 Sign up
 
@@ -21,18 +30,8 @@ Invite friends with the provided group code.
 
 Get recommendations of what to do based on the geolocation of group members.
 
-## Contributors
-Angela Wu
+## Installation
 
-Addie Johnsen
-
-Eric Handley
-
-Felipe Erazo
-
-Michael Palmer
-
-Ryan May
 
 ## Technologies
 
@@ -69,4 +68,20 @@ Ryan May
 
 </table>
 
-## Workflow
+## Contributors
+[Angela Wu](https://github.com/aywgit)
+
+[Addie Johnsen](https://github.com/addiejohnsen)
+
+[Eric Handley](https://github.com/erichand18)
+
+[Felipe Erazo](https://github.com/ferazo94)
+
+[Michael Palmer](https://github.com/gitInLoserWereGoingShopping)
+
+[Ryan May](https://github.com/ryan-m-may)
+
+## Takeaways
+
+
+## License
