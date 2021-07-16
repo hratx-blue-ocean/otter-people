@@ -17,6 +17,8 @@ export default function SelectedGroup(props) {
     setGroup(props.group)
   }, [props.group])
 
+  const organizer = props.organizer.firstName + props.organizer.lastName;
+
   return (
 
     <Box maxW="90%" width="90%" height="140px" borderBottomWidth="1px" borderRadius="sm" >
@@ -34,7 +36,7 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal mt="10" mr="6" colorScheme="teal" size="lg" />
+        <AddEventModal groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
     </Box>
   )

@@ -104,7 +104,7 @@ const Event = mongoose.model('Event', eventSchema, 'events');
 //Add event to db for specific group
 const createEvent = (event, callback) => {
   //check if event already exists first, then create event if doesn't exist
-  Event.findOne({ name: event.name, groupId: event.groupId}, (err, data) => {
+  Event.findOne({ name: event.name, groupId: event.groupId }, (err, data) => {
     if (err) {
       console.log(err);
       callback(err, null);
@@ -299,6 +299,26 @@ const fetchEvents = (groupId, callback) => {
   });
 }
 
+const updateAttending = (userId, eventName, callback) => {
+  Event.findOneAndUpdate({ name: eventName }, { $addToSet: { attending: userId } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+const checkAttending = (userId, eventName, callback) => {
+  Event.exists({ name: eventName, attending: { $in: [userId] } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
+
 module.exports = {
   fetchGroups,
   createGroup,
@@ -309,6 +329,8 @@ module.exports = {
   signIn,
   signUp,
   createEvent,
-  fetchEvents
+  fetchEvents,
+  updateAttending,
+  checkAttending
 }
 

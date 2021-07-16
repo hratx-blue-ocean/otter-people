@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
+import EventCard from './EventCard'
 import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons';
 
@@ -26,13 +27,9 @@ let sampleEvents = [{
 const sampleUserId = "c";
 
 export default function Events(props) {
-  const userId = "c";
 
   const [events, setEvents] = useState([]);
-  //
-  //add SHOW MORE if we want
-  //
-  //
+  const organizer = props.organizer.firstName + props.organizer.lastName;
 
   const getEvents = (groupId) => {
     const url = 'http://localhost:3001/events';
@@ -51,113 +48,23 @@ export default function Events(props) {
       });
   };
 
-
-  const findEvents = () => {
-    //axios
-    //setEvents(result)
-  }
-
-
-  const addAttending = () => {
-    //api call to add user to array of attendees in event
-    //should update number attending
-  }
-
-  //troubleshoot
-  const selectAttending = () => {
-    addAttending();
-  }
-
-
-  const getDetails = () => {
-    //
-    //need to create drawer
-    //
-  }
   useEffect(() => {
-    findEvents();
-  }, [props.groupId])
-
-  useEffect(() => {
-    if (props?.groupId !== undefined){
+    if (props?.groupId !== undefined) {
       console.log('hello from events')
-      getEvents(props.groupId)}
+      getEvents(props.groupId)
+    }
   }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
     let groupEvents = events.reverse();
-
     return (
       groupEvents.map((each, i) => {
         return (
-          <Center>
-            <Grid
-              boxShadow="md"
-              h="240px"
-              maxHeight="200px"
-              templateColumns="repeat(12, 1fr)"
-              gap={1.5}
-              borderWidth="1px" borderRadius="sm"
-              width="90%"
-              p="2"
-            >
-
-              <GridItem colSpan={3} >
-                <Grid maxHeight="240px" templateRows="repeat(7, 1fr)">
-                  <GridItem rowSpan={3}>
-                    <Text p="2" align="left" fontSize="sm">{each.date}</Text>
-                  </GridItem>
-                </Grid>
-              </GridItem>
-
-              <GridItem colSpan={6}>
-                <Grid maxHeight="240px" templateRows="repeat(8, 1fr)">
-                  <GridItem rowSpan={3}>
-                    <Box
-                      mt="1"
-                      lineHeight="tight"
-                    >
-                      <Heading align="left" size="md" noOfLines={[1, 2]}>
-                        {each.name}
-                      </Heading>
-                      <Text align="left" fontSize="xs" noOfLines={[1]}>
-                        {each.location}
-                      </Text>
-                      <Text as="i" align="left" fontSize="xs" noOfLines={[1]}>
-                        {each.attending.length} attending
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem rowSpan={1}></GridItem>
-                  <GridItem rowSpan={4}>
-                    <Box
-                      mt="1"
-                      lineHeight="tight"
-                    >
-                      <Text align="left" fontSize="xs" noOfLines={[1, 2, 3, 4]}>
-                        {each.description}
-                      </Text>
-                    </Box>
-                  </GridItem>
-                </Grid>
-              </GridItem>
-
-              <GridItem colSpan={3}>
-                <Button onClick={selectAttending} mt="4" colorScheme="teal" size="md">
-                  {each.attending.includes(props.userId) ? <Text>Attending!</Text> : <Text>RSVP</Text>}
-                </Button>
-                <br />
-                <EventDetailCard event={each} />
-
-              </GridItem>
-            </Grid >
-
-          </Center>
+          <EventCard userId={props.organizer.userId} organizer={organizer} each={each} />
         )
       })
     )
   }
-
 
   return (
     <Box  >

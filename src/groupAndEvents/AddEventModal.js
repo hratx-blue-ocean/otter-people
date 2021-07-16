@@ -49,7 +49,7 @@ function AddEventModal(props) {
     setEventDate('');
     setEventDescription('');
   }
-  
+
   const handleFormSubmission = (e) => {
     e.preventDefault();
     onClose();
@@ -63,9 +63,8 @@ function AddEventModal(props) {
     };
     axios.post(`${url}/event`, formSubmission)
       .then((response) => {
-        onClose();
         console.log('successfully added event: ', response);
-        props.onClose();
+        onClose();
         clearForm();
       })
       .catch((err) => {
@@ -113,12 +112,12 @@ function AddEventModal(props) {
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
                 <DatePicker
-                selected={eventDate}
-                onChange={(date) => setEventDate(date)}
-                showTimeSelect
-                isClearable
-                dateFormat="Pp"
-              />
+                  selected={eventDate}
+                  onChange={(date) => setEventDate(date)}
+                  showTimeSelect
+                  isClearable
+                  dateFormat="Pp"
+                />
               </FormControl>
 
               <FormControl isRequired>
