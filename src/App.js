@@ -63,16 +63,12 @@ const theme = extendTheme({
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const [userData, setUserData] = useState({});
-
-
   const [currentGroup, setCurrentGroup] = useState();
-
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <ChakraProvider theme={theme}>
       <AppBar onClose={onOpen} />
-      {console.log(colorMode)}
       <Box textAlign="center" fontSize="xl" >
         <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
@@ -83,8 +79,8 @@ function App() {
           </GridItem>
           <GridItem colSpan={7} >
             <VStack spacing={8} >
-              <SelectedGroup />
-              <Events />
+              <SelectedGroup group={currentGroup} />
+              <Events groupId={currentGroup ? currentGroup.groupId : 0} userId={userData.userId} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >

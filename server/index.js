@@ -11,11 +11,23 @@ app.use(express.json());
 
 // group routes
 // NEED TO HOOK UP USEREMAIL
-app.get('/groups', (req, res) => {
-  console.log('reqparmas', req.query.userId);
 
-  let userEmail = req.query.userId;
-  db.fetchGroups(userEmail, (err, result) => {
+app.get('/events', (req, res) =>{
+  const groupId = req.query.groupId;
+  db.fetchEvents(groupId, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      console.log('event results', result)
+      res.status(200).send(result);
+    }
+  })
+});
+
+app.get('/groups', (req, res) => {
+  // console.log('reqparmas', req.query.userId);
+  let userId = req.query.userId;
+  db.fetchGroups(userId, (err, result) => {
     if (err) {
       res.status(400).send(err)
     } else {

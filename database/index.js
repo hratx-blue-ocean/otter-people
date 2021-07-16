@@ -58,18 +58,18 @@ Counter.findOne({ _id: "groupId" }, (err, counter) => {
 
 });
 
-// db.users.create({
-//   email: "test@test.com",
-//   userId: 1,
-//   avatar: "",
-//   pin: 1234,
-//   firstName: "testFirstName",
-//   lastName: "testLastName",
-//   city: "Houston",
-//   state: "TX",
-//   calculated_geolocation: [{}],
-//   groups: [1],
-// })
+db.users.create({
+  email: "test@test.com",
+  userId: 1,
+  avatar: "",
+  pin: 1234,
+  firstName: "testFirstName",
+  lastName: "testLastName",
+  city: "Houston",
+  state: "TX",
+  calculated_geolocation: [{}],
+  groups: [1],
+})
 
 
 
@@ -84,7 +84,7 @@ const userSchema = Schema({
   city: String,
   state: String,
   calculated_geolocation: [Object],
-  groups: [Number],
+  groups: [String],
 })
 
 const User = mongoose.model('User', userSchema, 'users');
@@ -95,7 +95,8 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  groupId: { type: Number, index: true }
+  groupId: { type: Number, index: true },
+  attending: [Number]
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
@@ -105,7 +106,7 @@ const createEvent = (event, callback) => {
   //check if event already exists first, then create event if doesn't exist
   Event.findOne({ name: event.name, groupId: event.groupId}, (err, data) => {
     if (err) {
-      console.log(err);``
+      console.log(err);
       callback(err, null);
     } else {
       //No existing event name within this group, so create new event for group
@@ -211,8 +212,8 @@ db.users.insert({
 });
 */
 // model to get groups from database based on userEmail
-const fetchGroups = (userEmail, callback) => {
-  Group.find({ members: { $in: userEmail } }, (err, results) => {
+const fetchGroups = (userId, callback) => {
+  Group.find({ members: { $in: userId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -287,6 +288,16 @@ const findGroupCode = (groupCode, callback) => {
   });
 };
 
+const fetchEvents = (groupId, callback) => {
+  Event.find({ groupId: groupId }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('event query results');
+      callback(null, results)
+    }
+  });
+}
 
 module.exports = {
   fetchGroups,
@@ -297,6 +308,7 @@ module.exports = {
   fetchGroup,
   signIn,
   signUp,
-  createEvent
+  createEvent,
+  fetchEvents
 }
 
