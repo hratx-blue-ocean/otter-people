@@ -36,7 +36,7 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
+        <AddEventModal events={props.events} setEvents={props.setEvents} groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
     </Box>
   )

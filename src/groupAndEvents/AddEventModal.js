@@ -18,6 +18,7 @@ import DatePicker from 'react-datepicker';
 // import PropTypes from 'prop-types';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+
 const url = 'http://127.0.0.1:3001';
 
 function AddEventModal(props) {
@@ -66,6 +67,10 @@ function AddEventModal(props) {
         console.log('successfully added event: ', response);
         onClose();
         clearForm();
+        //re-render event list by pushing formSubmission into App's 'events' state
+        let eventsCopy = props.events.slice();
+        eventsCopy.push(formSubmission);
+        props.setEvents(eventsCopy);
       })
       .catch((err) => {
         console.log('Failed to add Event: ', err);

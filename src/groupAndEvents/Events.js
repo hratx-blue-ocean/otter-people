@@ -28,7 +28,7 @@ const sampleUserId = "c";
 
 export default function Events(props) {
 
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]); //refactor accept setEvents as props
   const organizer = props.organizer.firstName + props.organizer.lastName;
 
   const getEvents = (groupId) => {
@@ -40,7 +40,8 @@ export default function Events(props) {
     };
     axios.get(url, config)
       .then((results) => {
-        setEvents(results.data);
+        // setEvents(results.data); //props.setEvents(results.data)
+        props.setEvents(results.data); //props.setEvents(results.data)
         console.log(results.data);
       })
       .catch((err) => {
@@ -56,7 +57,8 @@ export default function Events(props) {
   }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
-    let groupEvents = events.reverse();
+    // let groupEvents = events.reverse();
+    let groupEvents = props.events.reverse();
     return (
       groupEvents.map((each, i) => {
         return (
