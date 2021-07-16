@@ -25,7 +25,7 @@ function JoinGroupModal(props) {
 
   const handleFormSubmission = (e) => {
     onClose()
-    console.log(typeof groupCode)
+    console.log("group code type: ", typeof groupCode)
     props.joinGroup(props.userId, groupCode)
     // HANDLE FORM SUBMISSION
     // check to see if group code matches

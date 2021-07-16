@@ -165,6 +165,17 @@ db.users.insert({
 });
 */
 // model to get groups from database based on userEmail
+const getUserInfo = (userIdArr, callback) => {
+  User.find({ userId: { $in: userIdArr } }, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(result);
+      callback(null, result);
+    }
+  })
+}
+
 const fetchGroups = (userEmail, callback) => {
   Group.find({ members: { $in: userEmail } }, (err, results) => {
     if (err) {
@@ -178,7 +189,7 @@ const fetchGroups = (userEmail, callback) => {
 
 // model to a single groups from database based on groupCode
 const fetchGroup = (groupCode, callback) => {
-  Group.find({ code: { $in: groupCode } }, (err, results) => {
+  Group.findOne({ code: groupCode }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -210,7 +221,7 @@ const createGroup = (groupData, callback) => {
 
 //model to add user to a group
 const addUserToGroup = (userId, groupCode, callback) => {
-  Group.updateOne({ code: groupCode }, { $addToSet: { members: userId } }, (err, results) => {
+  Group.findOneAndUpdate({ code: groupCode }, { $addToSet: { members: userId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -250,6 +261,7 @@ module.exports = {
   addGroupNameToUser,
   fetchGroup,
   signIn,
-  signUp
+  signUp,
+  getUserInfo
 }
 

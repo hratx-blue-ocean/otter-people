@@ -38,23 +38,23 @@ app.get('/groups/getOne', (req, res) => {
 app.get('/groups/code', (req, res) => {
   let groupCode = req.query.groupCode;
   let userId = req.query.userId;
-
+  console.log('group code: ', groupCode);
   db.findGroupCode(groupCode, (err, result) => {
     if (err) {
       res.status(400).send('Code incorrect', err);
     } else {
       if (result !== null) {
         // DO PUT REQUEST! - add to groups - DO we need to add group to user?
-        db.addUserToGroup(userId, groupCode, (err, result) => {
+        db.addUserToGroup(userId, groupCode, (err, group) => {
           if (err) {
             res.status(500).send('cannot add to group');
           } else {
-            console.log("This is the result: ", result);
-            db.addGroupNameToUser(userId, result.groupId, (err, data) => {
+            console.log("This is the result: ", group);
+            db.addGroupNameToUser(userId, result.groupId, (err, user) => {
               if (err) {
                 res.status(500).send('cannot add group to user', err);
               } else {
-                res.status(200).send('Successfully added user to group and vice versa');
+                res.status(200).send(group);
               }
             });
           }
@@ -108,7 +108,21 @@ app.post('/sign', (req, res) => {
       }
     }
   })
-})
+});
+
+app.post('/members/info', (req, res) => {
+  db.getUserInfo(req.body.members, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data !== null) {
+        res.status(200).send(data);
+      } else {
+        res.status(200).send({ error: 'No user data found' });
+      }
+    }
+  });
+});
 
 app.listen(port, (err) => {
   if (err) console.log(err);

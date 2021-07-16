@@ -57,15 +57,15 @@ const GroupList = (props) => {
       }
     };
     axios.get(url, config)
-    .then((result) => {
-      // update current Group
-      getOneGroup(groupCode);
-      //refetch groups
-    })
-    .catch((err) => {
-      console.error('Error: ', err);
-
-    });
+      .then((result) => {
+        // update current Group
+        getOneGroup(groupCode);
+        //refetch groups
+        getGroups(userId);
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
 
 
 
@@ -74,16 +74,16 @@ const GroupList = (props) => {
   const createGroup = (userId, group) => {
     const url = `http://localhost:3001/groups`;
     axios.post(url, group)
-    .then((result) => {
-      let newGroup = JSON.parse(result.config.data);
-      // props.setCurrentGroup(JSON.parse(result.config.data))
-      // call getGroups to get updated listed of groups
-      getGroups(props.userId);
-      getOneGroup(newGroup.code)
-    })
-    .catch((err) => {
-      console.error('Error: ', err);
-    })
+      .then((result) => {
+        let newGroup = JSON.parse(result.config.data);
+        // props.setCurrentGroup(JSON.parse(result.config.data))
+        // call getGroups to get updated listed of groups
+        getGroups(props.userId);
+        getOneGroup(newGroup.code)
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      })
   };
 
   const showMoreGroups = (e) => {
@@ -106,7 +106,7 @@ const GroupList = (props) => {
 
   return (
     <>
-      <AddGroupModal createGroup={createGroup} userEmail={props.userEmail} userId={props.userId}/>
+      <AddGroupModal createGroup={createGroup} userEmail={props.userEmail} userId={props.userId} />
       <JoinGroupModal joinGroup={joinGroup} userId={props.userId} />
       <GroupItem groups={groups} displayedGroups={displayedGroups} setCurrentGroup={props.setCurrentGroup} />
       {!toggleTriangle ?

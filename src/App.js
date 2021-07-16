@@ -89,7 +89,7 @@ function App() {
           </GridItem>
           <GridItem colSpan={3} >
             <VStack spacing={8} >
-              <Members />
+              <Members currentGroup={currentGroup} />
               <Recs />
             </VStack>
           </GridItem>
