@@ -64,17 +64,17 @@ Get recommendations of what to do based on the geolocation of group members.
 </table>
 
 ## Contributors
-Angela Wu
+[Angela Wu](https://github.com/aywgit)
 
-Addie Johnsen
+[Addie Johnsen](https://github.com/addiejohnsen)
 
-Eric Handley
+[Eric Handley](https://github.com/erichand18)
 
-Felipe Erazo
+[Felipe Erazo](https://github.com/ferazo94)
 
-Michael Palmer
+[Michael Palmer](https://github.com/gitInLoserWereGoingShopping)
 
-Ryan May
+[Ryan May](https://github.com/ryan-m-may)
 
 ## Takeaways
 
