@@ -12,7 +12,7 @@ app.use(express.json());
 // group routes
 // NEED TO HOOK UP USEREMAIL
 
-app.get('/events', (req, res) =>{
+app.get('/events', (req, res) => {
   const groupId = req.query.groupId;
   db.fetchEvents(groupId, (err, result) => {
     if (err) {
@@ -125,6 +125,24 @@ app.post('/sign', (req, res) => {
 app.post('/event', (req, res) => {
   console.log('server index: /event reached');
   db.createEvent(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
+app.put('/event/attending', (req, res) => {
+  console.log('update attending');
+  let eventName = req.query.eventName;
+  let userId = req.query.userId;
+
+  db.updateAttending(userId, eventName, (err, data) => {
     if (err) {
       res.status(400).send(err);
     } else {
