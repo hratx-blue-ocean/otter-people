@@ -59,7 +59,7 @@ function AddEventModal(props) {
 
   return (
     <>
-      <Button onClick={onOpen} mt="10" mr="6" colorScheme="teal" size="lg"> + Event</Button>
+      <Button onClick={onOpen} mt="10" mr="6" bg={gBtn} color={text} size="lg"> + Event</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered={true} >
         <ModalOverlay />
@@ -90,12 +90,13 @@ function AddEventModal(props) {
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
                 <DatePicker
-                selected={eventDate}
-                onChange={(date) => setEventDate(date)}
-                showTimeSelect
-                isClearable
-                dateFormat="Pp"
-              />
+                  selected={eventDate}
+                  onChange={(date) => setEventDate(date)}
+                  showTimeSelect
+                  isClearable
+                  dateFormat="Pp"
+                  background={layer}
+                />
               </FormControl>
 
               <FormControl isRequired>

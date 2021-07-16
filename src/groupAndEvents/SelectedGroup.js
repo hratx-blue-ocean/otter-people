@@ -14,12 +14,11 @@ export default function SelectedGroup(props) {
 
   // Colors
   const layer = useColorModeValue('layer.light', 'layer.dark');
-  const gBtn = useColorModeValue('gBtn.light', 'gBtn.dark');
-  const mainBlue = useColorModeValue('mainBlue.light', 'mainBlue.dark');
+  const border = useColorModeValue('select.light','layer.dark')
   const txt = useColorModeValue('text.light', 'text.dark');
 
   return (
-    <Box maxW="90%" width="90%" height="140px" borderBottomWidth="1px" borderRadius="sm" bg={layer} borderColor={layer} >
+    <Box maxW="90%" width="90%" height="140px" borderWidth="1px" borderRadius="md" bg={layer} borderColor={border} color={txt}>
       <Flex >
         <Spacer />
         <StarIcon mt="10" w={12} h={12} />
@@ -34,7 +33,7 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal mt="10" mr="6" colorScheme="teal" size="lg" />
+        <AddEventModal mt="10" mr="6" size="lg" />
       </Flex>
     </Box>
   )
