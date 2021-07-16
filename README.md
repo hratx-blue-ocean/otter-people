@@ -11,7 +11,11 @@ Invite like-minded others and get activity recommendations tailored to your loca
 
 Never lose touch with your friends and each otter again!
 
-## Usage
+## Overview
+
+
+
+## UI & Usage
 
 Sign up
 
@@ -21,18 +25,8 @@ Invite friends with the provided group code.
 
 Get recommendations of what to do based on the geolocation of group members.
 
-## Contributors
-Angela Wu
+## Installation
 
-Addie Johnsen
-
-Eric Handley
-
-Felipe Erazo
-
-Michael Palmer
-
-Ryan May
 
 ## Technologies
 
@@ -69,4 +63,20 @@ Ryan May
 
 </table>
 
-## Workflow
+## Contributors
+Angela Wu
+
+Addie Johnsen
+
+Eric Handley
+
+Felipe Erazo
+
+Michael Palmer
+
+Ryan May
+
+## Takeaways
+
+
+## License
