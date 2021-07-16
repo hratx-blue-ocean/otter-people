@@ -53,6 +53,7 @@ group = {
       code: Date.now(),
       photo: groupPhoto,
       members: [props.userId],
+      cities: [props.city],
     };
     console.log(newGroup);
     props.createGroup(props.userId, newGroup);
@@ -70,7 +71,7 @@ group = {
 
   return (
     <>
-      <Button bg={gBtn} color={text}  onClick={onOpen}>Create New Group</Button>
+      <Button bg={gBtn} color={text} onClick={onOpen}>Create New Group</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
