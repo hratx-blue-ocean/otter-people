@@ -63,9 +63,8 @@ function AddEventModal(props) {
     };
     axios.post(`${url}/event`, formSubmission)
       .then((response) => {
-        onClose();
         console.log('successfully added event: ', response);
-        props.onClose();
+        onClose();
         clearForm();
       })
       .catch((err) => {

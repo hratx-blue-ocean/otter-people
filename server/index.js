@@ -78,6 +78,24 @@ app.get('/groups/code', (req, res) => {
   })
 });
 
+app.get('/event/attending/check', (req, res) => {
+  console.log('check whether attending');
+  let eventName = req.body.eventName;
+  let userId = req.body.userId;
+
+  db.checkAttending(userId, eventName, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
 app.post('/groups', (req, res) => {
   db.createGroup(req.body, (err, results) => {
     if (err) {
@@ -139,8 +157,8 @@ app.post('/event', (req, res) => {
 
 app.put('/event/attending', (req, res) => {
   console.log('update attending');
-  let eventName = req.query.eventName;
-  let userId = req.query.userId;
+  let eventName = req.body.eventName;
+  let userId = req.body.userId;
 
   db.updateAttending(userId, eventName, (err, data) => {
     if (err) {

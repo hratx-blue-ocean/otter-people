@@ -29,6 +29,7 @@ const sampleUserId = "c";
 export default function Events(props) {
 
   const [events, setEvents] = useState([]);
+  const organizer = props.organizer.firstName + props.organizer.lastName;
 
   const getEvents = (groupId) => {
     const url = 'http://localhost:3001/events';
@@ -55,11 +56,11 @@ export default function Events(props) {
   }, [props.groupId])
 
   function Feature({ title, desc, ...rest }) {
-    let groupEvents = sampleEvents.reverse();
+    let groupEvents = events.reverse();
     return (
       groupEvents.map((each, i) => {
         return (
-          <EventCard userId={props.userId} each={each} />
+          <EventCard userId={props.organizer.userId} organizer={organizer} each={each} />
         )
       })
     )

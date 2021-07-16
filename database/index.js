@@ -293,6 +293,16 @@ const updateAttending = (userId, eventName, callback) => {
   });
 }
 
+const checkAttending = (userId, eventName, callback) => {
+  Event.exists({ name: eventName, attending: { $in: [userId] } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
+
 module.exports = {
   fetchGroups,
   createGroup,
@@ -304,6 +314,7 @@ module.exports = {
   signUp,
   createEvent,
   fetchEvents,
-  updateAttending
+  updateAttending,
+  checkAttending
 }
 

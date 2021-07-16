@@ -5,17 +5,16 @@ import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Butt
 import { StarIcon } from '@chakra-ui/icons';
 
 
-export default function EventCard({ userId, each }) {
+export default function EventCard({ userId, each, organizer }) {
 
   const [attending, setAttending] = useState(false);
+  const [number, setNumber] = useState(0);
 
   const addAttending = (userId, eventName) => {
-    const url = 'http://localhost:3001/events/attending';
+    const url = 'http://localhost:3001/event/attending';
     const config = {
-      params: {
-        userId: userId,
-        eventName: eventName
-      }
+      userId: userId.toString(),
+      eventName: eventName.toString(),
     };
     axios.put(url, config)
       .then((results) => {
@@ -30,6 +29,29 @@ export default function EventCard({ userId, each }) {
     addAttending(userId, eventName);
     setAttending(true)
   }
+
+  useEffect(() => {
+    setNumber(number + 1)
+  }, [attending])
+
+  useEffect(() => {
+    //see if userId is in attending array
+    //if so, setAttending(true)
+    const url = 'http://localhost:3001/event/attending/check';
+    const config = {
+      userId: userId,
+      eventName: each.name
+    };
+    axios.get(url, config)
+      .then((results) => {
+        if (results.data) {
+          setAttending(true)
+        }
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  }, [])
 
   return (
     <Center>
@@ -66,7 +88,7 @@ export default function EventCard({ userId, each }) {
                   {each.location}
                 </Text>
                 <Text as="i" align="left" fontSize="xs" noOfLines={[1]}>
-                  {each.attending.length} attending
+                  {number} attending
                 </Text>
               </Box>
             </GridItem>
@@ -89,7 +111,7 @@ export default function EventCard({ userId, each }) {
             {attending ? <Text>Attending!</Text> : <Text>RSVP</Text>}
           </Button>
           <br />
-          <EventDetailCard event={each} />
+          <EventDetailCard organizer={organizer} event={each} />
         </GridItem>
       </Grid >
 

@@ -30,7 +30,7 @@ function EventDetailCard(props) {
           <ModalHeader></ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontSize="l" align="left">Meeting Organizer: </Text> <Text fontSize="l">Jack P.</Text>
+            <Text fontSize="l" align="left">Meeting Organizer: </Text> <Text fontSize="l">{props.organizer}</Text>
             <br />
             <Text fontSize="xl">{props.event.date}
             </Text>
