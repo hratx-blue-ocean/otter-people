@@ -49,7 +49,7 @@ function AddEventModal(props) {
     setEventDate('');
     setEventDescription('');
   }
-  
+
   const handleFormSubmission = (e) => {
     e.preventDefault();
     onClose();
@@ -113,12 +113,12 @@ function AddEventModal(props) {
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
                 <DatePicker
-                selected={eventDate}
-                onChange={(date) => setEventDate(date)}
-                showTimeSelect
-                isClearable
-                dateFormat="Pp"
-              />
+                  selected={eventDate}
+                  onChange={(date) => setEventDate(date)}
+                  showTimeSelect
+                  isClearable
+                  dateFormat="Pp"
+                />
               </FormControl>
 
               <FormControl isRequired>
