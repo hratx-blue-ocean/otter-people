@@ -11,11 +11,23 @@ app.use(express.json());
 
 // group routes
 // NEED TO HOOK UP USEREMAIL
-app.get('/groups', (req, res) => {
-  console.log('reqparmas', req.query.userId);
 
-  let userEmail = req.query.userId;
-  db.fetchGroups(userEmail, (err, result) => {
+app.get('/events', (req, res) => {
+  const groupId = req.query.groupId;
+  db.fetchEvents(groupId, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      console.log('event results', result)
+      res.status(200).send(result);
+    }
+  })
+});
+
+app.get('/groups', (req, res) => {
+  // console.log('reqparmas', req.query.userId);
+  let userId = req.query.userId;
+  db.fetchGroups(userId, (err, result) => {
     if (err) {
       res.status(400).send(err)
     } else {
@@ -66,6 +78,24 @@ app.get('/groups/code', (req, res) => {
   })
 });
 
+app.get('/event/attending/check', (req, res) => {
+  console.log('check whether attending');
+  let eventName = req.body.eventName;
+  let userId = req.body.userId;
+
+  db.checkAttending(userId, eventName, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
 app.post('/groups', (req, res) => {
   db.createGroup(req.body, (err, results) => {
     if (err) {
@@ -98,6 +128,39 @@ app.post('/login', (req, res) => {
 app.post('/sign', (req, res) => {
   console.log('signup reached');
   db.signUp(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
+app.post('/event', (req, res) => {
+  console.log('server index: /event reached');
+  db.createEvent(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data.error) {
+        res.status(200).send({ error: data.error })
+      } else {
+        res.status(200).send(data);
+      }
+    }
+  })
+})
+
+app.put('/event/attending', (req, res) => {
+  console.log('update attending');
+  let eventName = req.body.eventName;
+  let userId = req.body.userId;
+
+  db.updateAttending(userId, eventName, (err, data) => {
     if (err) {
       res.status(400).send(err);
     } else {

@@ -59,20 +59,23 @@ const theme = extendTheme({
   }
 });
 
+/*
+  To be discussed: 
+  when multiple users are logged in, how would other users see newly added events?
+    |- possible solution(s): refresh button (or swipe down) or auto refresh (component/state not page)
+*/
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const [userData, setUserData] = useState({});
-
-
   const [currentGroup, setCurrentGroup] = useState();
-
-  const { colorMode, toggleColorMode } = useColorMode()
+  const [events, setEvents] = useState();
+  const { colorMode, toggleColorMode } = useColorMode();
+  
 
   return (
     <ChakraProvider theme={theme}>
       <AppBar onClose={onOpen} />
-      {console.log(colorMode)}
       <Box textAlign="center" fontSize="xl" >
         <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
@@ -83,8 +86,8 @@ function App() {
           </GridItem>
           <GridItem colSpan={7} >
             <VStack spacing={8} >
-              <SelectedGroup />
-              <Events />
+              <SelectedGroup events={events} setEvents={setEvents} organizer={userData} group={currentGroup ? currentGroup : {}} />
+              <Events events={events} setEvents={setEvents} groupId={currentGroup ? currentGroup.groupId : 0} organizer={userData} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >

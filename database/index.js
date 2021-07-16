@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const dbs = 'alumniMeetUp';
 
-mongoose.connect(`mongodb://localhost/${dbs}`, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect(`mongodb://localhost:27017/${dbs}`, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const db = mongoose.connection;
 
@@ -58,6 +58,22 @@ Counter.findOne({ _id: "groupId" }, (err, counter) => {
 
 });
 
+// db.users.create({
+//   email: "test@test.com",
+//   userId: 1,
+//   avatar: "",
+//   pin: 1234,
+//   firstName: "testFirstName",
+//   lastName: "testLastName",
+//   city: "Houston",
+//   state: "TX",
+//   calculated_geolocation: [{}],
+//   groups: [1],
+// })
+
+
+
+
 const userSchema = Schema({
   email: { type: String, unique: true, index: true },
   userId: Number,
@@ -79,11 +95,42 @@ const eventSchema = Schema({
   date: Date,
   description: String,
   organizer: String,
-  groupId: { type: Number, index: true }
+  groupId: { type: Number, index: true },
+  attending: [Number]
 });
 
 const Event = mongoose.model('Event', eventSchema, 'events');
 
+//Add event to db for specific group
+const createEvent = (event, callback) => {
+  //check if event already exists first, then create event if doesn't exist
+  Event.findOne({ name: event.name, groupId: event.groupId }, (err, data) => {
+    if (err) {
+      console.log(err);
+      callback(err, null);
+    } else {
+      //No existing event name within this group, so create new event for group
+      if (data === null) {
+        Event.create({
+          name: event.name,
+          location: event.location,
+          date: event.date,
+          description: event.description,
+          organizer: event.organizer,
+          groupId: event.groupId,
+        }, (err, user) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, user);
+          }
+        });
+      } else {
+        callback(null, { error: 'Event Already Exists' })
+      }
+    }
+  })
+}
 
 /* signIn method overview:
 Find a user given an email
@@ -92,7 +139,7 @@ If given email matches a user in database
 if either username (email) don't exist in db, or password doesn't match
   error or false
 */
-let signIn = (username, password, callback) => { //callback will be (req, res) coming in from server
+const signIn = (username, password, callback) => { //callback will be (req, res) coming in from server
   User.findOne({ email: username }, (err, user) => {
     if (err) {
       console.log(err);
@@ -110,7 +157,7 @@ let signIn = (username, password, callback) => { //callback will be (req, res) c
   });
 };
 
-let signUp = (userData, callback) => {
+const signUp = (userData, callback) => {
   User.findOne({ email: userData.email }, (err, user) => {
     if (err) {
       console.log(err);
@@ -165,8 +212,8 @@ db.users.insert({
 });
 */
 // model to get groups from database based on userEmail
-const fetchGroups = (userEmail, callback) => {
-  Group.find({ members: { $in: userEmail } }, (err, results) => {
+const fetchGroups = (userId, callback) => {
+  Group.find({ members: { $in: userId } }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -241,6 +288,36 @@ const findGroupCode = (groupCode, callback) => {
   });
 };
 
+const fetchEvents = (groupId, callback) => {
+  Event.find({ groupId: groupId }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('event query results');
+      callback(null, results)
+    }
+  });
+}
+
+const updateAttending = (userId, eventName, callback) => {
+  Event.findOneAndUpdate({ name: eventName }, { $addToSet: { attending: userId } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+const checkAttending = (userId, eventName, callback) => {
+  Event.exists({ name: eventName, attending: { $in: [userId] } }, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
 
 module.exports = {
   fetchGroups,
@@ -250,6 +327,10 @@ module.exports = {
   addGroupNameToUser,
   fetchGroup,
   signIn,
-  signUp
+  signUp,
+  createEvent,
+  fetchEvents,
+  updateAttending,
+  checkAttending
 }
 

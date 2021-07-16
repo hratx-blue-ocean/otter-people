@@ -4,17 +4,24 @@ import { useColorModeValue, Box, Center, Grid, GridItem, Button, ButtonGroup, Te
 import { StarIcon } from '@chakra-ui/icons'
 
 //need to pass as props
-const selectedGroup = { name: "Winterguard 2010", description: "The best ones.", code: '1234567891234'}
+const sampleGroup = { name: "Winterguard 2010", description: "The best ones.", code: '1234567891234' }
 
 export default function SelectedGroup(props) {
+  //we set group here because we are rendering the props on this screen
+  //contrast with Events.js where we do not need to apply useState to the props (groupId)
+  //since we don't render groupId on the screen
+  //on both pages, useEffect runs every time the props change
+  const [group, setGroup] = useState({ name: "", description: "", code: "" });
 
-  const addEvent = () => {
-    //need to create drawer
-  }
+  useEffect(() => {
+    setGroup(props.group)
+  }, [props.group])
+
+  const organizer = props.organizer.firstName + props.organizer.lastName;
 
   // Colors
   const layer = useColorModeValue('layer.light', 'layer.dark');
-  const border = useColorModeValue('select.light','layer.dark')
+  const border = useColorModeValue('select.light', 'layer.dark')
   const txt = useColorModeValue('text.light', 'text.dark');
 
   return (
@@ -24,17 +31,17 @@ export default function SelectedGroup(props) {
         <StarIcon mt="10" w={12} h={12} />
         <Spacer />
         <Box>
-          <Heading mt="8">{selectedGroup.name}</Heading>
-          <Text align="left" fontSize="md">{selectedGroup.description}</Text>
-          <Text align="left" fontSize="sm">Invitation Code: {selectedGroup.code}</Text>
+          <Heading mt="8">{group ? group.name : sampleGroup.name}</Heading>
+          <Text align="left" fontSize="md">{group ? group.description : sampleGroup.description}</Text>
+          <Text align="left" fontSize="sm">Invitation Code: {group ? group.code : sampleGroup.code}</Text>
         </Box>
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal mt="10" mr="6" size="lg" />
+        <AddEventModal events={props.events} setEvents={props.setEvents} groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
-    </Box>
+    </Box >
   )
 }
