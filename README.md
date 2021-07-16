@@ -1,3 +1,5 @@
+![OtterPeople](https://user-images.githubusercontent.com/79018160/126011396-d5465aee-869e-44ae-9989-76cc26c933c2.png)
+
 # Otter People 
 *Stay in touch with each otter.*
 
