@@ -38,7 +38,7 @@ export default function Members(props) {
 
     return function cleanup() {
       setMembers([]);
-    }
+    };
   }, [props.currentGroup]);
 
   const onSeeMore = () => {
