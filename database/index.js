@@ -42,6 +42,8 @@ const groupSchema = Schema({
   code: String,
   photo: String,
   members: [String],
+  cities: [String]
+  //cities: { sanFrancisco: Number, dallas: Number, newYork: Number },
 });
 
 const Group = mongoose.model('Group', groupSchema, 'groups');
@@ -83,7 +85,6 @@ const userSchema = Schema({
   lastName: String,
   city: String,
   state: String,
-  calculated_geolocation: [Object],
   groups: [String],
 })
 
@@ -269,8 +270,10 @@ const createGroup = (groupData, callback) => {
 }
 
 //model to add user to a group
-const addUserToGroup = (userId, groupCode, callback) => {
-  Group.findOneAndUpdate({ code: groupCode }, { $addToSet: { members: userId } }, (err, results) => {
+const addUserToGroup = (userId, groupCode, city, callback) => {
+  Group.updateOne({ code: groupCode }, {
+    $addToSet: { members: userId, cities: city }
+  }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {

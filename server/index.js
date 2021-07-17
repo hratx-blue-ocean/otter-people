@@ -50,14 +50,15 @@ app.get('/groups/getOne', (req, res) => {
 app.get('/groups/code', (req, res) => {
   let groupCode = req.query.groupCode;
   let userId = req.query.userId;
-  console.log('group code: ', groupCode);
+  let city = req.query.city;
+
   db.findGroupCode(groupCode, (err, result) => {
     if (err) {
       res.status(400).send('Code incorrect', err);
     } else {
       if (result !== null) {
         // DO PUT REQUEST! - add to groups - DO we need to add group to user?
-        db.addUserToGroup(userId, groupCode, (err, group) => {
+        db.addUserToGroup(userId, groupCode, city, (err, result) => {
           if (err) {
             res.status(500).send('cannot add to group');
           } else {
