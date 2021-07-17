@@ -108,19 +108,44 @@ All groups are private. To invite new members to the group, an existing group me
 
 .
 
+
+
+The center column displays the group's information, including the name, description, and invitation code. A sorted list of upcoming group events appears below. Each event card shows the event details and the ability for a user to RSVP. A user clicks on '+ Event' at the top of the column to create a new event.
+
 .
 
+.
 
-The center column displays the group's information including the name, description, and the invitation code. Underneath the group details is a list of upcoming group events. 
+.
+
+.
+
+[SCREEN CAPTURE IMAGE HERE]
+
+.
+
+.
+
+.
+
+The right column displays two widgets. At the top is a list of the current group's members. When a new group is selected, the member's list updates. Underneath is the Around Town widget, which provides users event and activity suggestions based on group member's geolocations.
 
 
-Sign up
+.
 
-Create a group
+.
 
-Invite friends with the provided group code.
+.
 
-Get recommendations of what to do based on the geolocation of group members.
+.
+
+[SCREEN CAPTURE IMAGE HERE]
+
+.
+
+.
+
+.
 
 
 
