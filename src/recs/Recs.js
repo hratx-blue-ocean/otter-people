@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Box } from "@chakra-ui/react"
+import { Box, useColorModeValue } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
 import { Image } from "@chakra-ui/react"
@@ -23,6 +23,10 @@ export default function Recs(props) {
   const [recommendations, setRecommendations] = useState([]);
   // const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
 
+  const layer = useColorModeValue('layer.light', 'layer.dark');
+  const slect = useColorModeValue('select.light', 'select.dark');
+  const txt = useColorModeValue('text.light', 'text.dark');
+
   //useEffect hooks
   // useEffect(() => {
   //   setData(apiTransformed.slice(0, itemsShown))
@@ -33,6 +37,8 @@ export default function Recs(props) {
         setRecommendations(events.data);
       });
   }, []);
+
+
 
   const onChange = (e) => {
     setCategory(e.target.value || "All")
@@ -53,7 +59,7 @@ export default function Recs(props) {
 
   const eachRecommendation = (dataObj, index) => {
     return (
-      < Box key={index} p="2" >
+      < Box key={index} p="2" bg={layer} color={txt}>
         {/*  */}
         {/* Need to hardcode height="" pixels based on final layout */}
         {/*  */}
@@ -70,11 +76,11 @@ export default function Recs(props) {
   }
 
   return (
-    <Box maxW="100%" width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Heading size="lg">Around Town</Heading>
-      <Text fontSize="sm" >Click to Add As Your Next Event!</Text>
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="md" borderColor={layer} overflow="hidden">
+      <Heading p="1" size="lg">Around Town</Heading>
+      <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>
-        <Select onChange={onChange} placeholder="Category" size="sm" width="50%">
+        <Select bg={slect} p="1" onChange={onChange} placeholder="Category" size="sm" width="50%" borderColor={slect} borderRadius='md'>
           <option value="SIGHTS">Sights</option>
           <option value="NIGHTLIFE">Nightlife</option>
           <option value="RESTAURANT">Restaurants</option>
