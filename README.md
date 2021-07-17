@@ -85,11 +85,11 @@ On page load, the user is presented with Otter People's landing page to enter th
 
 
 
-The personal dashboard is an intutitve three coulumn layout. The left column displays the user's group infomation. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. On form submission, the new group will be created, the group creator will automatically be added to the group, and user's group list will rerender.
+The personal dashboard is an intuitive three-column layout. The left column displays the user's group information. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. The new group will be created on form submission, the group creator will automatically be added to the group, and the user's group list will rerender.
 
-To join a group, a user clicks on 'Join Existing Group' and provides the secret group invitation code. If they enter the correct code, the group member will be immediately added to the group.
+A user clicks on 'Join Existing Group' and provides the secret group invitation code to join a group. If they enter the correct code, the user is immediately added to the group.
 
-All groups are private. To invite new members to the group an existing group member must share group invitation code. 
+All groups are private. To invite new members to the group, an existing group member must share the group's invitation code. 
 
 
 .
