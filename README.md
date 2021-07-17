@@ -59,6 +59,59 @@ Never lose touch with your friends and each otter again!
 ### Light Logo
 <img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
 
+### Walkthrough
+On page load, the user is presented with Otter People's landing page to enter their credentials to log in. If not already a member, the user can click the 'Sign up' button, and a modal sign-up form will appear. Once signed in or signed up, the user is rerouted to their personal dashboard.
+
+.
+
+.
+
+.
+
+.
+
+[SCREEN CAPTURE IMAGE HERE]
+
+.
+
+.
+
+.
+
+.
+
+
+
+
+
+
+The personal dashboard is an intutitve three coulumn layout. The left column displays the user's group infomation. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. On form submission, the new group will be created, the group creator will automatically be added to the group, and user's group list will rerender.
+
+To join a group, a user clicks on 'Join Existing Group' and provides the secret group invitation code. If they enter the correct code, the group member will be immediately added to the group.
+
+All groups are private. To invite new members to the group an existing group member must share group invitation code. 
+
+
+.
+
+.
+
+.
+
+.
+
+[SCREEN CAPTURE IMAGE HERE]
+
+.
+
+.
+
+.
+
+.
+
+
+The center column displays the group's information including the name, description, and the invitation code. Underneath the group details is a list of upcoming group events. 
 
 
 Sign up
