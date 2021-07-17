@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
-import { Button, Text, VStack } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 import {
   Modal,
   ModalOverlay,

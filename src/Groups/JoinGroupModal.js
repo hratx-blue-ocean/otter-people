@@ -27,12 +27,7 @@ function JoinGroupModal(props) {
   const handleFormSubmission = (e) => {
     onClose()
     props.joinGroup(props.userId, groupCode, props.city)
-    // HANDLE FORM SUBMISSION
-    // check to see if group code matches
-    // send put Request to add to group
-    // somehow re-render page with content
     setGroupCode('');
-
   }
 
   const gBtn = useColorModeValue('gBtn.light', 'gBtn.dark');

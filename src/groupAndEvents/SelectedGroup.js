@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddEventModal from './AddEventModal';
-import { useColorModeValue, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
+import { useColorModeValue, Box, Text, Heading, Flex, Spacer } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons';
 
 export default function SelectedGroup(props) {
@@ -12,7 +12,6 @@ export default function SelectedGroup(props) {
 
   const organizerName = props.organizer.firstName + " " + props.organizer.lastName;
 
-  // Colors
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const border = useColorModeValue('select.light', 'layer.dark');
   const txt = useColorModeValue('text.light', 'text.dark');

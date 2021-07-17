@@ -23,8 +23,6 @@ let SignUp = (props) => {
   const [city, setCity] = useState('');
   const [stateName, setStateName] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [profilePic, setProfilePic] = useState('');
-  //remember to consider type for password (if number (pin) and conditional checks string, it wont work)
   let isInvalid = (
     (email === '' ||
       password === 0 ||
@@ -71,7 +69,6 @@ let SignUp = (props) => {
       })
   };
 
-  //colors
   const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");
   const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
   const text = useColorModeValue("text.light", "text.dark");

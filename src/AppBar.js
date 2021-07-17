@@ -1,5 +1,5 @@
 import React from 'react';
-import { useColorModeValue, Center, Box, Image, Grid, GridItem, Link, Text } from '@chakra-ui/react';
+import { useColorModeValue, Center, Image, Grid, GridItem, Link, Text } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 function AppBar(props) {
@@ -8,7 +8,6 @@ function AppBar(props) {
   const image = useColorModeValue("https://i.imgur.com/xB1svO4.png", "https://i.imgur.com/QiA0JT9.png")
 
   const logOut = () => {
-    // logout function from props
     props.setEvents([]);
     props.setCurrentGroup({});
     props.setUserData({});

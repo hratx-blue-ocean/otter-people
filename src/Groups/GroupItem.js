@@ -8,7 +8,7 @@ const GroupItem = (props) => {
   const SwitchIcon = useColorModeValue(FaSun, FaMoon);
 
   const handleGroupClick = (e) => {
-    props.setCurrentGroup(props.displayedGroups[e.target.id]);  // NEED TO FORMAT PROPERLY based on db query!
+    props.setCurrentGroup(props.displayedGroups[e.target.id]);
   };
 
   if (props.displayedGroups === undefined || props.displayedGroups.length === 0) {

@@ -39,8 +39,6 @@ export default function EventCard({ userId, event, organizer }) {
 
 
   useEffect(() => {
-    //see if userId is in attending array
-    //if so, setAttending(true)
     const url = 'http://localhost:3001/event/attending/check';
     const config = {
       userId: userId,

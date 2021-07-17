@@ -9,8 +9,7 @@ import JoinGroupModal from './JoinGroupModal';
 
 const GroupList = (props) => {
   const [groups, setGroups] = useState([]);
-  // [{ name: 'Drumline' }, { name: 'DnD' }, { name: 'Foodies' }, { name: 'Green Thumb' }]
-  const [displayedGroups, setDisplayedGroups] = useState([]); // default to show three groups
+  const [displayedGroups, setDisplayedGroups] = useState([]);
   const [toggleTriangle, setToggleTriangle] = useState(false);
 
   const getGroups = (userId) => {
@@ -30,7 +29,6 @@ const GroupList = (props) => {
       });
   };
 
-  // get group base on groupCode
   const getOneGroup = (groupCode) => {
     const url = 'http://localhost:3001/groups/getOne';
     const config = {
@@ -47,8 +45,6 @@ const GroupList = (props) => {
       });
   };
 
-  // joinGroups - HTTP PUT Request? HOW TO HANDLE LOGIN ???
-  // PUT Request to group & user
   const joinGroup = (userId, groupCode, city) => {
     const url = 'http://localhost:3001/groups/code';
     const config = {
@@ -60,9 +56,7 @@ const GroupList = (props) => {
     };
     axios.get(url, config)
       .then((result) => {
-        // update current Group
         getOneGroup(groupCode);
-        //refetch groups
         getGroups(userId);
       })
       .catch((err) => {
@@ -75,8 +69,6 @@ const GroupList = (props) => {
     axios.post(url, group)
       .then((result) => {
         let newGroup = JSON.parse(result.config.data);
-        // props.setCurrentGroup(JSON.parse(result.config.data))
-        // call getGroups to get updated listed of groups
         getGroups(props.userId);
         getOneGroup(newGroup.code)
       })

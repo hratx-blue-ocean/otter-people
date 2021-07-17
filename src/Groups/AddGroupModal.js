@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import { Textarea } from '@chakra-ui/react';
@@ -32,20 +32,6 @@ function AddGroupModal(props) {
     setGroupDescription(groupDescriptionChange);
   };
 
-  const handleGroupPhotoUpload = (e) => {
-    let groupPhotoUpload = e.target.file;
-    setGroupPhoto(groupPhotoUpload);
-  };
-  /*
-group = {
-  id: id,
-  name: name,
-  description: description,
-  picture: picture,
-  members: [id...],
-}
-*/
-
   const handleFormSubmission = (e) => {
     onClose()
     const newGroup = {
@@ -58,7 +44,6 @@ group = {
     };
     console.log(newGroup);
     props.createGroup(props.userId, newGroup);
-    // clear form inputs
     setGroupName('');
     setGroupDescription('');
     setGroupPhoto('');

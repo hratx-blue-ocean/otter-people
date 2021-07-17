@@ -60,22 +60,6 @@ Counter.findOne({ _id: "groupId" }, (err, counter) => {
 
 });
 
-// db.users.create({
-//   email: "test@test.com",
-//   userId: 1,
-//   avatar: "",
-//   pin: 1234,
-//   firstName: "testFirstName",
-//   lastName: "testLastName",
-//   city: "Houston",
-//   state: "TX",
-//   calculated_geolocation: [{}],
-//   groups: [1],
-// })
-
-
-
-
 const userSchema = Schema({
   email: { type: String, unique: true, index: true },
   userId: Number,
@@ -102,7 +86,6 @@ const eventSchema = Schema({
 
 const Event = mongoose.model('Event', eventSchema, 'events');
 
-//Add event to db for specific group
 const createEvent = (event, callback) => {
   //check if event already exists first, then create event if doesn't exist
   Event.findOne({ name: event.name, groupId: event.groupId }, (err, data) => {
@@ -134,25 +117,17 @@ const createEvent = (event, callback) => {
   })
 }
 
-/* signIn method overview:
-Find a user given an email
-If given email matches a user in database
-  if passwords match: send back all of that user's data
-if either username (email) don't exist in db, or password doesn't match
-  error or false
-*/
-const signIn = (username, password, callback) => { //callback will be (req, res) coming in from server
+const signIn = (username, password, callback) => {
   User.findOne({ email: username }, (err, user) => {
     if (err) {
       console.log(err);
-      callback(err, null); //{failedUsername: true}
+      callback(err, null);
     } else {
       if (!user) {
         callback(null, { failedLogin: true })
       } else if (user.pin === Number(password)) {
         callback(null, user);
       } else {
-        //if username is correct but passwords don't match...
         callback(null, { failedLogin: true })
       }
     }
@@ -196,31 +171,11 @@ const signUp = (userData, callback) => {
   })
 }
 
-//export methods that rely on the classes created (e.g. Group, User, Event)
-
-/* injecting fake user into db
-use alumniMeetUp
-
-db.users.insert({
-  email: 'tom.m.riddle@voldemort.uk',
-  avatar: 'Basilisk',
-  pin: 1150,
-  firstName: 'Thomas',
-  lastName:  'Riddle',
-  city: 'London',
-  state: 'UK',
-  calculated_geolocation: 'sewers at hogwarts',
-  groups: [1,3,3,7],
-});
-*/
-// model to get groups from database based on userEmail
-
 const getUserInfo = (userIdArr, callback) => {
   User.find({ userId: { $in: userIdArr } }, (err, result) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log(result);
       callback(null, result);
     }
   })
@@ -231,19 +186,17 @@ const fetchGroups = (userId, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log(results);
       callback(null, results)
     }
   });
 }
 
-// model to a single groups from database based on groupCode
+// fetches single group from database based on the group's unique invitation code
 const fetchGroup = (groupCode, callback) => {
   Group.findOne({ code: groupCode }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log(results);
       callback(null, results)
     }
   });
@@ -266,10 +219,8 @@ const createGroup = (groupData, callback) => {
     .catch((err) => {
       console.log(err);
     })
-
 }
 
-//model to add user to a group
 const addUserToGroup = (userId, groupCode, city, callback) => {
   Group.updateOne({ code: groupCode }, {
     $addToSet: { members: userId, cities: city }
@@ -282,7 +233,6 @@ const addUserToGroup = (userId, groupCode, city, callback) => {
   });
 };
 
-//model to add group Name to a user
 const addGroupNameToUser = (userId, groupId, callback) => {
   User.findOneAndUpdate({ userId: userId }, { $addToSet: { groups: groupId } }, (err, results) => {
     if (err) {
@@ -293,7 +243,6 @@ const addGroupNameToUser = (userId, groupId, callback) => {
   });
 };
 
-// model to get group code from the database
 const findGroupCode = (groupCode, callback) => {
   Group.findOne({ code: groupCode }, (err, results) => {
     if (err) {
@@ -309,7 +258,6 @@ const fetchEvents = (groupId, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      console.log('event query results');
       callback(null, results)
     }
   });

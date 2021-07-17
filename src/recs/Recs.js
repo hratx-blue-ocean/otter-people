@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
@@ -15,7 +15,6 @@ import { apiTransformed } from './sampleData.js'
 export default function Recs(props) {
   const [category, setCategory] = useState("All");
   const [itemsShown, setItemsShown] = useState(4);
-  const [isMore, setIsMore] = useState(true);
 
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const slect = useColorModeValue('select.light', 'select.dark');
@@ -77,10 +76,6 @@ export default function Recs(props) {
         </SimpleGrid>
         :
         <SimpleGrid columns={2} >
-          {/*  */}
-          {/* Consider making separate data arrays for each category? */}
-          {/* Problem is that this is truncating results */}
-          {/*  */}
           {apiTransformed.slice(0, itemsShown).map((each, i) => {
             if (category === each.category) {
               return (
