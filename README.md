@@ -12,14 +12,18 @@ Never lose touch with your friends and each otter again!
 
 1. [Overview](#overview)
 2. [Installation](#installation)
-3.  [UI & Usage](#usage)
-
+3. [UI & Usage](#usage)
+4. [Technologies](#tech)
+5. [Contributors](#contributors)
+6. [Project Takeaways](#takeaways)
+7. [License](#license)
 
 
 
 
 
 ## Overview <a name="overview"/>
+Otter People 
 
 
 ## Installation <a name="installation"/>
@@ -35,6 +39,7 @@ Never lose touch with your friends and each otter again!
 3. Enter you API in config.js
     
 4. Open two terminals
+
     Start the frontend (development mode):
     ```
     npm run start
@@ -68,7 +73,7 @@ Get recommendations of what to do based on the geolocation of group members.
 
 
 
-## Technologies
+## Technologies <a name="tech"/>
 
 <table>
 <tr>
@@ -98,12 +103,12 @@ Get recommendations of what to do based on the geolocation of group members.
  </tr>
   <tr>
       <td>Workflow</td>
-      <td><img alt="Trello" src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white"/></td>
+      <td><img alt="Trello" src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white"/> <img alt="Discord" src="https://img.shields.io/badge/Discord-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white"/></td>
     </tr>
 
 </table>
 
-## Contributors
+## Contributors <a name="contributors"/>
 [Angela Wu](https://github.com/aywgit)
 
 [Addie Johnsen](https://github.com/addiejohnsen)
@@ -116,7 +121,7 @@ Get recommendations of what to do based on the geolocation of group members.
 
 [Ryan May](https://github.com/ryan-m-may)
 
-## Takeaways
+## Takeaways <a name="takeaways"/>
 
 
-## License
+## License <a name="license"/>
