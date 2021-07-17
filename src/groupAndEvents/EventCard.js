@@ -9,7 +9,6 @@ export default function EventCard({ userId, event, organizer }) {
 
   const [attending, setAttending] = useState(false);
   const [number, setNumber] = useState(0);
-  console.log('Props.organizer in eventCard: ', organizer, event.organizer, userId)
   const addAttending = (userId, eventName) => {
     const url = 'http://localhost:3001/event/attending';
     const config = {

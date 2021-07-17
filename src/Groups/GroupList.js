@@ -63,20 +63,11 @@ const GroupList = (props) => {
         // update current Group
         getOneGroup(groupCode);
         //refetch groups
-<<<<<<< HEAD
         getGroups(userId);
-=======
->>>>>>> fd56ca15cec82d202883b07e0a6b9848bd6a201a
       })
       .catch((err) => {
         console.error('Error: ', err);
       });
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> fd56ca15cec82d202883b07e0a6b9848bd6a201a
   };
 
   const createGroup = (userId, group) => {
