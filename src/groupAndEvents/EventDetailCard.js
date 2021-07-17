@@ -10,27 +10,27 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import { darken } from '@chakra-ui/theme-tools';
 
 function EventDetailCard(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");
-  const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
+  const eventInfo = useColorModeValue("eventInfo.light", "eventInfo.dark");
   const text = useColorModeValue("text.light", "text.dark");
-  const layer = useColorModeValue("layer.light", "layer.dark");
-  //props.event
+  const hoverBlue = useColorModeValue(darken("mainBlue.light", 5), darken("mainBlue.dark", 8));
 
 
   return (
     <>
-      <Button onClick={onOpen} mt="4" colorScheme="teal" size="md">Details</Button>
+      <Button onClick={onOpen} mt="4" size="md" bg={mainBlue} _hover={{ bg: hoverBlue }} color={"text.dark"}>Details</Button>
 
       <Modal size="xl" isOpen={isOpen} isCentered={true} onClose={onClose} >
         <ModalOverlay />
-        <ModalContent bg="#3EBABE">
+        <ModalContent bg={eventInfo} color={text}>
           <ModalHeader></ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontSize="l" align="left">Meeting Organizer: </Text> <Text fontSize="l">{props.organizer}</Text>
+            <Text fontSize="l" align="left">Meeting Organizer: </Text> <Text fontSize="l">{props.event.organizer}</Text>
             <br />
             <Text fontSize="xl">{props.event.date}
             </Text>

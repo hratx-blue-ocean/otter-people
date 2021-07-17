@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import EventDetailCard from './EventDetailCard';
-import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons';
+import { useColorModeValue, Box, Center, Grid, GridItem, Button, Text, Heading, } from "@chakra-ui/react";
+import { darken } from '@chakra-ui/theme-tools';
 
 
 export default function EventCard({ userId, event, organizer }) {
@@ -57,23 +57,33 @@ export default function EventCard({ userId, event, organizer }) {
       });
   }, [])
 
+  const text = useColorModeValue("text.light", "text.dark");
+  const layer = useColorModeValue("layer.light", "layer.dark");
+  const border = useColorModeValue('select.light', 'layer.dark');
+  const gBtn = useColorModeValue('gBtn.light', 'gBtn.dark');
+  const hoverGreen = useColorModeValue(darken("gBtn.light", 12), darken("gBtn.dark", 12));
+
+
   return (
-    <Center>
+    <Center >
       <Grid
-        boxShadow="md"
+        boxShadow="sm"
         h="240px"
         maxHeight="200px"
         templateColumns="repeat(12, 1fr)"
         gap={1.5}
-        borderWidth="1px" borderRadius="sm"
-        width="90%"
+        borderWidth="1px" borderRadius="md"
         p="2"
+        w='100%'
+        bg={layer}
+        color={text}
+        borderColor={border}
       >
 
         <GridItem colSpan={3} >
           <Grid maxHeight="240px" templateRows="repeat(7, 1fr)">
             <GridItem rowSpan={3}>
-              <Text p="2" align="left" fontSize="sm">{event.date}</Text>
+              <Text p="2" align="left" fontSize="md">{event.date}</Text>
             </GridItem>
           </Grid>
         </GridItem>
@@ -111,11 +121,11 @@ export default function EventCard({ userId, event, organizer }) {
         </GridItem>
 
         <GridItem colSpan={3}>
-          <Button onClick={() => selectAttending(userId, event.name)} mt="4" colorScheme="teal" size="md">
+          <Button onClick={() => selectAttending(userId, event.name)} mt="4" colorScheme="teal" size="md" _hover={{ bg: hoverGreen }} bg={gBtn} color={text}>
             {attending ? <Text>Attending!</Text> : <Text>RSVP</Text>}
           </Button>
           <br />
-          <EventDetailCard organizer={organizer} event={event} />
+          <EventDetailCard event={event} />
         </GridItem>
       </Grid >
 

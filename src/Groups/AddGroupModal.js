@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import { darken } from '@chakra-ui/theme-tools';
 
 function AddGroupModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -67,11 +68,11 @@ group = {
   const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
   const text = useColorModeValue("text.light", "text.dark");
   const layer = useColorModeValue("layer.light", "layer.dark");
-
+  const hoverGreen = useColorModeValue(darken("gBtn.light", 12), darken("gBtn.dark", 12));
 
   return (
     <>
-      <Button bg={gBtn} color={text} onClick={onOpen}>Create New Group</Button>
+      <Button mt='4' bg={gBtn} color={text} onClick={onOpen} _hover={{ bg: hoverGreen }}>Create New Group</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
@@ -110,7 +111,7 @@ group = {
           </ModalBody>
 
           <ModalFooter alignItems="center" >
-            <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission}>
+            <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission} _hover={{ bg: hoverGreen }}>
               Create Group
             </Button>
           </ModalFooter>

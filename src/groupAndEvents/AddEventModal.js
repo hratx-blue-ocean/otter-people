@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { useDisclosure, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import { Textarea } from '@chakra-ui/react';
 import { VStack } from '@chakra-ui/react';
@@ -15,20 +15,21 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
-// import PropTypes from 'prop-types';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import './style.css';
+import { darken } from '@chakra-ui/theme-tools';
 
 const url = 'http://127.0.0.1:3001';
 
 function AddEventModal(props) {
-  console.log("id types: ", typeof props.organizer.userId, props.organizer.userId);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventName, setEventName] = useState('');
   const [eventLocation, setEventLocation] = useState('');
   const [eventDate, setEventDate] = useState(new Date());
   const [eventDescription, setEventDescription] = useState('');
+  const [disable, setDisable] = useState(false);
 
   const handleEventNameChange = (e) => {
     let eventNameValue = e.target.value;
@@ -46,7 +47,6 @@ function AddEventModal(props) {
   };
 
   const clearForm = () => {
-    // clear form inputs
     setEventName('');
     setEventLocation('');
     setEventDate('');
@@ -70,7 +70,6 @@ function AddEventModal(props) {
         console.log('successfully added event: ', response);
         onClose();
         clearForm();
-        //re-render event list by pushing formSubmission into App's 'events' state
         let eventsCopy = props.events.slice();
         eventsCopy.push(formSubmission);
         props.setEvents(eventsCopy);
@@ -85,11 +84,22 @@ function AddEventModal(props) {
   const gBtn = useColorModeValue("gBtn.light", "gBtn.dark");
   const text = useColorModeValue("text.light", "text.dark");
   const layer = useColorModeValue("layer.light", "layer.dark");
+  const hoverGreen = useColorModeValue(darken("gBtn.light", 12), darken("gBtn.dark", 12));
+
+  useEffect(() => {
+    if (!props.groupId) {
+      setDisable(true);
+    } else {
+      setDisable(false)
+    }
+  });
+
+  const isLight = useColorMode().colorMode === 'light';
 
 
   return (
     <>
-      <Button onClick={onOpen} mt="10" mr="6" bg={gBtn} color={text} size="lg"> + Event</Button>
+      <Button onClick={onOpen} mt="10" mr="6" bg={gBtn} color={text} size="lg" isDisabled={disable} _hover={{ bg: hoverGreen }}> + Event</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered={true} >
         <ModalOverlay />
@@ -119,14 +129,16 @@ function AddEventModal(props) {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
-                <DatePicker
-                  selected={eventDate}
-                  onChange={(date) => setEventDate(date)}
-                  showTimeSelect
-                  isClearable
-                  dateFormat="Pp"
-                  background={layer}
-                />
+                <div className={isLight ? "light-theme" : "dark-theme"}>
+                  <DatePicker
+                    selected={eventDate}
+                    onChange={(date) => setEventDate(date)}
+                    showTimeSelect
+                    isClearable
+                    dateFormat="Pp"
+                    className="react-datapicker__input-text"
+                  />
+                </div>
               </FormControl>
 
               <FormControl isRequired>
@@ -145,7 +157,7 @@ function AddEventModal(props) {
           </ModalBody>
 
           <ModalFooter alignItems="center" >
-            <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission}>
+            <Button bg={gBtn} color={text} ml="auto" mr="auto" onClick={handleFormSubmission} _hover={{ bg: hoverGreen }}>
               Create Event
             </Button>
           </ModalFooter>

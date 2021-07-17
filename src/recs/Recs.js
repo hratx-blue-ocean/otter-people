@@ -10,26 +10,17 @@ import { Center } from "@chakra-ui/react"
 import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
 import { IconButton } from "@chakra-ui/react"
 
-//change this to props later
 import { apiTransformed } from './sampleData.js'
 
 export default function Recs(props) {
-
-  //useState hooks
   const [category, setCategory] = useState("All");
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
-  // const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
 
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const slect = useColorModeValue('select.light', 'select.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
-
-  //useEffect hooks
-  // useEffect(() => {
-  //   setData(apiTransformed.slice(0, itemsShown))
-  // }, [itemsShown])
-
+  const border = useColorModeValue('select.light', 'layer.dark');
 
 
   const onChange = (e) => {
@@ -53,9 +44,6 @@ export default function Recs(props) {
   const eachRecommendation = (dataObj, index) => {
     return (
       < Box key={index} p="2" bg={layer} color={txt}>
-        {/*  */}
-        {/* Need to hardcode height="" pixels based on final layout */}
-        {/*  */}
         <Image objectFit="cover" maxWidth="100%" maxHeight="100%" src={dataObj.imageURL}
           alt={dataObj.name} />
         <Box
@@ -69,7 +57,7 @@ export default function Recs(props) {
   }
 
   return (
-    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="md" borderColor={layer} overflow="hidden">
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderRadius="md" borderColor={border} overflow="hidden" boxShadow="sm">
       <Heading p="1" size="lg">Around Town</Heading>
       <Text p="1" fontSize="sm" >Click to Add As Your Next Event!</Text>
       <Center>

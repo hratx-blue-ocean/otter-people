@@ -16,6 +16,7 @@ export default function Members(props) {
 
   const layer = useColorModeValue('layer.light', 'layer.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
+  const border = useColorModeValue('select.light', 'layer.dark');
 
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
@@ -50,7 +51,7 @@ export default function Members(props) {
   };
 
   return (
-    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderColor={layer} borderRadius="md" overflow="hidden">
+    <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderColor={border} borderRadius="md" overflow="hidden" boxShadow="sm">
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>

@@ -24,6 +24,7 @@ function AppBar(props) {
         templateColumns="repeat(12, 1fr)"
         gap={0}
         textAlign="center" fontSize="xl"
+        mb="2"
       >
         <GridItem colSpan={1} bg={mainBlue}>
           <Center >

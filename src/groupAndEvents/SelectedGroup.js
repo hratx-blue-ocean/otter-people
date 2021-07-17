@@ -1,39 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import AddEventModal from './AddEventModal';
 import { useColorModeValue, Box, Center, Grid, GridItem, Button, ButtonGroup, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons'
-
-//need to pass as props
-const sampleGroup = { name: "Winterguard 2010", description: "The best ones.", code: '1234567891234' }
+import { StarIcon } from '@chakra-ui/icons';
 
 export default function SelectedGroup(props) {
-  //we set group here because we are rendering the props on this screen
-  //contrast with Events.js where we do not need to apply useState to the props (groupId)
-  //since we don't render groupId on the screen
-  //on both pages, useEffect runs every time the props change
   const [group, setGroup] = useState({ name: "", description: "", code: "" });
 
   useEffect(() => {
     setGroup(props.group)
   }, [props.group])
 
-  const organizerName = props.organizer.firstName + props.organizer.lastName;
+  const organizerName = props.organizer.firstName + " " + props.organizer.lastName;
 
   // Colors
   const layer = useColorModeValue('layer.light', 'layer.dark');
-  const border = useColorModeValue('select.light', 'layer.dark')
+  const border = useColorModeValue('select.light', 'layer.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
 
   return (
-    <Box maxW="90%" width="90%" height="140px" borderWidth="1px" borderRadius="md" bg={layer} borderColor={border} color={txt}>
+    <Box maxW="90%" width="90%" height="140px" borderWidth="1px" borderRadius="md" boxShadow="sm" bg={layer} borderColor={border} color={txt}>
       <Flex >
         <Spacer />
         <StarIcon mt="10" w={12} h={12} />
         <Spacer />
         <Box>
-          <Heading mt="8">{group ? group.name : sampleGroup.name}</Heading>
-          <Text align="left" fontSize="md">{group ? group.description : sampleGroup.description}</Text>
-          <Text align="left" fontSize="sm">Invitation Code: {group ? group.code : sampleGroup.code}</Text>
+          <Heading mt="8">{group ? group.name : ''}</Heading>
+          <Text align="left" fontSize="md">{group ? group.description : ''}</Text>
+          <Text align="left" fontSize="sm">Invitation Code: {group ? group.code : ''}</Text>
         </Box>
         <Spacer />
         <Spacer />

@@ -18,8 +18,8 @@ let SignUp = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState();
   const [passwordConfirm, setPasswordConfirm] = useState();
-  const [firstName, setFirstName] = useState('Jack');
-  const [lastName, setLastName] = useState('Pronske');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [city, setCity] = useState('');
   const [stateName, setStateName] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();

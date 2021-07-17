@@ -13,6 +13,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import { darken } from '@chakra-ui/theme-tools';
 
 function JoinGroupModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,9 +40,12 @@ function JoinGroupModal(props) {
   const layer = useColorModeValue('layer.ligth', 'layer.dark');
   const txt = useColorModeValue('text.light', 'text.dark');
 
+  const hoverGreen = useColorModeValue(darken("gBtn.light", 12), darken("gBtn.dark", 12));
+  const hoverBlue = useColorModeValue(darken("mainBlue.light", 5), darken("mainBlue.dark", 8));
+
   return (
     <>
-      <Button bg={mainBlue} color={'text.dark'} onClick={onOpen}>Join Existing Group</Button>
+      <Button bg={mainBlue} color={'text.dark'} onClick={onOpen} _hover={{ bg: hoverBlue }}>Join Existing Group</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -63,7 +67,7 @@ function JoinGroupModal(props) {
           </ModalBody>
 
           <ModalFooter alignItems="center" >
-            <Button bg={gBtn} color={txt} ml="auto" mr="auto" onClick={handleFormSubmission}>
+            <Button bg={gBtn} color={txt} ml="auto" mr="auto" onClick={handleFormSubmission} _hover={{ bg: hoverGreen }}>
               Join Group
             </Button>
           </ModalFooter>

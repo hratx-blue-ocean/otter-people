@@ -74,7 +74,7 @@ export default function Events(props) {
   }, [props.events]);
 
   return (
-    <Box  >
+    <Box w="90%" >
       <Stack>
         {groupEvents.map((event, i) => {
           return (
