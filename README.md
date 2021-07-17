@@ -1,4 +1,4 @@
-![OtterPeople](https://user-images.githubusercontent.com/79018160/126011396-d5465aee-869e-44ae-9989-76cc26c933c2.png)
+![OtterPeopleBanner](https://user-images.githubusercontent.com/79018160/126011396-d5465aee-869e-44ae-9989-76cc26c933c2.png)
 
 # Otter People 
 *Stay in touch with each otter.*
@@ -8,12 +8,47 @@ Invite like-minded others and get activity recommendations tailored to your loca
 
 Never lose touch with your friends and each otter again!
 
+## Table of Contents
 
-## Overview
+1. [Overview](#overview)
+2. [Installation](#installation)
+3.  [UI & Usage](#usage)
 
 
 
-## UI & Usage
+
+
+
+## Overview <a name="overview"/>
+
+
+## Installation <a name="installation"/>
+1. Clone down repo
+   ```
+   git clone https://github.com/hratx-blue-ocean/alumni-meetup.git 
+   ``` 
+2. Install NPM packages
+   ```
+   npm install
+   ```
+  
+3. Enter you API in config.js
+    
+4. Open two terminals
+    Start the frontend (development mode):
+    ```
+    npm run start
+    ```
+    Start the server:
+    ```
+    npm run devServer
+    ```
+
+
+
+
+
+## UI & Usage <a name="usage"/>
 ### Dark Logo
 <img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>
 
@@ -30,7 +65,7 @@ Invite friends with the provided group code.
 
 Get recommendations of what to do based on the geolocation of group members.
 
-## Installation
+
 
 
 ## Technologies
