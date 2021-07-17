@@ -5,11 +5,10 @@ import { VStack, Feature, Stack, StackDivider, Box, Center, Grid, GridItem, Butt
 import { StarIcon } from '@chakra-ui/icons';
 
 
-export default function EventCard({ userId, each, organizer }) {
+export default function EventCard({ userId, event, organizer }) {
 
   const [attending, setAttending] = useState(false);
   const [number, setNumber] = useState(0);
-
   const addAttending = (userId, eventName) => {
     const url = 'http://localhost:3001/event/attending';
     const config = {
@@ -27,12 +26,17 @@ export default function EventCard({ userId, each, organizer }) {
 
   const selectAttending = (userId, eventName) => {
     addAttending(userId, eventName);
+    setNumber(number + 1);
     setAttending(true)
   }
 
   useEffect(() => {
-    setNumber(number + 1)
-  }, [attending])
+    if (event.attending.includes(userId)) {
+      setAttending(true);
+    }
+    setNumber(event.attending.length)
+  }, [event.attending])
+
 
   useEffect(() => {
     //see if userId is in attending array
@@ -40,7 +44,7 @@ export default function EventCard({ userId, each, organizer }) {
     const url = 'http://localhost:3001/event/attending/check';
     const config = {
       userId: userId,
-      eventName: each.name
+      eventName: event.name
     };
     axios.get(url, config)
       .then((results) => {
@@ -69,7 +73,7 @@ export default function EventCard({ userId, each, organizer }) {
         <GridItem colSpan={3} >
           <Grid maxHeight="240px" templateRows="repeat(7, 1fr)">
             <GridItem rowSpan={3}>
-              <Text p="2" align="left" fontSize="sm">{each.date}</Text>
+              <Text p="2" align="left" fontSize="sm">{event.date}</Text>
             </GridItem>
           </Grid>
         </GridItem>
@@ -82,10 +86,10 @@ export default function EventCard({ userId, each, organizer }) {
                 lineHeight="tight"
               >
                 <Heading align="left" size="md" noOfLines={[1, 2]}>
-                  {each.name}
+                  {event.name}
                 </Heading>
                 <Text align="left" fontSize="xs" noOfLines={[1]}>
-                  {each.location}
+                  {event.location}
                 </Text>
                 <Text as="i" align="left" fontSize="xs" noOfLines={[1]}>
                   {number} attending
@@ -99,7 +103,7 @@ export default function EventCard({ userId, each, organizer }) {
                 lineHeight="tight"
               >
                 <Text align="left" fontSize="xs" noOfLines={[1, 2, 3, 4]}>
-                  {each.description}
+                  {event.description}
                 </Text>
               </Box>
             </GridItem>
@@ -107,11 +111,11 @@ export default function EventCard({ userId, each, organizer }) {
         </GridItem>
 
         <GridItem colSpan={3}>
-          <Button onClick={() => selectAttending(userId, each.name)} mt="4" colorScheme="teal" size="md">
+          <Button onClick={() => selectAttending(userId, event.name)} mt="4" colorScheme="teal" size="md">
             {attending ? <Text>Attending!</Text> : <Text>RSVP</Text>}
           </Button>
           <br />
-          <EventDetailCard organizer={organizer} event={each} />
+          <EventDetailCard organizer={organizer} event={event} />
         </GridItem>
       </Grid >
 

@@ -22,6 +22,8 @@ import axios from 'axios';
 const url = 'http://127.0.0.1:3001';
 
 function AddEventModal(props) {
+  console.log("id types: ", typeof props.organizer.userId, props.organizer.userId);
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventName, setEventName] = useState('');
   const [eventLocation, setEventLocation] = useState('');
@@ -59,8 +61,9 @@ function AddEventModal(props) {
       location: eventLocation,
       date: eventDate,
       description: eventDescription,
-      organizer: props.organizer,
+      organizer: props.organizerName,
       groupId: props.groupId,
+      attending: [Number(props.organizer.userId)]
     };
     axios.post(`${url}/event`, formSubmission)
       .then((response) => {

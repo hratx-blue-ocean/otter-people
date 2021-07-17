@@ -67,22 +67,20 @@ export default function Events(props) {
       });
     }
     setGroupEvents(newEvents);
-  }, [props.events]);
 
-  function Feature({ title, desc, ...rest }) {
-    return (
-      groupEvents.map((each, i) => {
-        return (
-          <EventCard key={i} userId={props.organizer.userId} organizer={organizer} each={each} />
-        )
-      })
-    )
-  }
+    return function cleanup() {
+      setGroupEvents([])
+    }
+  }, [props.events]);
 
   return (
     <Box  >
       <Stack>
-        <Feature />
+        {groupEvents.map((event, i) => {
+          return (
+            <EventCard key={i} userId={props.organizer.userId} organizer={organizer} event={event} />
+          )
+        })}
       </Stack>
     </Box>
   )

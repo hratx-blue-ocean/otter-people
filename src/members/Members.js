@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
-import { Box, Center, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar, useColorModeValue } from "@chakra-ui/react"
-import { TriangleUpIcon, TriangleDownIcon, EmailIcon } from '@chakra-ui/icons'
+import axios from 'axios';
+import { Box, Center, Text, Heading, SimpleGrid, IconButton, Flex, Spacer, Avatar, useColorModeValue } from "@chakra-ui/react";
+import { TriangleUpIcon, TriangleDownIcon, EmailIcon } from '@chakra-ui/icons';
+import MemberAvatar from './MemberAvatar.js';
 
 //need to pass as props
-const members = [{ firstName: 'Jack', lastName: 'Pronske' }, { firstName: 'Kim', lastName: 'Kost' },
-{ firstName: 'Tom', lastName: 'Chandler' }, { firstName: 'Allison', lastName: 'Dillon' },
-{ firstName: 'Joe', lastName: 'Haller' }, { firstName: 'Cody', lastName: 'Haines' },
-{ firstName: 'Christian', lastName: 'Peterson' }]
+// const members = [{ firstName: 'Jack', lastName: 'Pronske' }, { firstName: 'Kim', lastName: 'Kost' },
+// { firstName: 'Tom', lastName: 'Chandler' }, { firstName: 'Allison', lastName: 'Dillon' },
+// { firstName: 'Joe', lastName: 'Haller' }, { firstName: 'Cody', lastName: 'Haines' },
+// { firstName: 'Christian', lastName: 'Peterson' }]
 
+const url = 'http://127.0.0.1:3001';
 
 export default function Members(props) {
 
@@ -17,9 +19,27 @@ export default function Members(props) {
 
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
+  const [members, setMembers] = useState([]);
 
-  const onInvite = () => {
-  };
+  useEffect(() => {
+    if (props.currentGroup?.members) {
+      axios.post(`${url}/members/info`, { members: props.currentGroup.members })
+        .then((response) => {
+          if (!response.error) {
+            setMembers(response.data);
+          } else {
+            console.log('No user matching this user id found');
+          }
+        })
+        .catch((err) => {
+          console.log('There was an error getting info for this user');
+        });
+    }
+
+    return function cleanup() {
+      setMembers([]);
+    };
+  }, [props.currentGroup]);
 
   const onSeeMore = () => {
     setItemsShown(itemsShown + 4)
@@ -29,41 +49,15 @@ export default function Members(props) {
     setItemsShown(4)
   };
 
-  const eachMember = (dataObj, index) => {
-    let fullName = dataObj.firstName + " " + dataObj.lastName;
-
-    return (
-      < Box key={index} p="2" >
-        <Flex p="0" bg={layer} color={txt}>
-          <Spacer />
-          {/* Future Feature */}
-          {/* Can add avatar image URL to src attribute */}
-          <Avatar size="md" name={fullName} src="" />
-          <Box
-            p="2"
-            mt="1"
-            lineHeight="tight"
-            bg={layer}
-          >
-            <Text fontSize="md">{dataObj.firstName} {dataObj.lastName.slice(0, 1)}.</Text>
-          </Box>
-          <Spacer />
-          <Spacer />
-          <Spacer />
-        </Flex>
-      </Box>
-    )
-  }
-
   return (
     <Box bg={layer} color={txt} maxW="100%" width="100%" borderWidth="1px" borderColor={layer} borderRadius="md" overflow="hidden">
       <Box p="1">
         <Heading size="lg">Group Members</Heading>
       </Box>
       <SimpleGrid columns={2}>
-        {members.slice(0, itemsShown).map((each, i) =>
-          eachMember(each, i)
-        )}
+        {members.slice(0, itemsShown).map((member, i) => {
+          return <MemberAvatar key={i} dataObj={member} />
+        })}
       </SimpleGrid>
       <Center>
         {

@@ -62,12 +62,12 @@ app.get('/groups/code', (req, res) => {
           if (err) {
             res.status(500).send('cannot add to group');
           } else {
-            console.log("This is the result: ", result);
-            db.addGroupNameToUser(userId, result.groupId, (err, data) => {
+            console.log("This is the result: ", group);
+            db.addGroupNameToUser(userId, result.groupId, (err, user) => {
               if (err) {
                 res.status(500).send('cannot add group to user', err);
               } else {
-                res.status(200).send('Successfully added user to group and vice versa');
+                res.status(200).send(group);
               }
             });
           }
@@ -139,12 +139,27 @@ app.post('/sign', (req, res) => {
       }
     }
   })
-})
+});
+
+app.post('/members/info', (req, res) => {
+  db.getUserInfo(req.body.members, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (data !== null) {
+        res.status(200).send(data);
+      } else {
+        res.status(200).send({ error: 'No user data found' });
+      }
+    }
+  });
+});
 
 app.post('/event', (req, res) => {
   console.log('server index: /event reached');
   db.createEvent(req.body, (err, data) => {
     if (err) {
+      console.log('failed to add event');
       res.status(400).send(err);
     } else {
       if (data.error) {
@@ -154,7 +169,7 @@ app.post('/event', (req, res) => {
       }
     }
   })
-})
+});
 
 app.put('/event/attending', (req, res) => {
   console.log('update attending');

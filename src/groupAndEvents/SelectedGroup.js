@@ -17,7 +17,7 @@ export default function SelectedGroup(props) {
     setGroup(props.group)
   }, [props.group])
 
-  const organizer = props.organizer.firstName + props.organizer.lastName;
+  const organizerName = props.organizer.firstName + props.organizer.lastName;
 
   // Colors
   const layer = useColorModeValue('layer.light', 'layer.dark');
@@ -40,7 +40,7 @@ export default function SelectedGroup(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <AddEventModal events={props.events} setEvents={props.setEvents} groupId={props.group.groupId} organizer={organizer} mt="10" mr="6" colorScheme="teal" size="lg" />
+        <AddEventModal events={props.events} setEvents={props.setEvents} groupId={props.group.groupId} organizer={props.organizer} organizerName={organizerName} mt="10" mr="6" colorScheme="teal" size="lg" />
       </Flex>
     </Box >
   )

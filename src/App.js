@@ -71,11 +71,11 @@ function App() {
   const [currentGroup, setCurrentGroup] = useState();
   const [events, setEvents] = useState();
   const { colorMode, toggleColorMode } = useColorMode();
-  
+
 
   return (
     <ChakraProvider theme={theme}>
-      <AppBar onClose={onOpen} />
+      <AppBar onClose={onOpen} setEvents={setEvents} setCurrentGroup={setCurrentGroup} setUserData={setUserData} />
       <Box textAlign="center" fontSize="xl" >
         <Login isOpen={isOpen} onOpen={onOpen} onClose={onClose} setUser={setUserData} />
         <Grid minH="92vh" p={3} templateColumns="repeat(12, 1fr)" >
@@ -87,12 +87,12 @@ function App() {
           <GridItem colSpan={7} >
             <VStack spacing={8} >
               <SelectedGroup events={events} setEvents={setEvents} organizer={userData} group={currentGroup ? currentGroup : {}} />
-              <Events events={events} setEvents={setEvents} groupId={currentGroup ? currentGroup.groupId : 0} organizer={userData} />
+              <Events events={events} setEvents={setEvents} groupId={currentGroup ? currentGroup.groupId : -1} organizer={userData} />
             </VStack>
           </GridItem>
           <GridItem colSpan={3} >
             <VStack spacing={8} >
-              <Members />
+              <Members currentGroup={currentGroup} />
               <Recs cities={currentGroup ? currentGroup.cities : ""} />
             </VStack>
           </GridItem>

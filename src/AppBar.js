@@ -9,6 +9,9 @@ function AppBar(props) {
 
   const logOut = () => {
     // logout function from props
+    props.setEvents([]);
+    props.setCurrentGroup({});
+    props.setUserData({});
     props.onClose();
   };
 

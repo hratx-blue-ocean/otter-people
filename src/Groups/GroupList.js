@@ -63,6 +63,7 @@ const GroupList = (props) => {
         // update current Group
         getOneGroup(groupCode);
         //refetch groups
+        getGroups(userId);
       })
       .catch((err) => {
         console.error('Error: ', err);

@@ -119,6 +119,7 @@ const createEvent = (event, callback) => {
           description: event.description,
           organizer: event.organizer,
           groupId: event.groupId,
+          attending: event.attending
         }, (err, user) => {
           if (err) {
             callback(err, null);
@@ -213,6 +214,18 @@ db.users.insert({
 });
 */
 // model to get groups from database based on userEmail
+
+const getUserInfo = (userIdArr, callback) => {
+  User.find({ userId: { $in: userIdArr } }, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(result);
+      callback(null, result);
+    }
+  })
+}
+
 const fetchGroups = (userId, callback) => {
   Group.find({ members: { $in: userId } }, (err, results) => {
     if (err) {
@@ -226,7 +239,7 @@ const fetchGroups = (userId, callback) => {
 
 // model to a single groups from database based on groupCode
 const fetchGroup = (groupCode, callback) => {
-  Group.find({ code: { $in: groupCode } }, (err, results) => {
+  Group.findOne({ code: groupCode }, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
@@ -331,6 +344,7 @@ module.exports = {
   fetchGroup,
   signIn,
   signUp,
+  getUserInfo,
   createEvent,
   fetchEvents,
   updateAttending,
