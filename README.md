@@ -23,8 +23,7 @@ Never lose touch with your friends and each otter again!
 
 
 ## Overview <a name="overview"/>
-Otter People 
-
+**Otter People** was a capstone project for [Hack Reactor](https://www.hackreactor.com/) Austin's 56 cohort. The team of 6 engineers was given one week to create the full-stack application based on client requirements. The client requested an alumni networking application where users could create and join both groups and events. The client wanted groups to be private and invite-only and upcoming events to be prominently displayed and specific to individual groups. Additionally, the client wished for event and meetup recommendations based on group members' geolocations.
 
 ## Installation <a name="installation"/>
 1. Clone down repo
