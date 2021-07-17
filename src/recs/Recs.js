@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { Box } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
@@ -10,8 +11,8 @@ import { Center } from "@chakra-ui/react"
 import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons'
 import { IconButton } from "@chakra-ui/react"
 
-//change this to props later
-import { apiTransformed } from './sampleData.js'
+// change this to props later
+// import { apiTransformed } from './sampleData.js'
 
 export default function Recs(props) {
 
@@ -19,12 +20,19 @@ export default function Recs(props) {
   const [category, setCategory] = useState("All");
   const [itemsShown, setItemsShown] = useState(4);
   const [isMore, setIsMore] = useState(true);
+  const [recommendations, setRecommendations] = useState([]);
   // const [data, setData] = useState(apiTransformed.slice(0, itemsShown))
 
   //useEffect hooks
   // useEffect(() => {
   //   setData(apiTransformed.slice(0, itemsShown))
   // }, [itemsShown])
+  useEffect(() => {
+    axios.get('/recommendEvents')
+      .then((events) => {
+        setRecommendations(events.data);
+      });
+  }, []);
 
   const onChange = (e) => {
     setCategory(e.target.value || "All")
@@ -37,7 +45,6 @@ export default function Recs(props) {
 
   const onSeeMore = () => {
     setItemsShown(itemsShown + 4)
-
   };
 
   const onCollapse = () => {
@@ -77,7 +84,7 @@ export default function Recs(props) {
 
       {category === "All" ?
         <SimpleGrid columns={2} >
-          {apiTransformed.slice(0, itemsShown).map((each, i) =>
+          {recommendations.slice(0, itemsShown).map((each, i) =>
             eachRecommendation(each, i)
           )}
         </SimpleGrid>
@@ -87,7 +94,7 @@ export default function Recs(props) {
           {/* Consider making separate data arrays for each category? */}
           {/* Problem is that this is truncating results */}
           {/*  */}
-          {apiTransformed.slice(0, itemsShown).map((each, i) => {
+          {recommendations.slice(0, itemsShown).map((each, i) => {
             if (category === each.category) {
               return (
                 eachRecommendation(each, i)
@@ -100,7 +107,7 @@ export default function Recs(props) {
       <Center>
 
         {
-          itemsShown < apiTransformed.length && apiTransformed.length > 4 ?
+          itemsShown < recommendations.length && recommendations.length > 4 ?
             <IconButton onClick={onSeeMore} aria-label="See More" icon={<TriangleDownIcon />} />
             :
             <IconButton onClick={onCollapse} aria-label="Collapse" icon={<TriangleUpIcon />} />
