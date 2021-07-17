@@ -26,6 +26,11 @@ Never lose touch with your friends and each otter again!
 **Otter People** was a capstone project for [Hack Reactor](https://www.hackreactor.com/) Austin's 56 cohort. The team of 6 engineers was given one week to create the full-stack application based on client requirements. The client requested an alumni networking application where users could create and join both groups and events. The client wanted groups to be private and invite-only and upcoming events to be prominently displayed and specific to individual groups. Additionally, the client wished for event and meetup recommendations based on group members' geolocations.
 
 ## Installation <a name="installation"/>
+
+### Pre-requisites 
+To use the 'Around Town' widget you will need get access to [Amadeus's API](https://developers.amadeus.com/) and a [Radar.io key](https://radar.io/) 
+
+### Install
 1. Clone down repo
    ```
    git clone https://github.com/hratx-blue-ocean/alumni-meetup.git 
@@ -35,7 +40,13 @@ Never lose touch with your friends and each otter again!
    npm install
    ```
   
-3. Enter you API in config.js
+3. Create a .env file in the main directory of the application that looks like:
+   ```
+   AMADEUS_KEY=YOUR_KEY
+   AMADEUS_SEC=YOUR_KEY
+   RADAR_KEY=YOUR_KEY
+   ```
+   
     
 4. Open two terminals
 
@@ -53,6 +64,9 @@ Never lose touch with your friends and each otter again!
 
 
 ## UI & Usage <a name="usage"/>
+
+Otter People's UI has both custom dark and light themes that easily toggle in the upper right-hand corner of the application. 
+
 ### Dark Logo
 <img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>
 
