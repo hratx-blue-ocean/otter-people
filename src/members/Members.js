@@ -35,6 +35,10 @@ export default function Members(props) {
           console.log('There was an error getting info for this user');
         });
     }
+
+    return function cleanup() {
+      setMembers([]);
+    }
   }, [props.currentGroup]);
 
   const onSeeMore = () => {

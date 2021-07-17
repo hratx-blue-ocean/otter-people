@@ -17,8 +17,13 @@ import {
 import DatePicker from 'react-datepicker';
 // import PropTypes from 'prop-types';
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
+
+const url = 'http://127.0.0.1:3001';
 
 function AddEventModal(props) {
+  console.log("id types: ", typeof props.organizer.userId, props.organizer.userId);
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventName, setEventName] = useState('');
   const [eventLocation, setEventLocation] = useState('');
@@ -40,15 +45,40 @@ function AddEventModal(props) {
     setEventDescription(eventDescriptionValue);
   };
 
-  const handleFormSubmission = (e) => {
-    onClose()
-    // handle submission
-
+  const clearForm = () => {
     // clear form inputs
     setEventName('');
     setEventLocation('');
     setEventDate('');
     setEventDescription('');
+  }
+
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    onClose();
+    let formSubmission = {
+      name: eventName,
+      location: eventLocation,
+      date: eventDate,
+      description: eventDescription,
+      organizer: props.organizerName,
+      groupId: props.groupId,
+      attending: [Number(props.organizer.userId)]
+    };
+    axios.post(`${url}/event`, formSubmission)
+      .then((response) => {
+        console.log('successfully added event: ', response);
+        onClose();
+        clearForm();
+        //re-render event list by pushing formSubmission into App's 'events' state
+        let eventsCopy = props.events.slice();
+        eventsCopy.push(formSubmission);
+        props.setEvents(eventsCopy);
+      })
+      .catch((err) => {
+        console.log('Failed to add Event: ', err);
+        clearForm();
+      })
   }
 
   const mainBlue = useColorModeValue("mainBlue.light", "mainBlue.dark");
@@ -59,7 +89,7 @@ function AddEventModal(props) {
 
   return (
     <>
-      <Button onClick={onOpen} mt="10" mr="6" colorScheme="teal" size="lg"> + Event</Button>
+      <Button onClick={onOpen} mt="10" mr="6" bg={gBtn} color={text} size="lg"> + Event</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered={true} >
         <ModalOverlay />
@@ -90,12 +120,13 @@ function AddEventModal(props) {
               <FormControl isRequired>
                 <FormLabel color={'text.dark'}>Event Date</FormLabel>
                 <DatePicker
-                selected={eventDate}
-                onChange={(date) => setEventDate(date)}
-                showTimeSelect
-                isClearable
-                dateFormat="Pp"
-              />
+                  selected={eventDate}
+                  onChange={(date) => setEventDate(date)}
+                  showTimeSelect
+                  isClearable
+                  dateFormat="Pp"
+                  background={layer}
+                />
               </FormControl>
 
               <FormControl isRequired>

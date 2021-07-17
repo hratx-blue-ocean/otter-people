@@ -9,6 +9,9 @@ function AppBar(props) {
 
   const logOut = () => {
     // logout function from props
+    props.setEvents([]);
+    props.setCurrentGroup({});
+    props.setUserData({});
     props.onClose();
   };
 
@@ -24,11 +27,10 @@ function AppBar(props) {
       >
         <GridItem colSpan={1} bg={mainBlue}>
           <Center >
-            <Image mt="1" src={image} maxWidth="12" />
+            <Image mt="2" src={image} maxWidth="12" />
           </Center>
         </GridItem>
         <GridItem colSpan={2} bg={mainBlue}>
-
           <Text align="left" fontSize="2xl" color={'text.dark'} m='0' mt='1vh'>Otter People</Text>
         </GridItem>
         <GridItem colSpan={6} bg={mainBlue} />
