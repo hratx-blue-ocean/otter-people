@@ -219,3 +219,6 @@ The right column displays two widgets. At the top is a list of the current group
 
 
 ## License <a name="license"/>
+
+## Sources & Thanks 
+React-date picker wrapper for Chakra by: https://gist.github.com/igoro00/99e9d244677ccafbf39667c24b5b35ed
