@@ -11,8 +11,8 @@ Never lose touch with your friends and each otter again!
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Installation](#installation)
-3. [UI & Usage](#usage)
+2. [UI & Usage](#usage)
+3. [Installation](#installation)
 4. [Technologies](#tech)
 5. [Contributors](#contributors)
 6. [Project Takeaways](#takeaways)
@@ -24,6 +24,38 @@ Never lose touch with your friends and each otter again!
 
 ## Overview <a name="overview"/>
 **Otter People** was a capstone project for [Hack Reactor](https://www.hackreactor.com/) Austin's 56 cohort. The team of 6 engineers was given one week to create the full-stack application based on client requirements. The client requested an alumni networking application where users could create and join both groups and events. The client wanted groups to be private and invite-only and upcoming events to be prominently displayed and specific to individual groups. Additionally, the client wished for event and meetup recommendations based on group members' geolocations.
+
+
+## UI & Usage <a name="usage"/>
+
+Otter People's UI has both custom dark and light themes that easily toggle in the upper right-hand corner of the application. 
+
+### Dark Logo
+<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>
+
+### Light Logo
+<img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
+
+### Walkthrough
+On page load, the user is presented with Otter People's landing page to enter their credentials to log in. If not already a member, the user can click the 'Sign up' button, and a modal sign-up form will appear. Once signed in or signed up, the user is rerouted to their personal dashboard.
+
+<p align="center"><img src="https://thumbs.gfycat.com/JoyfulSarcasticAmericanbittern-max-1mb.gif" width="600px"></p>
+
+The personal dashboard is an intuitive three-column layout. The left column displays the user's group information. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. The new group will be created on form submission, the group creator will automatically be added to the group, and the user's group list will rerender.
+                            
+The center column displays the group's information, including the name, description, and invitation code. A sorted list of upcoming group events appears below. Each event card shows the event details and the ability for a user to RSVP. A user clicks on '+ Event' at the top of the column to create a new event.
+
+<p align="center"><img src="https://thumbs.gfycat.com/AlienatedBlueEasteuropeanshepherd-size_restricted.gif" width="600px"></p>
+
+The right column displays two widgets. At the top is a list of the current group's members. When a new group is selected, the member's list updates. Underneath is the Around Town widget, which provides users event and activity suggestions based on group member's geolocations.
+
+A user clicks on 'Join Existing Group' and provides the secret group invitation code to join a group. If they enter the correct code, the user is immediately added to the group.
+
+All groups are private. To invite new members to the group, an existing group member must share the group's invitation code. 
+
+
+<p align="center"><img src="https://thumbs.gfycat.com/WellwornFancyEidolonhelvum-size_restricted.gif" width="600px"></p>
+
 
 ## Installation <a name="installation"/>
 
@@ -58,111 +90,6 @@ To use the 'Around Town' widget you will need get access to [Amadeus's API](http
     ```
     npm run devServer
     ```
-
-
-
-
-
-## UI & Usage <a name="usage"/>
-
-Otter People's UI has both custom dark and light themes that easily toggle in the upper right-hand corner of the application. 
-
-### Dark Logo
-<img src="https://user-images.githubusercontent.com/33425993/125796028-b0f718f1-9368-43c7-854f-3e21b79b0b25.png" width=135>
-
-### Light Logo
-<img src="https://user-images.githubusercontent.com/33425993/125796025-9e57f2a2-12fe-464c-8e01-53ae94354903.png" width=135>
-
-### Walkthrough
-On page load, the user is presented with Otter People's landing page to enter their credentials to log in. If not already a member, the user can click the 'Sign up' button, and a modal sign-up form will appear. Once signed in or signed up, the user is rerouted to their personal dashboard.
-
-.
-
-.
-
-.
-
-.
-
-[SCREEN CAPTURE IMAGE HERE]
-
-.
-
-.
-
-.
-
-.
-
-
-
-
-
-
-The personal dashboard is an intuitive three-column layout. The left column displays the user's group information. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. The new group will be created on form submission, the group creator will automatically be added to the group, and the user's group list will rerender.
-
-A user clicks on 'Join Existing Group' and provides the secret group invitation code to join a group. If they enter the correct code, the user is immediately added to the group.
-
-All groups are private. To invite new members to the group, an existing group member must share the group's invitation code. 
-
-
-.
-
-.
-
-.
-
-.
-
-[SCREEN CAPTURE IMAGE HERE]
-
-.
-
-.
-
-.
-
-
-
-The center column displays the group's information, including the name, description, and invitation code. A sorted list of upcoming group events appears below. Each event card shows the event details and the ability for a user to RSVP. A user clicks on '+ Event' at the top of the column to create a new event.
-
-.
-
-.
-
-.
-
-.
-
-[SCREEN CAPTURE IMAGE HERE]
-
-.
-
-.
-
-.
-
-The right column displays two widgets. At the top is a list of the current group's members. When a new group is selected, the member's list updates. Underneath is the Around Town widget, which provides users event and activity suggestions based on group member's geolocations.
-
-
-.
-
-.
-
-.
-
-.
-
-[SCREEN CAPTURE IMAGE HERE]
-
-.
-
-.
-
-.
-
-
-
 
 ## Technologies <a name="tech"/>
 
