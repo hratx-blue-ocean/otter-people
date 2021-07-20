@@ -56,6 +56,8 @@ All groups are private. To invite new members to the group, an existing group me
 
 <p align="center"><img src="https://thumbs.gfycat.com/WellwornFancyEidolonhelvum-size_restricted.gif" width="600px"></p>
 
+![Otter People Demo - Invite to Group](https://user-images.githubusercontent.com/33425993/126377034-4b23a3f1-9618-4b08-b518-d27978489f09.gif)
+
 
 ## Installation <a name="installation"/>
 
