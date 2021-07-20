@@ -4,7 +4,7 @@ import { Box, Center, Heading, SimpleGrid, IconButton, useColorModeValue } from 
 import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import MemberAvatar from './MemberAvatar.js';
 
-const url = 'http://127.0.0.1:3001';
+const url = 'http://127.0.0.1:3000';
 
 export default function Members(props) {
 

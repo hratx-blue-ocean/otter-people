@@ -42,7 +42,6 @@ function AddGroupModal(props) {
       members: [props.userId],
       cities: [props.city],
     };
-    console.log(newGroup);
     props.createGroup(props.userId, newGroup);
     setGroupName('');
     setGroupDescription('');
@@ -88,10 +87,6 @@ function AddGroupModal(props) {
                   bg={layer}
                 />
               </FormControl>
-              {/* <FormControl>
-              <FormLabel>Upload Group Photo</FormLabel>
-              <Input type="file" />
-              </FormControl> */}
             </VStack>
           </ModalBody>
 

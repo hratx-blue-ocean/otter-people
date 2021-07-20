@@ -11,7 +11,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react"
 
-const url = 'http://127.0.0.1:3001';
+const url = 'http://127.0.0.1:3000';
 
 let SignUp = (props) => {
 

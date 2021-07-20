@@ -13,7 +13,7 @@ const GroupList = (props) => {
   const [toggleTriangle, setToggleTriangle] = useState(false);
 
   const getGroups = (userId) => {
-    const url = 'http://localhost:3001/groups';
+    const url = 'http://localhost:3000/groups';
     const config = {
       params: {
         userId: props.userId,
@@ -30,7 +30,7 @@ const GroupList = (props) => {
   };
 
   const getOneGroup = (groupCode) => {
-    const url = 'http://localhost:3001/groups/getOne';
+    const url = 'http://localhost:3000/groups/getOne';
     const config = {
       params: {
         groupCode: groupCode,
@@ -46,7 +46,7 @@ const GroupList = (props) => {
   };
 
   const joinGroup = (userId, groupCode, city) => {
-    const url = 'http://localhost:3001/groups/code';
+    const url = 'http://localhost:3000/groups/code';
     const config = {
       params: {
         groupCode: groupCode,
@@ -65,7 +65,7 @@ const GroupList = (props) => {
   };
 
   const createGroup = (userId, group) => {
-    const url = `http://localhost:3001/groups`;
+    const url = `http://localhost:3000/groups`;
     axios.post(url, group)
       .then((result) => {
         let newGroup = JSON.parse(result.config.data);

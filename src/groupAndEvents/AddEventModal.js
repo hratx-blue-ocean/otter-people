@@ -20,7 +20,7 @@ import axios from 'axios';
 import './style.css';
 import { darken } from '@chakra-ui/theme-tools';
 
-const url = 'http://127.0.0.1:3001';
+const url = 'http://127.0.0.1:3000';
 
 function AddEventModal(props) {
 

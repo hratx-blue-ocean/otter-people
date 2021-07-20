@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import SignUp from './SignUp';
 
-const url = 'http://127.0.0.1:3001';
+const url = 'http://127.0.0.1:3000';
 
 function Login(props) {
   let [email, setEmail] = useState('');
