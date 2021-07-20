@@ -39,22 +39,20 @@ Otter People's UI has both custom dark and light themes that easily toggle in th
 ### Walkthrough
 On page load, the user is presented with Otter People's landing page to enter their credentials to log in. If not already a member, the user can click the 'Sign up' button, and a modal sign-up form will appear. Once signed in or signed up, the user is rerouted to their personal dashboard.
 
-<p align="center"><img src="https://thumbs.gfycat.com/JoyfulSarcasticAmericanbittern-max-1mb.gif" width="600px"></p>
+![Otter People Demo - Sign Up](https://user-images.githubusercontent.com/33425993/126394822-a30f177b-760f-4292-86a5-a96b39bf2a10.gif)
 
 The personal dashboard is an intuitive three-column layout. The left column displays the user's group information. Only groups that the user is a member of will be displayed. If the member wants to create a group, they click on the 'Create New Group' button and will be presented with a modal form to create the group. The new group will be created on form submission, the group creator will automatically be added to the group, and the user's group list will rerender.
                             
 The center column displays the group's information, including the name, description, and invitation code. A sorted list of upcoming group events appears below. Each event card shows the event details and the ability for a user to RSVP. A user clicks on '+ Event' at the top of the column to create a new event.
 
-<p align="center"><img src="https://thumbs.gfycat.com/AlienatedBlueEasteuropeanshepherd-size_restricted.gif" width="600px"></p>
+![Otter People Demo - New Group and Event](https://user-images.githubusercontent.com/33425993/126392791-46094f66-2f9f-4ce7-b7be-e826a359d37f.gif)
+
 
 The right column displays two widgets. At the top is a list of the current group's members. When a new group is selected, the member's list updates. Underneath is the Around Town widget, which provides users event and activity suggestions based on group member's geolocations.
 
 A user clicks on 'Join Existing Group' and provides the secret group invitation code to join a group. If they enter the correct code, the user is immediately added to the group.
 
 All groups are private. To invite new members to the group, an existing group member must share the group's invitation code. 
-
-
-<p align="center"><img src="https://thumbs.gfycat.com/WellwornFancyEidolonhelvum-size_restricted.gif" width="600px"></p>
 
 ![Otter People Demo - Invite to Group](https://user-images.githubusercontent.com/33425993/126377034-4b23a3f1-9618-4b08-b518-d27978489f09.gif)
 
