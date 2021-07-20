@@ -11,7 +11,6 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react"
 
-const url = 'http://127.0.0.1:3000';
 
 let SignUp = (props) => {
 
@@ -54,7 +53,7 @@ let SignUp = (props) => {
       city: city,
       stateName: stateName
     };
-    axios.post(`${url}/sign`, formSubmission)
+    axios.post(`/sign`, formSubmission)
       .then((response) => {
         console.log('successful Sign-Up: ', response);
         props.setUser(response.data);

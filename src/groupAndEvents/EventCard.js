@@ -10,7 +10,7 @@ export default function EventCard({ userId, event, organizer }) {
   const [attending, setAttending] = useState(false);
   const [number, setNumber] = useState(0);
   const addAttending = (userId, eventName) => {
-    const url = 'http://localhost:3000/event/attending';
+    const url = '/event/attending';
     const config = {
       userId: userId.toString(),
       eventName: eventName.toString(),
@@ -39,7 +39,7 @@ export default function EventCard({ userId, event, organizer }) {
 
 
   useEffect(() => {
-    const url = 'http://localhost:3000/event/attending/check';
+    const url = '/event/attending/check';
     const config = {
       userId: userId,
       eventName: event.name

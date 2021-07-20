@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import SignUp from './SignUp';
 
-const url = 'http://127.0.0.1:3000';
 
 function Login(props) {
   let [email, setEmail] = useState('');
@@ -21,7 +20,7 @@ function Login(props) {
 
   let login = (event) => {
     event.preventDefault();
-    axios.post(`${url}/login`, { email: email, password: password })
+    axios.post(`/login`, { email: email, password: password })
       .then((response) => {
         if (response.data.error) {
           console.log(response.data.error);

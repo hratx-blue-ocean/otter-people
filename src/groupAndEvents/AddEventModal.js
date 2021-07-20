@@ -20,7 +20,6 @@ import axios from 'axios';
 import './style.css';
 import { darken } from '@chakra-ui/theme-tools';
 
-const url = 'http://127.0.0.1:3000';
 
 function AddEventModal(props) {
 
@@ -65,7 +64,7 @@ function AddEventModal(props) {
       groupId: props.groupId,
       attending: [Number(props.organizer.userId)]
     };
-    axios.post(`${url}/event`, formSubmission)
+    axios.post(`/event`, formSubmission)
       .then((response) => {
         console.log('successfully added event: ', response);
         onClose();

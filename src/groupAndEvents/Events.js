@@ -9,7 +9,7 @@ export default function Events(props) {
   const organizer = props.organizer.firstName + props.organizer.lastName;
 
   const getEvents = (groupId) => {
-    const url = 'http://localhost:3000/events';
+    const url = '/events';
     const config = {
       params: {
         groupId: groupId,

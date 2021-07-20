@@ -4,7 +4,6 @@ import { Box, Center, Heading, SimpleGrid, IconButton, useColorModeValue } from 
 import { TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import MemberAvatar from './MemberAvatar.js';
 
-const url = 'http://127.0.0.1:3000';
 
 export default function Members(props) {
 
@@ -17,7 +16,7 @@ export default function Members(props) {
 
   useEffect(() => {
     if (props.currentGroup?.members) {
-      axios.post(`${url}/members/info`, { members: props.currentGroup.members })
+      axios.post(`/members/info`, { members: props.currentGroup.members })
         .then((response) => {
           if (!response.error) {
             setMembers(response.data);
